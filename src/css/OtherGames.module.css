@@ -1,0 +1,26 @@
+.OtherGames {
+  min-width: 340;
+  max-width: 410px;
+  background-color: #f7f7ff;
+  color: rgb(0, 0, 0);
+  padding: 10px;
+}
+.link {
+  text-decoration: none;
+}
+.objectContainer {
+  display: flex;
+  justify-content: space-between;
+  margin-left: 2px;
+  text-align: center;
+}
+.objects {
+  min-width: 80px;
+  max-width: 90.25px;
+  height: 97px;
+}
+.menuImage {
+  border-radius: 50%;
+  height: 65px;
+  width: 65px;
+}

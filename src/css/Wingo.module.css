@@ -1,0 +1,7 @@
+.backbutton {
+  position: absolute;
+  top: 13px;
+  left: 10px;
+  color: white;
+  display: inline-block;
+}

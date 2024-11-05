@@ -1,0 +1,43 @@
+#main {
+  min-width: 340px;
+  max-width: 412px;
+  position: relative;
+  margin: 0 auto;
+
+  background-color: #f7f7ff;
+  /*background-color: #f7f8ff;*/
+  overflow: scroll;
+}
+#main::-webkit-scrollbar {
+  display: none;
+}
+
+:root {
+  --main-color: #ed8a1f;
+  --main_gradient-color: linear-gradient(90deg, #ff9a02 0%, #e67302 100%);
+  --main_gradient-color2: linear-gradient(180deg, #ff9a02 0%, #e67302 100%);
+  --light-main_gradient-color: var(--main_gradient-color);
+  --text_white: #fff;
+  --light-bg_white: #fff;
+  --light-main-color: var(--main-color);
+  --norm_red-color: #fb5b5b;
+  --norm_green-color: #18b660;
+  --norm_secondary-color: #feaa57;
+  --norm_Purple-color: #c86eff;
+  --norm_bule-color: #6ea8f4;
+  --button_dis_color: linear-gradient(90deg, #cccedc 15.38%, #cdcfdd 98.73%);
+  --text_color_L1: #1e2637;
+  --text_color_L2: #768096;
+  --text_color_L3: #b6bcc8;
+  --text_color_L4: #fff;
+  --bg_color_L1: #f7f8ff;
+  --bg_color_L2: #fff;
+  --bg_color_L3: #f6f6f6;
+  --Dividing-line_color: #e1e1e1;
+  --sheet_nva_color: var(--main-color);
+  --sheet_detail_bg_color: #f6f6f6;
+  --pop_bg-color: linear-gradient(180deg, #13bf77 13.44%, #4ccc77 86.56%);
+  --iconSecondary: rgba(24, 182, 96, 0.3);
+  --lightColor: #a4a4a4;
+  --generalbackground: #f7f7ff;
+}

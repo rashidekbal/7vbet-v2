@@ -1,0 +1,55 @@
+.WalletSection {
+  height: 142.92px;
+  width: 364.28px;
+  background-color: white;
+  margin: 0 auto;
+  border-radius: 19px;
+  overflow: hidden;
+  padding: 10px;
+}
+.BalanceView {
+  display: inline-block;
+  width: 95%;
+  margin: 0 auto;
+  text-align: center;
+}
+.WalletSlogan {
+  display: block;
+  width: 99%;
+  margin: 0 auto;
+  text-align: center;
+  margin-top: 5px;
+  padding-right: 20px;
+}
+.WalletImage {
+  width: 25px;
+  display: inline-block;
+  vertical-align: middle;
+}
+.WalletSloganSpan {
+  display: inline-block;
+  vertical-align: middle;
+}
+.Wid {
+  width: 100%;
+  text-align: center;
+}
+.WidthdrawlButton {
+  display: block;
+  width: 40%;
+  background-color: red;
+  padding: 10px;
+  border-radius: 20px;
+  margin-top: 8px;
+  float: left;
+  margin-left: 10px;
+}
+.widthdrawlAction {
+  text-decoration: none;
+  color: white;
+}
+.deposite {
+  background-color: green;
+  float: right;
+  margin-right: 10px;
+}

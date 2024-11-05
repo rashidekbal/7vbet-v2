@@ -1,0 +1,276 @@
+.header {
+  width: 100%;
+  height: 40px;
+  background-color: white;
+  text-align: center;
+  position: relative;
+}
+.header p {
+  margin-right: 10px;
+  padding-top: 10px;
+  display: inline-block;
+}
+.header p:nth-child(2) {
+  margin: 0 auto;
+  position: absolute;
+  right: 10px;
+  color: grey;
+}
+
+.paymentOptions {
+  width: 100%;
+}
+.inner {
+  width: 94%;
+  height: 185px;
+
+  margin: 0 auto;
+  border-radius: 5px;
+  overflow: hidden;
+}
+.paymentOptionsrow {
+  height: 50%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.paymentcolumn {
+  height: 90%;
+  width: 32%;
+  border-radius: 5px;
+  background-color: white;
+}
+.paymenticons {
+  width: 100%;
+  display: flex;
+  margin-top: 10px;
+}
+.paymenticons img {
+  height: 40px;
+  display: inline-block;
+  margin: 0 auto;
+}
+.paymentOptionsname {
+  width: 100%;
+  text-align: center;
+  color: grey;
+}
+.paymtchannelholder {
+  width: 100%;
+}
+.channelholder {
+  width: 94%;
+  margin: 0 auto;
+  border-radius: 5px;
+  overflow: hidden;
+  background-color: white;
+  padding-bottom: 15px;
+}
+.channelrow {
+  width: 100%;
+  height: 90px;
+  margin-top: 10px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-around;
+  padding-right: 10px;
+  padding-left: 10px;
+}
+.channelcolumn {
+  width: 47%;
+  background-color: #f7f7ff;
+  height: 98%s;
+  border-radius: 15px;
+  padding-top: 15px;
+  padding-left: 16px;
+  color: black;
+}
+.depositeholder {
+  width: 100%;
+}
+.depositeInner {
+  width: 94%;
+  margin: 0 auto;
+  margin-top: 10px;
+  border-radius: 5px;
+  overflow: hidden;
+  background-color: white;
+  padding-bottom: 25px;
+}
+.depositerow {
+  width: 94%;
+  height: 40px;
+
+  margin: 0 auto;
+  margin-top: 10px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  overflow: hidden;
+}
+.depositerow:nth-child(4) {
+  margin-bottom: 25px;
+}
+.depositecolumn {
+  width: 31%;
+  text-align: center;
+  border: 1px solid lightgrey;
+  border-radius: 10px;
+  height: 95%;
+}
+.depositecolumn p {
+  padding: 10px;
+  width: 100%;
+  font-size: 17px;
+  color: orange;
+}
+.depositeintput {
+  background-color: #f7f7ff;
+  height: 45px;
+  width: 94%;
+  margin: 0 auto;
+  margin-top: 5px;
+  margin-bottom: 25px;
+  border-radius: 25px;
+  display: flex;
+  overflow: hidden;
+  justify-content: start;
+  align-items: middle;
+}
+.rupee {
+  width: 12%;
+  padding-left: 15px;
+  margin-top: 10px;
+  color: orange;
+  font-size: 15px;
+  padding-top: 2px;
+}
+.rupee::after {
+  content: "";
+  border: 1px solid lightgrey;
+  margin-left: 9px;
+}
+.input {
+  height: 30px;
+  margin-top: 7px;
+  padding-left: 10px;
+  color: darkgrey;
+  outline: none;
+  border: none;
+  background-color: #f7f7ff;
+}
+.inputbox {
+  width: 70%;
+}
+.cross {
+  width: 18%;
+}
+.div {
+  font-size: 35px;
+  padding-top: 8px;
+  float: right;
+  padding-right: 5px;
+  color: darkgrey;
+}
+.submitholder {
+  width: 94%;
+
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.submitholder input {
+  all: unset;
+  background-color: lightgrey;
+  color: grey;
+  width: 94%;
+  padding: 10px;
+  border-radius: 25px;
+  text-align: center;
+}
+.submitholder .on {
+  all: unset;
+  background-color: orange;
+  color: white;
+  width: 94%;
+  padding: 10px;
+  border-radius: 25px;
+  text-align: center;
+}
+.rechargeInstructions {
+  height: 370px;
+  width: 94%;
+  background-color: white;
+  margin: 0 auto;
+  padding: 5px;
+  margin-top: 19px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+.instructions img {
+  display: inline-block;
+  vertical-align: middle;
+  height: 25px;
+  padding-left: 5px;
+}
+.instructions p {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 5px;
+}
+.instructions {
+  width: 100%;
+  height: 45px;
+  padding: 5px;
+}
+
+.instructionscontainer {
+  height: 300px;
+  margin: 0 auto;
+  width: 94%;
+  border: 1px solid lightgrey;
+  border-radius: 15px;
+  padding: 20px 0 0 20px;
+}
+.instructionscontainer li {
+  padding: 10px 0px;
+  color: grey;
+  list-style-type: square;
+  list-style: linear-gradient(yellow, orange);
+}
+.depositehistorylogo {
+  background-color: white;
+  padding: 2px;
+  margin: 0 auto;
+  margin-bottom: 10px;
+  width: 94%;
+  border-radius: 8px;
+}
+.postcardholder {
+  width: 94%;
+  margin: 0 auto;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.slogan {
+  width: 100%;
+
+  height: 40px;
+  padding-top: 10px;
+}
+.slogan img {
+  color: white;
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 10px;
+}
+.slogan p {
+  color: white;
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 10px;
+}
+.slogan img {
+  height: 20px;
+}

@@ -1,0 +1,35 @@
+.menu {
+  max-width: 412px;
+  width: 100%;
+
+  height: 70px;
+  background-image: url("../icons/tabBarBg-0d05851f.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  position: fixed;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.menu2 {
+  display: inline-block;
+  width: 70px;
+  height: 41.42px;
+  text-align: center;
+  margin-top: 18px;
+  margin-left: 1.55%;
+}
+.specials {
+  background-color: orangered;
+  border-radius: 50%;
+  padding: 10px;
+  margin-top: -32px;
+}
+.specialschange {
+  background-color: red;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  padding: 10px;
+}

@@ -1,0 +1,21 @@
+.gameHistoryData {
+  margin: 0 auto;
+  width: 93%;
+  max-height: 380px;
+  overflow: scroll;
+}
+.gameHistoryData::-webkit-scrollbar {
+  display: none;
+}
+.DataHolder {
+  display: flex;
+  margin-bottom: 10px;
+}
+.data {
+  padding: 5px;
+  text-align: center;
+}
+
+.Colorres {
+  width: 17px;
+}

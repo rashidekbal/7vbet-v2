@@ -1,0 +1,121 @@
+.top {
+  background-color: #ff9a02;
+  width: 100%;
+  height: 170px;
+}
+.heading {
+  text-align: center;
+  vertical-align: middle;
+  color: white;
+  padding: 10px;
+  font-size: 20px;
+}
+.showuser {
+  height: 80px;
+  width: 90%;
+  margin: 0 auto;
+  margin-top: 1px;
+
+  display: flex;
+}
+.avatarbox {
+  height: 100%;
+  width: 23%;
+  overflow: hidden;
+  border-radius: 50%;
+}
+.avatarbox img {
+  height: 100%;
+  width: auto;
+}
+.userinfo {
+  height: 100%;
+  width: 65%;
+
+  padding-left: 10px;
+  margin-left: 10px;
+}
+.currentlevel {
+  height: 25px;
+  overflow: hidden;
+  margin-top: 10px;
+}
+.currentlevel img {
+  height: 100%;
+}
+.username {
+  margin-top: 10px;
+  padding: 2px 0px;
+  color: white;
+}
+.twosider {
+  width: 90%;
+  height: 67px;
+
+  margin: 0 auto;
+  margin-top: 15px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.twosider div {
+  height: 100%;
+  width: 47.5%;
+  background-color: white;
+  border-radius: 5px;
+  text-align: center;
+}
+.twosider div p {
+  margin-top: 7px;
+  color: #768096;
+}
+.settelmentTime {
+  width: 90%;
+  border: 1px solid lightgrey;
+  margin: 0 auto;
+  border-radius: 5px;
+  padding: 4px 8px;
+  margin-top: 12px;
+  font-size: 13px;
+  color: #768096;
+}
+.cardHolderMain {
+  height: 190px;
+  width: 100%;
+  margin-top: 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.btnholder {
+  width: 10%;
+
+  text-align: center;
+}
+.card {
+  width: 80%;
+  background-color: green;
+  height: 95%;
+  border-radius: 5px;
+  position: relative;
+}
+.btn {
+  font-size: 25px;
+}
+.back {
+  font-size: 25px;
+  transform: rotate(180deg);
+}
+.bonusInfo {
+  width: 94%;
+
+  margin: 0 auto;
+  border-radius: 5px;
+  margin-top: 12px;
+  overflow: hidden;
+}
+.history {
+  width: 94%;
+  margin: 0 auto;
+  margin-top: 10px;
+}

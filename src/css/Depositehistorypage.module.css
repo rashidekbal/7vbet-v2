@@ -1,0 +1,91 @@
+.header {
+  height: 45px;
+  background-color: white;
+  width: 100%;
+  text-align: center;
+  padding: 10px;
+  font-weight: 600;
+  padding-top: 14px;
+}
+.OptionSlider {
+  height: 40px;
+  display: flex;
+  flex-direction: start;
+  justify-content: space-around;
+  margin-top: 10px;
+  font-size: 15px;
+}
+.option {
+  height: 100%;
+  width: 23%;
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+  padding: 2.5% 4%;
+}
+.selected {
+  height: 100%;
+  width: 23%;
+  background-color: orange;
+  border-radius: 8px;
+  overflow: hidden;
+  padding: 2.5% 4%;
+  color: white;
+}
+.option p {
+  color: var(--lightColor);
+  vertical-align: middle;
+}
+.optionImg {
+  height: 20px;
+  display: inline-block;
+  vertical-align: middle;
+}
+.dropdownholder {
+  width: 94%;
+  height: 50px;
+  margin: 10px auto;
+  overflow: hidden;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+}
+.flexItem {
+  height: 100%;
+  background-color: white;
+  width: 49%;
+  overflow: hidden;
+  border-radius: 8px;
+}
+.select {
+  width: 100%;
+  padding: 10px;
+  vertical-align: middle;
+  height: 100%;
+  outline: none;
+  border: none;
+  color: var(--lightColor);
+  background-color: white;
+}
+.datepicker {
+  color: var(--lightColor);
+  width: 100%;
+  float: right;
+  height: 100%;
+  outline: none;
+  border: none;
+  display: block;
+  padding: 10%;
+  background-color: white;
+}
+.p {
+  position: absolute;
+  top: 5px;
+  z-index: 1;
+  color: var(--lightColor);
+  background-color: white;
+  padding: 10px;
+}
+.invisible {
+  display: none;
+}

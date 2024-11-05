@@ -1,0 +1,120 @@
+.statsSection {
+  width: 100%;
+}
+.statsName {
+  width: 100%;
+  height: 20px;
+}
+.sidebar {
+  display: inline-block;
+  width: 4px;
+  background-color: orangered;
+  height: 17px;
+  margin-left: 15px;
+}
+.statsData {
+  height: auto;
+  width: 90%;
+  margin: 0 auto;
+  height: 290px;
+  overflow: hidden;
+  margin-top: 10px;
+}
+.test {
+  margin-top: -140px;
+  animation-name: transit;
+  animation-direction: forwards;
+  animation-duration: 10s;
+  animation-iteration-count: infinite;
+}
+.stats {
+  width: 100%;
+  background-color: white;
+  height: 60px;
+  margin-top: 10px;
+  border-radius: 5px;
+  position: relative;
+}
+
+.dataAvatar {
+  height: 42.66px;
+  width: 42.66px;
+  border-radius: 50%;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
+.avatarName {
+  position: absolute;
+  left: 60px;
+  top: 21px;
+}
+.winingI {
+  position: absolute;
+  height: 42.66px;
+  background-color: orangered;
+  border-radius: 5px;
+  right: 130px;
+  top: 8px;
+}
+
+.winMoney {
+  position: absolute;
+  right: 10px;
+  font-size: small;
+  top: 15px;
+}
+
+@keyframes transit {
+  0% {
+    margin-top: -140px;
+  }
+  10% {
+    margin-top: -126px;
+  }
+  20% {
+    margin-top: -112px;
+  }
+  30% {
+    margin-top: -98px;
+  }
+  40% {
+    margin-top: -84px;
+  }
+  50% {
+    margin-top: -70px;
+  }
+  60% {
+    margin-top: -56px;
+  }
+  70% {
+    margin-top: -42px;
+  }
+  80% {
+    margin-top: -28px;
+  }
+  90% {
+    margin-top: -14px;
+  }
+  100% {
+    margin-top: 0px;
+  }
+}
+.winingRank {
+  width: 100%;
+  margin-top: 15px;
+  height: 280px;
+}
+.ranks {
+  height: auto;
+  width: 85%;
+  margin: 0 auto;
+  position: relative;
+}
+.ranksU {
+  position: absolute;
+  font-size: small;
+  color: white;
+  text-align: center;
+}

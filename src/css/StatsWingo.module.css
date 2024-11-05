@@ -1,0 +1,12 @@
+.GamesStat {
+  display: flex;
+  margin: 10px auto;
+  width: 93%;
+  border-radius: 10px;
+  justify-content: center;
+}
+.historyCommon {
+  background-color: white;
+  padding: 10px;
+  border-radius: 10px;
+}

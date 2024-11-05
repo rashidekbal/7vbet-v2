@@ -1,0 +1,63 @@
+.banner {
+  width: 100%;
+}
+.giftscollector {
+  width: 95%;
+
+  border-radius: 8px;
+  margin: 10px auto;
+  background-color: white;
+  padding: 10px;
+}
+.notice {
+  color: grey;
+  padding-left: 15px;
+  padding-top: 15px;
+}
+.giftdialog {
+  padding-left: 15px;
+  padding-top: 15px;
+  margin-top: 20px;
+}
+.giftdialog p {
+  font-family: "Times New Roman", Times, serif;
+  margin-bottom: 10px;
+}
+.giftdialog input[type="text"] {
+  all: unset;
+  background-color: rgb(241, 234, 234);
+  padding: 8px 0 8px 15px;
+  font-size: larger;
+  overflow: hidden;
+  border-radius: 25px;
+  display: block;
+  width: 94%;
+}
+.giftdialog input[type="submit"] {
+  all: unset;
+  background-color: orangered;
+  padding: 10px;
+  color: white;
+  width: 94%;
+  border-radius: 25px;
+  margin: 20px 0 0 0;
+  text-align: center;
+  font-size: larger;
+  margin-bottom: 25px;
+}
+.history {
+  background-color: white;
+  width: 95%;
+  margin: 15px auto;
+  border-radius: 8px;
+  padding-top: 20px;
+  padding-bottom: 15px;
+}
+.history svg {
+  width: 40%;
+  margin: 0 auto;
+  display: block;
+}
+.center {
+  color: grey;
+}

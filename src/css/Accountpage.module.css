@@ -1,0 +1,147 @@
+.accountinfo {
+  width: 100%;
+  height: 270px;
+  background-color: orangered;
+  position: relative;
+  border-radius: 0 0 90px 90px;
+}
+.userlogo {
+  display: inline-block;
+  width: 20%;
+  height: 80px;
+  margin: 40px 0px 0px 35px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.userinfo {
+  position: absolute;
+  height: 60px;
+  width: 65%;
+  top: 45px;
+  right: 10px;
+  color: white;
+}
+.uid {
+  display: block;
+  width: 50%;
+  background-color: lightgrey;
+  background-blend-mode: soft-light;
+  padding: 5px;
+  border-radius: 10px;
+  font-size: small;
+}
+
+.AccountSection {
+  width: 94%;
+  height: 150px;
+  background-color: white;
+  position: relative;
+  top: -135px;
+  left: 11.9px;
+  border-radius: 10px;
+}
+.section1 {
+  height: 40%;
+  width: 100%;
+  padding: 10px;
+}
+.section2 {
+  width: 100%;
+  position: relative;
+  height: 55%;
+}
+.subSections {
+  display: inline-block;
+  font-size: smaller;
+  width: 24%;
+  margin-top: 15px;
+  text-align: center;
+}
+.safe {
+  width: 94%;
+  height: 82px;
+  background-color: white;
+  margin: 0 auto;
+  margin-top: -120px;
+  border-radius: 10px;
+  position: relative;
+}
+.vaultimage {
+  display: inline-block;
+  margin-top: 10px;
+  margin-left: 5px;
+}
+.safeInfo {
+  display: inline-block;
+  width: 78%;
+  height: 55px;
+  position: absolute;
+  top: 5px;
+  right: 10px;
+}
+.historycontainer {
+  width: 94%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+}
+.historycontainersections {
+  width: 48%;
+  display: inline-block;
+  background-color: white;
+  height: 58px;
+  margin-top: 15px;
+  border-radius: 10px;
+}
+.accountfunctions {
+  width: 100%;
+  height: 68px;
+  padding: 10px;
+  background-color: white;
+  margin-top: 10px;
+  border-radius: 8px;
+}
+.accountfunctioncontainer {
+  width: 94%;
+  margin: 15px auto;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.functionlogo {
+  display: inline-block;
+  width: 14%;
+  padding-top: -20px;
+  height: 100%;
+}
+.functioninfo {
+  display: inline-block;
+  height: 50%;
+  padding: 5px;
+  position: relative;
+  top: -12px;
+  left: -10px;
+}
+.servicecenter {
+  width: 94%;
+  background-color: white;
+  margin: 0 auto;
+  border-radius: 10px;
+}
+.servicetabs {
+  display: inline-block;
+  height: 70px;
+  width: 27%;
+  margin: 10px;
+  text-align: center;
+}
+.logout {
+  display: block;
+  width: 94%;
+  margin: 10px auto;
+  background-color: red;
+  border-radius: 25px;
+  padding: 10px;
+  color: white;
+  margin-bottom: 90px;
+}

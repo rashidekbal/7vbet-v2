@@ -1,0 +1,9 @@
+.WalletView {
+  height: 312px;
+  width: 100%;
+  background: orangered;
+  border-bottom-right-radius: 70px;
+  border-bottom-left-radius: 70px;
+  overflow: visible;
+  padding: 15px;
+}

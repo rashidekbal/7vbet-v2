@@ -1,0 +1,98 @@
+.ColoOptions {
+  width: 92.7%;
+  margin: 0 auto;
+  border-radius: 10px;
+  height: auto;
+  text-align: center;
+  background-color: white;
+  padding-bottom: 15px;
+}
+.green {
+  float: left;
+  padding: 5px;
+  border: none;
+  background-color: green;
+  color: white;
+  width: 100px;
+  height: 35px;
+  border-radius: 0 10px 0 10px;
+  margin-top: 10px;
+  margin-left: 13px;
+  height: 38px;
+}
+.violet {
+  padding: 5px;
+  border: none;
+  background-color: darkviolet;
+  color: white;
+  width: 100px;
+  height: 35px;
+  border-radius: 10px;
+  margin-top: 10px;
+  height: 38px;
+}
+.red {
+  float: right;
+  padding: 5px;
+  border: none;
+  background-color: red;
+  color: white;
+  width: 100px;
+  height: 35px;
+  border-radius: 10px 0 10px 0;
+  margin-top: 10px;
+  margin-right: 13px;
+  height: 38px;
+}
+.numberSections {
+  width: 94.5%;
+  height: 68px;
+  background-color: rgb(241, 234, 234);
+  margin: 0 auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.numberSections img {
+  height: 60px;
+  margin: 4px;
+}
+.Randoms {
+  display: flex;
+  width: 99%;
+  margin: 0 auto;
+  margin-top: 10px;
+  padding: 5px;
+  justify-content: center;
+  align-items: center;
+}
+.Tabs {
+  background-color: rgb(241, 234, 234);
+  margin: auto;
+  padding: 8px 5px;
+  color: lightslategray;
+  border-radius: 5px;
+  height: 34px;
+  justify-content: center;
+}
+.Tabs:nth-child(2) {
+  color: white;
+  background-color: green;
+}
+.BetBigSmall {
+  width: 93%;
+  background-color: red;
+  margin: 10px auto;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.BetBigSmall p {
+  display: inline-block;
+  height: 38px;
+  text-align: center;
+  width: 50%;
+  padding: 10px;
+  color: white;
+}

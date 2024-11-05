@@ -1,0 +1,19 @@
+.main {
+  height: 51.06px;
+  background-color: orangered;
+  margin: 0 auto;
+  min-width: 340px;
+  width: 100%;
+  max-width: 412px;
+
+  z-index: 9;
+}
+.logoContainer {
+  width: 50%;
+  margin: 0 auto;
+  text-align: center;
+}
+.logo {
+  height: 48px;
+  width: 85px;
+}

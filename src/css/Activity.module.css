@@ -1,0 +1,31 @@
+.activityInfo {
+  width: 100%;
+  height: 90px;
+  background-color: orangered;
+  color: white;
+  padding-left: 10px;
+  font-size: small;
+}
+.activityInfo h4 {
+  margin-bottom: 10px;
+  margin-top: 5px;
+  font-size: large;
+}
+.Attendancegiftscontainer {
+  width: 100%;
+  height: 188.25px;
+  background-color: #f7f7ff;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-around;
+}
+
+.giftsattendence {
+  display: inline-block;
+  width: 43.1%;
+  height: 99%;
+  text-decoration: none;
+  color: black;
+  background-color: white;
+  margin-top: 15px;
+}

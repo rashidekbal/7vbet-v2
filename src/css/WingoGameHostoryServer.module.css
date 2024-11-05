@@ -1,0 +1,11 @@
+.DataHeader {
+  width: 93%;
+  background-color: orange;
+  color: white;
+  display: flex;
+  margin: 0 auto;
+  font-size: small;
+}
+.DataHeadersSecond {
+  padding: 10px;
+}
