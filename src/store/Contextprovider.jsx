@@ -1,4 +1,5 @@
 import { createContext, useState } from "react";
+
 let safeRevenue = 0.1;
 let totalrevenuesafe = 0.0;
 const currentintrestrate = 5;

@@ -127,3 +127,10 @@
 .ancor1 {
   color: orange;
 }
+.warning {
+  color: red;
+  font-size: small;
+}
+.hidden {
+  display: none;
+}
