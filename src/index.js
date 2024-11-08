@@ -26,18 +26,18 @@ import Safe from "./components/Safe";
 let router = createBrowserRouter([
   {
     path: "/",
-    element: <Login />,
-  },
-  {
-    path: "/register",
-    element: <Register />,
-  },
-  {
-    path: "/ajax",
     element: <App></App>,
     children: [
       {
         path: "",
+        element: <Login />,
+      },
+      {
+        path: "register",
+        element: <Register />,
+      },
+      {
+        path: "home",
         element: <OriginalLottery />,
       },
       {

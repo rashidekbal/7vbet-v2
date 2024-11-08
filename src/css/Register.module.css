@@ -51,7 +51,7 @@
   appearance: none;
 }
 .checkbox:checked {
-  background-color: green;
+  background-color: orange;
 }
 .submit {
   display: block;
@@ -133,4 +133,62 @@
 }
 .hidden {
   display: none;
+}
+.icons {
+  height: 20px;
+  width: 20px;
+  color: orange;
+}
+.register_Info {
+  background-color: white;
+  height: 250px;
+  width: 80%;
+  position: absolute;
+  z-index: 1;
+  top: 40%;
+  right: 10%;
+  border-radius: 20px;
+  box-shadow: 0 0 200px grey;
+  transition: 0.2s;
+  overflow: hidden;
+}
+.hidden_dialog {
+  background-color: white;
+  height: 0px;
+  width: 80%;
+  position: absolute;
+  z-index: 1;
+  top: 40%;
+  right: 10%;
+  border-radius: 20px;
+  box-shadow: 0 0 200px grey;
+  overflow: hidden;
+  transition: 0.2s;
+}
+.infoImage {
+  height: 80px;
+  width: 80px;
+  text-align: center;
+  color: forestgreen;
+  margin-top: 15px;
+}
+.message {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 20px;
+}
+.Next {
+  position: absolute;
+  bottom: 12%;
+  width: 80%;
+  right: 10%;
+}
+.Next button {
+  border: none;
+  outline: none;
+  background-color: orangered;
+  color: white;
+  width: 100%;
+  padding: 15px;
+  border-radius: 10px;
 }

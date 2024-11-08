@@ -1,5 +1,5 @@
 import { createContext, useState } from "react";
-
+const host = "http://192.168.57.240:8000";
 let safeRevenue = 0.1;
 let totalrevenuesafe = 0.0;
 const currentintrestrate = 5;
@@ -128,6 +128,7 @@ export default function Contextprovider({ children }) {
           safeRevenue,
           totalrevenuesafe,
           currentintrestrate,
+          host,
         }}
       >
         {children}
