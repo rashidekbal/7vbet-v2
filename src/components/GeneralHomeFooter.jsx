@@ -5,7 +5,7 @@ export const GeneralHomeFooter = ({ page }) => {
   return (
     <div className={style.menu}>
       {page == "home" ? (
-        <NavLink to="/ajax/" style={newstyle}>
+        <NavLink to="/home" style={newstyle}>
           <div id="home" className={style.menu2}>
             <svg
               data-v-6ab3f23e=""
@@ -19,7 +19,7 @@ export const GeneralHomeFooter = ({ page }) => {
           </div>
         </NavLink>
       ) : (
-        <NavLink to="/ajax/" style={newstyle}>
+        <NavLink to="/home" style={newstyle}>
           <div id="home" className={style.menu2}>
             <svg
               data-v-6ab3f23e=""
@@ -34,7 +34,7 @@ export const GeneralHomeFooter = ({ page }) => {
         </NavLink>
       )}
       {page == "activity" ? (
-        <NavLink to="/ajax/activity" style={newstyle}>
+        <NavLink to="/activity" style={newstyle}>
           <div id="Activity" className={style.menu2}>
             <svg
               data-v-6ab3f23e=""
@@ -47,7 +47,7 @@ export const GeneralHomeFooter = ({ page }) => {
           </div>
         </NavLink>
       ) : (
-        <NavLink to="/ajax/activity" style={newstyle}>
+        <NavLink to="/activity" style={newstyle}>
           <div id="Activity" className={style.menu2}>
             <svg
               data-v-6ab3f23e=""
@@ -61,7 +61,7 @@ export const GeneralHomeFooter = ({ page }) => {
         </NavLink>
       )}
       {page == "promotion" ? (
-        <NavLink to="/ajax/promotion" style={newstyle}>
+        <NavLink to="/promotion" style={newstyle}>
           <div id="Promotion" className={style.menu2}>
             <svg
               data-v-6ab3f23e=""
@@ -83,7 +83,7 @@ export const GeneralHomeFooter = ({ page }) => {
           </div>
         </NavLink>
       ) : (
-        <NavLink to="/ajax/promotion" style={newstyle}>
+        <NavLink to="/promotion" style={newstyle}>
           <div id="Promotion" className={style.menu2}>
             <svg
               data-v-6ab3f23e=""
@@ -98,7 +98,7 @@ export const GeneralHomeFooter = ({ page }) => {
         </NavLink>
       )}
       {page == "wallet" ? (
-        <NavLink to="/ajax/wallet" style={newstyle}>
+        <NavLink to="/wallet" style={newstyle}>
           <div id="Wallet" className={style.menu2}>
             <svg
               data-v-6ab3f23e=""
@@ -111,7 +111,7 @@ export const GeneralHomeFooter = ({ page }) => {
           </div>
         </NavLink>
       ) : (
-        <NavLink to="/ajax/wallet" style={newstyle}>
+        <NavLink to="/wallet" style={newstyle}>
           <div id="Wallet" className={style.menu2}>
             <svg
               data-v-6ab3f23e=""
@@ -125,7 +125,7 @@ export const GeneralHomeFooter = ({ page }) => {
         </NavLink>
       )}
       {page == "account" ? (
-        <NavLink to="/ajax/account" style={newstyle}>
+        <NavLink to="/account" style={newstyle}>
           <div id="Main" className={style.menu2}>
             <svg
               data-v-6ab3f23e=""
@@ -138,7 +138,7 @@ export const GeneralHomeFooter = ({ page }) => {
           </div>
         </NavLink>
       ) : (
-        <NavLink to="/ajax/account" style={newstyle}>
+        <NavLink to="/account" style={newstyle}>
           <div id="Main" className={style.menu2}>
             <svg
               data-v-6ab3f23e=""

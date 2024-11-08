@@ -1,5 +1,6 @@
 import { createContext, useState } from "react";
 const host = "http://192.168.57.240:8000";
+
 let safeRevenue = 0.1;
 let totalrevenuesafe = 0.0;
 const currentintrestrate = 5;
@@ -8,6 +9,8 @@ let exp = 500;
 export const data = createContext([]);
 let accumulated = 45;
 export default function Contextprovider({ children }) {
+  const [uid, changeuid] = useState("");
+
   let WingoServerData1min = [
     {
       period: "20240618010732",
@@ -129,6 +132,9 @@ export default function Contextprovider({ children }) {
           totalrevenuesafe,
           currentintrestrate,
           host,
+          uid,
+
+          changeuid,
         }}
       >
         {children}

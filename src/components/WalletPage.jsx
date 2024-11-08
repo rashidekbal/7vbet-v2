@@ -76,7 +76,7 @@ export const WalletPage = () => {
 
           <div style={{ margin: "0 auto", textAlign: "center" }}>
             <div className={style.diffwallets}>
-              <NavLink to="/ajax/Deposite">
+              <NavLink to="/Deposite">
                 {" "}
                 <img
                   src={walleticon}
@@ -86,7 +86,7 @@ export const WalletPage = () => {
               </NavLink>
             </div>
             <div className={style.diffwallets}>
-              <NavLink to="/ajax/widthdrawl">
+              <NavLink to="/widthdrawl">
                 <img
                   src={widthdrawlblue}
                   style={{ height: "65px", borderRadius: "7px" }}
@@ -98,7 +98,7 @@ export const WalletPage = () => {
               className={style.diffwallets}
               style={{ height: "90px", position: "relative", top: "12px" }}
             >
-              <NavLink to="/ajax/depositHistory">
+              <NavLink to="/depositHistory">
                 <img
                   src={rechargeHistory}
                   style={{
@@ -132,7 +132,7 @@ export const WalletPage = () => {
                 right: "14px",
               }}
             >
-              <NavLink to="/ajax/withdrawlhistory">
+              <NavLink to="/withdrawlhistory">
                 <img src={widthdrawHistory} style={{ height: "65px" }} />
                 <p className={style.widthslogan}>
                   Widthdrawl

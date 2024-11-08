@@ -6,7 +6,8 @@ import { Stats } from "./Stats";
 
 import { GeneralHomeFooter } from "./GeneralHomeFooter";
 import Header from "./Header";
-
+import { useContext, useEffect } from "react";
+import { data } from "../store/Contextprovider";
 export default function OriginalLottery() {
   return (
     <>

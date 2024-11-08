@@ -15,7 +15,11 @@ function gifts() {
         </div>
         <div className={style.giftdialog}>
           <p>Please enter the gift code below</p>
-          <form>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+            }}
+          >
             <input
               type="text"
               placeholder="Please enter gift code"

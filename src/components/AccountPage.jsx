@@ -7,13 +7,16 @@ import customer from "../svgs/customer-support-svgrepo-com.svg";
 import guide from "../svgs/guide-svgrepo-com.svg";
 import about from "../svgs/about-filled-svgrepo-com.svg";
 import style from "../css/Accountpage.module.css";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { data } from "../store/Contextprovider";
 import { GeneralHomeFooter } from "./GeneralHomeFooter";
 import { FaRupeeSign } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 export const AccountPage = () => {
   let getData = useContext(data);
+  useEffect(() => {
+    getData.changeuid(window.sessionStorage.getItem("uid"));
+  }, []);
   return (
     <>
       <div>
@@ -26,7 +29,7 @@ export const AccountPage = () => {
             <p className={style.uid}>
               <span>UID</span>
               <span> |</span>
-              <span id="user-id"> 4476216</span>
+              <span id="user-id"> {getData.uid}</span>
               <span onclick="copy_user_id()">
                 {" "}
                 <svg
@@ -73,7 +76,7 @@ export const AccountPage = () => {
 
           <div className={style.section2}>
             <div className={style.subSections}>
-              <NavLink to="/ajax/wallet">
+              <NavLink to="/wallet">
                 <svg
                   style={{ height: "40px", width: "40px" }}
                   data-v-7d799898=""
@@ -86,7 +89,7 @@ export const AccountPage = () => {
             </div>
 
             <div className={style.subSections}>
-              <NavLink to="/ajax/Deposite">
+              <NavLink to="/Deposite">
                 <svg
                   style={{ height: "40px", width: "40px" }}
                   data-v-7d799898=""
@@ -99,7 +102,7 @@ export const AccountPage = () => {
             </div>
 
             <div className={style.subSections}>
-              <NavLink to="/ajax/widthdrawl">
+              <NavLink to="/widthdrawl">
                 <svg
                   data-v-7d799898=""
                   style={{ height: "40px", width: "40px" }}
@@ -112,7 +115,7 @@ export const AccountPage = () => {
             </div>
 
             <div className={style.subSections}>
-              <NavLink to="/ajax/Vip">
+              <NavLink to="/Vip">
                 <svg
                   style={{ height: "40px", width: "40px" }}
                   data-v-7d799898=""
@@ -127,7 +130,7 @@ export const AccountPage = () => {
         </div>
 
         <div className={style.safe}>
-          <NavLink to="/ajax/safe">
+          <NavLink to="/safe">
             <div className={style.vaultimage}>
               <svg
                 style={{ height: "60px", width: "60px" }}
@@ -149,7 +152,7 @@ export const AccountPage = () => {
         </div>
         <div className={style.historycontainer}>
           <div className={style.historycontainersections}>
-            <NavLink to="/ajax/deposithistory">
+            <NavLink to="/deposithistory">
               <div style={{ display: "inline-block", paddingTop: "13px" }}>
                 <svg
                   data-v-acd6d46f=""
@@ -183,7 +186,7 @@ export const AccountPage = () => {
             </NavLink>
           </div>
           <div className={style.historycontainersections}>
-            <NavLink to="/ajax/withdrawlhistory">
+            <NavLink to="/withdrawlhistory">
               <div style={{ display: "inline-block", paddingTop: "13px" }}>
                 <svg
                   data-v-acd6d46f=""
@@ -370,7 +373,15 @@ export const AccountPage = () => {
             </div>
           </div>
         </div>
-        <button className={style.logout}>Logout</button>
+        <button
+          className={style.logout}
+          onClick={() => {
+            window.sessionStorage.removeItem("uid");
+            window.location.replace("http://192.168.57.240:3000/");
+          }}
+        >
+          Logout
+        </button>
       </div>
       <GeneralHomeFooter page="account" />
     </>

@@ -30,9 +30,9 @@ function Register() {
             })
             .then((res) => {
               changedialog("yes");
-              if (res.statusText == "OK") {
+              if (String(res.data) == "ok") {
                 changeRegistered("yes");
-              } else if (res.statusText == "user_Exists") {
+              } else if (String(res.data) == "user_Exists") {
                 changeRegistered("no");
               }
             })

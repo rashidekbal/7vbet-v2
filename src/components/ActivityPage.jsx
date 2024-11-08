@@ -16,7 +16,7 @@ export const ActivityPage = () => {
           <p>We will launch user feedback activity time totime</p>
         </div>
         <div className={style.Attendancegiftscontainer}>
-          <NavLink to="/ajax/gifts" className={style.giftsattendence}>
+          <NavLink to="/gifts" className={style.giftsattendence}>
             <img
               src={gift}
               height="97.23px"
@@ -32,7 +32,7 @@ export const ActivityPage = () => {
           </NavLink>
 
           <NavLink
-            to="/ajax/attandance"
+            to="/attandance"
             style={{ right: "10px" }}
             className={style.giftsattendence}
           >
