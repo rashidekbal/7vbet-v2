@@ -165,7 +165,7 @@ function Register() {
               placeholder="Create your password"
               required
               minlength="6"
-              maxlength="10"
+              maxlength="20"
               name="pass"
               value={password}
               onChange={(e) => {
@@ -188,7 +188,7 @@ function Register() {
               placeholder="Re-enter password"
               required
               minlength="6"
-              maxlength="10"
+              maxlength="20"
               value={cnfpassword}
               onChange={(e) => {
                 changecnfpassword(e.target.value);
