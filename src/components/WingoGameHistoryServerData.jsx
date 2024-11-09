@@ -29,7 +29,7 @@ export default function WingoGameHistoryServerData({ currenttimer }) {
                   {item.number}
                 </div>
                 <div className={style.data} style={{ width: "24%" }}>
-                  {item.res}
+                  {item.size}
                 </div>
                 <div
                   className={style.data}
@@ -80,7 +80,7 @@ export default function WingoGameHistoryServerData({ currenttimer }) {
                   {item.number}
                 </div>
                 <div className={style.data} style={{ width: "24%" }}>
-                  {item.res}
+                  {item.size}
                 </div>
                 <div
                   className={style.data}
@@ -127,7 +127,7 @@ export default function WingoGameHistoryServerData({ currenttimer }) {
                   {item.number}
                 </div>
                 <div className={style.data} style={{ width: "24%" }}>
-                  {item.res}
+                  {item.size}
                 </div>
                 <div
                   className={style.data}
@@ -174,7 +174,7 @@ export default function WingoGameHistoryServerData({ currenttimer }) {
                   {item.number}
                 </div>
                 <div className={style.data} style={{ width: "24%" }}>
-                  {item.res}
+                  {item.size}
                 </div>
                 <div
                   className={style.data}

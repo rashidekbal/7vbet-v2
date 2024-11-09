@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Notice from "./Notice";
 import WalletDataForGames from "./WalletDataForGames";
 import { WalletViewEffect } from "./WalletViewEffect";
@@ -8,9 +8,14 @@ import Wingo3min from "./Wingo3min";
 import Wingo5min from "./Wingo5min";
 import Wingo10min from "./Wingo10min";
 import Footer from "./Footer";
+import { data } from "../store/Contextprovider";
 
 export default function Wingo({ taber }) {
   const [currenttimer, changecurrenttimer] = useState("1");
+  const { get1minwingo } = useContext(data);
+  useEffect(() => {
+    get1minwingo();
+  }, []);
   return (
     <>
       <div>

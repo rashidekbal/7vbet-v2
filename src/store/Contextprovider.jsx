@@ -1,3 +1,4 @@
+import axios from "axios";
 import { createContext, useState } from "react";
 const host = "http://192.168.57.240:8000";
 
@@ -11,43 +12,22 @@ let accumulated = 45;
 export default function Contextprovider({ children }) {
   const [uid, changeuid] = useState("");
 
-  let WingoServerData1min = [
-    {
-      period: "20240618010732",
-      number: "4",
-      res: "Small",
-      color: "greenviolet",
-    },
-    { period: "20240618010732", number: "4", res: "Small", color: "red" },
-    { period: "20240618010732", number: "4", res: "Small", color: "red" },
-    { period: "20240618010732", number: "4", res: "Small", color: "red" },
-    { period: "20240618010732", number: "4", res: "Small", color: "red" },
-    { period: "20240618010732", number: "4", res: "Small", color: "red" },
-  ];
-  let WingoServerData3min = [
-    { period: "20240618010732", number: "4", res: "Small", color: "red" },
-    { period: "20240618010732", number: "4", res: "Small", color: "red" },
-    { period: "20240618010732", number: "4", res: "Small", color: "red" },
-    { period: "20240618010732", number: "4", res: "Small", color: "red" },
-    { period: "20240618010732", number: "4", res: "Small", color: "red" },
-    { period: "20240618010732", number: "4", res: "Small", color: "red" },
-  ];
-  let WingoServerData5min = [
-    { period: "20240618010732", number: "4", res: "Small", color: "red" },
-    { period: "20240618010732", number: "4", res: "Small", color: "red" },
-    { period: "20240618010732", number: "4", res: "Small", color: "red" },
-    { period: "20240618010732", number: "4", res: "Small", color: "red" },
-    { period: "20240618010732", number: "4", res: "Small", color: "red" },
-    { period: "20240618010732", number: "4", res: "Small", color: "red" },
-  ];
-  let WingoServerData10min = [
-    { period: "20240618010732", number: "4", res: "Small", color: "red" },
-    { period: "20240618010732", number: "4", res: "Small", color: "red" },
-    { period: "20240618010732", number: "4", res: "Small", color: "red" },
-    { period: "20240618010732", number: "4", res: "Small", color: "red" },
-    { period: "20240618010732", number: "4", res: "Small", color: "red" },
-    { period: "20240618010732", number: "4", res: "Small", color: "red" },
-  ];
+  let [WingoServerData1min, change1minWingo] = useState([]);
+  let [WingoServerData3min, change3minWingo] = useState([]);
+  let [WingoServerData5min, change5minWingo] = useState([]);
+  let [WingoServerData10min, change10minWingo] = useState([]);
+  // change wingo 1 min result
+  function get1minwingo() {
+    axios
+      .get(`${host}/wingoOneMin`)
+      .then((res) => {
+        change1minWingo(res.data);
+      })
+      .catch((res) => {
+        console.log("error getting data");
+      });
+  }
+
   let rechargehistory = [
     {
       status: "pending",
@@ -133,7 +113,7 @@ export default function Contextprovider({ children }) {
           currentintrestrate,
           host,
           uid,
-
+          get1minwingo,
           changeuid,
         }}
       >

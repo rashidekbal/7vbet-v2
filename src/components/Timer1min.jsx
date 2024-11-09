@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import style from "../css/Timer.module.css";
 import number0 from "../icons/n0-30bd92d1.png";
 import number1 from "../icons/n1-dfccbff5.png";
@@ -10,8 +10,10 @@ import number6 from "../icons/n6-a56e0b9a.png";
 import number7 from "../icons/n7-5961a17f.png";
 import number8 from "../icons/n8-d4d951a4.png";
 import number9 from "../icons/n9-a20f6f42.png";
+import { data } from "../store/Contextprovider";
 
 export default function Timer1min() {
+  let { get1minwingo } = useContext(data);
   const [currentsec, changesec] = useState("0");
 
   var time = new Date();
@@ -19,6 +21,9 @@ export default function Timer1min() {
   useEffect(() => {
     setTimeout(() => {
       changesec(Math.abs(time.getSeconds() - 60).toString());
+      if (currentsec == "1") {
+        get1minwingo();
+      }
     }, 1000);
   });
 

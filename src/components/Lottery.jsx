@@ -11,7 +11,7 @@ function Lottery({ taber }) {
     <>
       <div className={style.maingames}>
         <div className={style.games} id="wingo">
-          <NavLink to="/ajax/wingo" style={newstyle}>
+          <NavLink to="/wingo" style={newstyle}>
             <div className={style.openerUpper1}>
               <div className={style.gamelogo}>
                 <img className={style.gamelogoimg} src={logo1} alt="wingo" />
@@ -46,7 +46,7 @@ function Lottery({ taber }) {
           </NavLink>
         </div>
         <div className={style.games} id="k3">
-          <NavLink to="/ajax/k3" style={newstyle}>
+          <NavLink to="/k3" style={newstyle}>
             <div className={style.openerUpper2}>
               <div className={style.gamelogo}>
                 <img className={style.gamelogoimg} src={logo2} alt="k3" />
@@ -81,7 +81,7 @@ function Lottery({ taber }) {
           </NavLink>
         </div>
         <div className={style.games} id="5d">
-          <NavLink to="/ajax/5d" style={newstyle}>
+          <NavLink to="/5d" style={newstyle}>
             <div className={style.openerUpper3}>
               <div className={style.gamelogo}>
                 <img className={style.gamelogoimg} src={logo3} alt="5D" />
@@ -116,7 +116,7 @@ function Lottery({ taber }) {
           </NavLink>
         </div>
         <div className={style.games} id="trx" style={{ margin: "0 0 5px 0;" }}>
-          <NavLink to="/ajax/trx" style={newstyle}>
+          <NavLink to="/trx" style={newstyle}>
             <div className={style.openerUpper4}>
               <div className={style.gamelogo}>
                 <img className={style.gamelogoimg} src={logo4} alt="Trx" />
