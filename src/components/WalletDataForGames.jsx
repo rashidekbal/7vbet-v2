@@ -2,13 +2,16 @@ import { useContext } from "react";
 import style from "../css/WalletDataForGames.module.css";
 import wallet from "../icons/wallet-3f0340b6.png";
 import { data } from "../store/Contextprovider";
+import { FaRupeeSign } from "react-icons/fa";
 export default function WalletDataForGames() {
   let getData = useContext(data);
   return (
     <>
       <div className={style.WalletSection}>
         <h2 className={style.BalanceView}>
-          <span>Rs </span>
+          <span>
+            <FaRupeeSign style={{ height: "17px", width: "14px" }} />
+          </span>
           <span id="balance">{getData.account_balance}</span>
         </h2>
 

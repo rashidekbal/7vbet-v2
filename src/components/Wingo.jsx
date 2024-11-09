@@ -38,7 +38,6 @@ export default function Wingo({ taber }) {
             <Wingo10min currenttimer={currenttimer}></Wingo10min>
           )
         )}
-        <Footer></Footer>
       </div>
     </>
   );

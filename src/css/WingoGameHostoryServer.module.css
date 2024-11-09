@@ -5,7 +5,8 @@
   display: flex;
   margin: 0 auto;
   font-size: small;
+  justify-content: space-evenly;
 }
 .DataHeadersSecond {
-  padding: 10px;
+  padding: 8px;
 }

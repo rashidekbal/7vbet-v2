@@ -1,9 +1,0 @@
-
-        <svg data-v-9bb5e81c="" class="svg-icon icon-weal4">
-          <use xlinkHref="#icon-weal4"></use>
-        </svg>
-
-        <svg data-v-9bb5e81c="" class="svg-icon icon-weal5">
-          <use xlinkHref="#icon-weal5"></use>
-        </svg>
-       

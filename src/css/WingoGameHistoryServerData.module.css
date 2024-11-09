@@ -1,8 +1,9 @@
 .gameHistoryData {
   margin: 0 auto;
   width: 93%;
-  max-height: 380px;
+
   overflow: scroll;
+  margin-top: 4px;
 }
 .gameHistoryData::-webkit-scrollbar {
   display: none;

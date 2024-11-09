@@ -28,7 +28,7 @@ export default function StatsWingo({ currenttimer }) {
               width: "108px",
             }}
           >
-            Game history
+            History
           </div>
         ) : (
           <div

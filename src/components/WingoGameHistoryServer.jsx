@@ -7,7 +7,7 @@ export default function WingoGameHistoryServer({ currenttimer }) {
         <div
           id="period"
           className={style.DataHeadersSecond}
-          style={{ width: "38%", textAlign: "center" }}
+          style={{ width: "34%", textAlign: "center" }}
         >
           <b>Period</b>
         </div>
@@ -19,9 +19,13 @@ export default function WingoGameHistoryServer({ currenttimer }) {
           className={style.DataHeadersSecond}
           style={{ width: "25%", textAlign: "center" }}
         >
-          <b>Big Small</b>
+          <b>size</b>
         </div>
-        <div id="color" className={style.DataHeadersSecond}>
+        <div
+          id="color"
+          className={style.DataHeadersSecond}
+          style={{ textAlign: "center" }}
+        >
           <b>Color</b>
         </div>
       </div>

@@ -19,16 +19,26 @@ export default function WingoGameHistoryServerData({ currenttimer }) {
         ? WingoServerData1min.map((item) => (
             <div className={style.gameHistoryData}>
               <div className={style.DataHolder}>
-                <div className={style.data} style={{ width: "38%" }}>
+                <div
+                  className={style.data}
+                  style={{ width: "38%", fontSize: "17px" }}
+                >
                   {item.period}
                 </div>
                 <div
                   className={style.data}
-                  style={{ textAlign: "center", width: "22%" }}
+                  style={{
+                    textAlign: "center",
+                    width: "22%",
+                    fontSize: "17px",
+                  }}
                 >
                   {item.number}
                 </div>
-                <div className={style.data} style={{ width: "24%" }}>
+                <div
+                  className={style.data}
+                  style={{ width: "24%", fontSize: "17px" }}
+                >
                   {item.size}
                 </div>
                 <div
@@ -47,14 +57,17 @@ export default function WingoGameHistoryServerData({ currenttimer }) {
                         style={{ marginLeft: "12px" }}
                       />
                     ) : item.color === "green" ? (
-                      <img src={green} style={{ marginLeft: "12px" }} />
+                      <img
+                        src={green}
+                        style={{ marginLeft: "12px", height: "14px" }}
+                      />
                     ) : item.color === "redViolet" ? (
                       <img
                         src={redVilet}
                         style={{ width: "40px", height: "16px" }}
                       />
                     ) : (
-                      item.color === "greenviolet" && (
+                      item.color === "greenViolet" && (
                         <img
                           src={greenViolet}
                           style={{ width: "40px", height: "16px" }}
@@ -70,21 +83,35 @@ export default function WingoGameHistoryServerData({ currenttimer }) {
         ? WingoServerData3min.map((item) => (
             <div className={style.gameHistoryData}>
               <div className={style.DataHolder}>
-                <div className={style.data} style={{ width: "38%" }}>
+                <div
+                  className={style.data}
+                  style={{ width: "38%", fontSize: "17px" }}
+                >
                   {item.period}
                 </div>
                 <div
                   className={style.data}
-                  style={{ textAlign: "center", width: "22%" }}
+                  style={{
+                    textAlign: "center",
+                    width: "22%",
+                    fontSize: "17px",
+                  }}
                 >
                   {item.number}
                 </div>
-                <div className={style.data} style={{ width: "24%" }}>
+                <div
+                  className={style.data}
+                  style={{ width: "24%", fontSize: "17px" }}
+                >
                   {item.size}
                 </div>
                 <div
                   className={style.data}
-                  style={{ width: "14.9%", textAlign: "center" }}
+                  style={{
+                    width: "40px",
+                    margin: "0 auto",
+                    textAlign: "center",
+                  }}
                 >
                   <div>
                     {item.color === "red" ? (
@@ -94,14 +121,17 @@ export default function WingoGameHistoryServerData({ currenttimer }) {
                         style={{ marginLeft: "12px" }}
                       />
                     ) : item.color === "green" ? (
-                      <img src={green} style={{ marginLeft: "12px" }} />
+                      <img
+                        src={green}
+                        style={{ marginLeft: "12px", height: "14px" }}
+                      />
                     ) : item.color === "redViolet" ? (
                       <img
                         src={redVilet}
                         style={{ width: "40px", height: "16px" }}
                       />
                     ) : (
-                      item.color === "greenviolet" && (
+                      item.color === "greenViolet" && (
                         <img
                           src={greenViolet}
                           style={{ width: "40px", height: "16px" }}
@@ -117,21 +147,35 @@ export default function WingoGameHistoryServerData({ currenttimer }) {
         ? WingoServerData5min.map((item) => (
             <div className={style.gameHistoryData}>
               <div className={style.DataHolder}>
-                <div className={style.data} style={{ width: "38%" }}>
+                <div
+                  className={style.data}
+                  style={{ width: "38%", fontSize: "17px" }}
+                >
                   {item.period}
                 </div>
                 <div
                   className={style.data}
-                  style={{ textAlign: "center", width: "22%" }}
+                  style={{
+                    textAlign: "center",
+                    width: "22%",
+                    fontSize: "17px",
+                  }}
                 >
                   {item.number}
                 </div>
-                <div className={style.data} style={{ width: "24%" }}>
+                <div
+                  className={style.data}
+                  style={{ width: "24%", fontSize: "17px" }}
+                >
                   {item.size}
                 </div>
                 <div
                   className={style.data}
-                  style={{ width: "14.9%", textAlign: "center" }}
+                  style={{
+                    width: "40px",
+                    margin: "0 auto",
+                    textAlign: "center",
+                  }}
                 >
                   <div>
                     {item.color === "red" ? (
@@ -141,14 +185,17 @@ export default function WingoGameHistoryServerData({ currenttimer }) {
                         style={{ marginLeft: "12px" }}
                       />
                     ) : item.color === "green" ? (
-                      <img src={green} style={{ marginLeft: "12px" }} />
+                      <img
+                        src={green}
+                        style={{ marginLeft: "12px", height: "14px" }}
+                      />
                     ) : item.color === "redViolet" ? (
                       <img
                         src={redVilet}
                         style={{ width: "40px", height: "16px" }}
                       />
                     ) : (
-                      item.color === "greenviolet" && (
+                      item.color === "greenViolet" && (
                         <img
                           src={greenViolet}
                           style={{ width: "40px", height: "16px" }}
@@ -164,21 +211,35 @@ export default function WingoGameHistoryServerData({ currenttimer }) {
           WingoServerData10min.map((item) => (
             <div className={style.gameHistoryData}>
               <div className={style.DataHolder}>
-                <div className={style.data} style={{ width: "38%" }}>
+                <div
+                  className={style.data}
+                  style={{ width: "38%", fontSize: "17px" }}
+                >
                   {item.period}
                 </div>
                 <div
                   className={style.data}
-                  style={{ textAlign: "center", width: "22%" }}
+                  style={{
+                    textAlign: "center",
+                    width: "22%",
+                    fontSize: "17px",
+                  }}
                 >
                   {item.number}
                 </div>
-                <div className={style.data} style={{ width: "24%" }}>
+                <div
+                  className={style.data}
+                  style={{ width: "24%", fontSize: "17px" }}
+                >
                   {item.size}
                 </div>
                 <div
                   className={style.data}
-                  style={{ width: "14.9%", textAlign: "center" }}
+                  style={{
+                    width: "40px",
+                    margin: "0 auto",
+                    textAlign: "center",
+                  }}
                 >
                   <div>
                     {item.color === "red" ? (
@@ -188,14 +249,17 @@ export default function WingoGameHistoryServerData({ currenttimer }) {
                         style={{ marginLeft: "12px" }}
                       />
                     ) : item.color === "green" ? (
-                      <img src={green} style={{ marginLeft: "12px" }} />
+                      <img
+                        src={green}
+                        style={{ marginLeft: "12px", height: "14px" }}
+                      />
                     ) : item.color === "redViolet" ? (
                       <img
                         src={redVilet}
                         style={{ width: "40px", height: "16px" }}
                       />
                     ) : (
-                      item.color === "greenviolet" && (
+                      item.color === "greenViolet" && (
                         <img
                           src={greenViolet}
                           style={{ width: "40px", height: "16px" }}
