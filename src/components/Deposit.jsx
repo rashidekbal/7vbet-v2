@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import style from "../css/Deposite.module.css";
 import balance from "../icons/balance-e39ce400.png";
 import { FaRupeeSign } from "react-icons/fa";
@@ -16,6 +16,11 @@ import BalanceView from "./BalanceView";
 
 function Deposit() {
   let info = useContext(data);
+  let getData = useContext(data);
+  useEffect(() => {
+    getData.changeuid(window.sessionStorage.getItem("uid"));
+    getData.getUserfinances(String(window.sessionStorage.getItem("uid")));
+  }, []);
   return (
     <>
       <div className={style.header}>

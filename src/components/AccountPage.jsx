@@ -16,6 +16,7 @@ export const AccountPage = () => {
   let getData = useContext(data);
   useEffect(() => {
     getData.changeuid(window.sessionStorage.getItem("uid"));
+    getData.getUserfinances(String(window.sessionStorage.getItem("uid")));
   }, []);
   return (
     <>
@@ -30,7 +31,11 @@ export const AccountPage = () => {
               <span>UID</span>
               <span> |</span>
               <span id="user-id"> {getData.uid}</span>
-              <span onclick="copy_user_id()">
+              <span
+                onClick={() => {
+                  getData.copydata(getData.uid);
+                }}
+              >
                 {" "}
                 <svg
                   style={{
@@ -57,8 +62,14 @@ export const AccountPage = () => {
             <p style={{ color: "grey" }}> Total balance</p>
             <h4 id="total_balance_view" style={{ padding: "5px" }}>
               <FaRupeeSign style={{ height: "12px" }} />
-              <span id="total_balance">{getData.account_balance}</span>{" "}
-              <span>
+              <span id="total_balance">{getData.userfinance.balance}</span>{" "}
+              <span
+                onClick={() => {
+                  getData.getUserfinances(
+                    String(window.sessionStorage.getItem("uid"))
+                  );
+                }}
+              >
                 <svg
                   style={{
                     height: "18.86px",

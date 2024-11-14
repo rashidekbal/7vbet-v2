@@ -11,7 +11,7 @@ export const data = createContext([]);
 let accumulated = 45;
 export default function Contextprovider({ children }) {
   const [uid, changeuid] = useState("");
-
+  const [userfinance, changeuserfinance] = useState({});
   let [WingoServerData1min, change1minWingo] = useState([]);
   let [WingoServerData3min, change3minWingo] = useState([]);
   let [WingoServerData5min, change5minWingo] = useState([]);
@@ -27,7 +27,16 @@ export default function Contextprovider({ children }) {
         console.log("error getting data");
       });
   }
-
+  function getUserfinances(userid) {
+    axios
+      .post(`${host}/userfinances`, {
+        uid: userid,
+      })
+      .then((res) => {
+        changeuserfinance(res.data);
+      })
+      .catch((err) => console.log(err));
+  }
   let rechargehistory = [
     {
       status: "pending",
@@ -81,7 +90,6 @@ export default function Contextprovider({ children }) {
       orderid: "Rc2024092813005007730775f",
     },
   ];
-  let account_balance = 99999;
   let takenout = 27000;
   let tobeBet = 0;
   let WithdrawlReamining = 3;
@@ -102,7 +110,7 @@ export default function Contextprovider({ children }) {
           WingoServerData5min,
           WingoServerData10min,
           takenout,
-          account_balance,
+
           accumulated,
           tobeBet,
           WithdrawlReamining,
@@ -115,6 +123,8 @@ export default function Contextprovider({ children }) {
           uid,
           get1minwingo,
           changeuid,
+          getUserfinances,
+          userfinance,
         }}
       >
         {children}

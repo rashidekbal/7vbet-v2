@@ -1,4 +1,4 @@
-import React, { useContext, useRef } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import BalanceView from "./BalanceView";
 import style from "../css/Widthdrawlpage.module.css";
 import bankcard from "../icons/bankcard.png";
@@ -11,6 +11,11 @@ import Withdrawlhistory from "./Withdrawlhistory";
 
 function Widthdrawlpage() {
   let info = useContext(data);
+  let getData = useContext(data);
+  useEffect(() => {
+    getData.changeuid(window.sessionStorage.getItem("uid"));
+    getData.getUserfinances(String(window.sessionStorage.getItem("uid")));
+  }, []);
 
   return (
     <>
@@ -78,7 +83,7 @@ function Widthdrawlpage() {
                 />
                 <span style={{ fontSize: "10px" }}>
                   {" "}
-                  {info.account_balance}
+                  {getData.userfinance.balance}
                 </span>
               </span>
             </p>
@@ -89,7 +94,7 @@ function Widthdrawlpage() {
                 <FaRupeeSign
                   style={{ fontSize: "10px", verticalAlign: "middle" }}
                 />
-                <span>{info.takenout}</span>
+                <span>{info.userfinance.totalWidthdrawl}</span>
               </span>
             </p>
             <div className={style.submitholder}>

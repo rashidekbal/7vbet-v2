@@ -1,10 +1,15 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import style from "../css/WalletDataForGames.module.css";
 import wallet from "../icons/wallet-3f0340b6.png";
 import { data } from "../store/Contextprovider";
 import { FaRupeeSign } from "react-icons/fa";
 export default function WalletDataForGames() {
   let getData = useContext(data);
+
+  useEffect(() => {
+    getData.changeuid(window.sessionStorage.getItem("uid"));
+    getData.getUserfinances(String(window.sessionStorage.getItem("uid")));
+  }, []);
   return (
     <>
       <div className={style.WalletSection}>
@@ -12,7 +17,7 @@ export default function WalletDataForGames() {
           <span>
             <FaRupeeSign style={{ height: "17px", width: "14px" }} />
           </span>
-          <span id="balance">{getData.account_balance}</span>
+          <span id="balance">{getData.userfinance.balance}</span>
         </h2>
 
         <p className={style.WalletSlogan}>

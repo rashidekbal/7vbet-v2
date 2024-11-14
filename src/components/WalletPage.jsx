@@ -3,7 +3,7 @@ import widthdrawlblue from "../icons/widthdrawBlue-80197e64.png";
 import rechargeHistory from "../icons/rechargeHistory-b5a853c0.png";
 import widthdrawHistory from "../icons/withdrawHistory-fb2bafcf.png";
 import style from "../css/walletpage.module.css";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { data } from "../store/Contextprovider";
 import { FaRupeeSign } from "react-icons/fa";
 import { GeneralHomeFooter } from "./GeneralHomeFooter";
@@ -11,6 +11,11 @@ import { NavLink } from "react-router-dom";
 import Header from "./Header";
 export const WalletPage = () => {
   let getData = useContext(data);
+
+  useEffect(() => {
+    getData.changeuid(window.sessionStorage.getItem("uid"));
+    getData.getUserfinances(String(window.sessionStorage.getItem("uid")));
+  }, []);
   return (
     <>
       {" "}
@@ -24,7 +29,7 @@ export const WalletPage = () => {
                 {" "}
                 <FaRupeeSign style={{ height: "25px" }} />
               </span>
-              <span class="balance">{getData.account_balance}</span>
+              <span class="balance">{getData.userfinance.balance}</span>
             </h1>
             <p>Total balance</p>
           </div>
@@ -33,14 +38,14 @@ export const WalletPage = () => {
               <h5 id="total_widthdrawl_amount">
                 {" "}
                 <FaRupeeSign style={{ height: "10px" }} />
-                270000
+                {getData.userfinance.totalWidthdrawl}
               </h5>{" "}
               <p>Total widthdrawl</p>
             </div>
             <div className={style.totalDeposite}>
               <h5 id="total_deposit_amount">
                 <FaRupeeSign style={{ height: "10px" }} />
-                10
+                {getData.userfinance.totalDeposite}
               </h5>
               <p>Total deposit amount</p>
             </div>
@@ -56,7 +61,7 @@ export const WalletPage = () => {
             </div>
             <h5>
               <FaRupeeSign style={{ height: "10px" }} />
-              <span id="main_amount">{getData.account_balance}</span>
+              <span id="main_amount">{getData.userfinance.balance}</span>
             </h5>
             <p>Main Wallet</p>
           </div>

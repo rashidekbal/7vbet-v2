@@ -17,7 +17,7 @@ function BalanceView() {
           <div className={style.paisa}>
             <FaRupeeSign className={style.logo} />
 
-            <h1>{info.account_balance}</h1>
+            <h1>{info.userfinance.balance}</h1>
             <img src={refresh} className={style.refresh} />
           </div>
         </div>
