@@ -1,26 +1,27 @@
-import { useEffect, useRef, useState } from "react";
-import style from "../css/Timer.module.css";
-import number0 from "../icons/n0-30bd92d1.png";
-import number1 from "../icons/n1-dfccbff5.png";
-import number2 from "../icons/n2-c2913607.png";
-import number3 from "../icons/n3-f92c313f.png";
-import number4 from "../icons/n4-cb84933b.png";
-import number5 from "../icons/n5-49d0e9c5.png";
-import number6 from "../icons/n6-a56e0b9a.png";
-import number7 from "../icons/n7-5961a17f.png";
-import number8 from "../icons/n8-d4d951a4.png";
-import number9 from "../icons/n9-a20f6f42.png";
+import { useContext, useEffect, useRef, useState } from "react";
+import style from "../../css/Timer.module.css";
+import number0 from "../../icons/n0-30bd92d1.png";
+import number1 from "../../icons/n1-dfccbff5.png";
+import number2 from "../../icons/n2-c2913607.png";
+import number3 from "../../icons/n3-f92c313f.png";
+import number4 from "../../icons/n4-cb84933b.png";
+import number5 from "../../icons/n5-49d0e9c5.png";
+import number6 from "../../icons/n6-a56e0b9a.png";
+import number7 from "../../icons/n7-5961a17f.png";
+import number8 from "../../icons/n8-d4d951a4.png";
+import number9 from "../../icons/n9-a20f6f42.png";
+import { data } from "../../store/Contextprovider";
 
-export default function Timer10min() {
-  const [currentsec, changesec] = useState("00");
-  const [currentmin, changemin] = useState("1");
+export default function Timer3min() {
+  const [currentsec, changesec] = useState("0");
+  const [currentmin, changemin] = useState("0");
 
   var time = new Date();
 
   useEffect(() => {
     setTimeout(() => {
       changesec(Math.abs(time.getSeconds() - 60).toString());
-      changemin(Math.abs((time.getMinutes() % 10) - 10).toString());
+      changemin(Math.abs((time.getMinutes() % 3) - 3));
     }, 1000);
   });
 
@@ -55,40 +56,40 @@ export default function Timer10min() {
       <div class={style.twosectionSpll}>
         <p className={style.timenotice}>Time remaining</p>
         <p className={style.time}>
-          {currentmin.length === 2 ? (
+          {currentsec === "60" ? (
             <b>
               <span className={style.min} id="min_first">
                 0
               </span>
               <span className={style.min} id="min_sec">
-                {parseInt(currentmin[1] - 1)}
+                {Math.abs(currentmin - 1)}
               </span>
               <span className={style.min} id="min_colen">
                 :
               </span>
               <span className={style.min} id="second_first">
-                {currentsec.length === 2 ? currentsec[0] : "0"}
+                0
               </span>
               <span className={style.min} id="second_second">
-                {currentsec.length === 2 ? currentsec[1] : currentsec[0]}
+                0
               </span>
             </b>
-          ) : currentmin.length === 1 ? (
+          ) : currentsec.length === 2 ? (
             <b>
               <span className={style.min} id="min_first">
                 0
               </span>
               <span className={style.min} id="min_sec">
-                {parseInt(currentmin[0] - 1)}
+                {Math.abs(currentmin - 1)}
               </span>
               <span className={style.min} id="min_colen">
                 :
               </span>
               <span className={style.min} id="second_first">
-                {currentsec.length === 2 ? currentsec[0] : "0"}
+                {currentsec[0]}
               </span>
               <span className={style.min} id="second_second">
-                {currentsec.length === 2 ? currentsec[1] : currentsec[0]}
+                {currentsec[1]}
               </span>
             </b>
           ) : (
@@ -97,16 +98,16 @@ export default function Timer10min() {
                 0
               </span>
               <span className={style.min} id="min_sec">
-                0
+                {Math.abs(currentmin - 1)}
               </span>
               <span className={style.min} id="min_colen">
                 :
               </span>
               <span className={style.min} id="second_first">
-                {currentsec.length === 2 ? currentsec[0] : "0"}
+                0
               </span>
               <span className={style.min} id="second_second">
-                {currentsec.length === 2 ? currentsec[1] : currentsec[0]}
+                {currentsec[0]}
               </span>
             </b>
           )}

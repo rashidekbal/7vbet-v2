@@ -1,0 +1,259 @@
+.GameTimer {
+  height: 96px;
+  width: 100%;
+  background-color: white;
+  margin: 15px auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
+  display: flex;
+}
+.Options {
+  width: 25%;
+
+  border-radius: 10px;
+  text-align: center;
+}
+.OptionsImage {
+  width: 50px;
+}
+.ColoOptions {
+  width: 92.7%;
+  margin: 0 auto;
+  border-radius: 10px;
+  height: auto;
+  text-align: center;
+  background-color: white;
+  padding-bottom: 15px;
+}
+.green {
+  float: left;
+  padding: 5px;
+  border: none;
+  background-color: #18b660;
+  color: white;
+  width: 100px;
+  height: 35px;
+  border-radius: 0 10px 0 10px;
+  margin-top: 10px;
+  margin-left: 13px;
+  height: 38px;
+}
+.violet {
+  padding: 5px;
+  border: none;
+  background-color: violet;
+  color: white;
+  width: 100px;
+  height: 35px;
+  border-radius: 10px;
+  margin-top: 10px;
+  height: 38px;
+}
+.red {
+  float: right;
+  padding: 5px;
+  border: none;
+  background-color: red;
+  color: white;
+  width: 100px;
+  height: 35px;
+  border-radius: 10px 0 10px 0;
+  margin-top: 10px;
+  margin-right: 13px;
+  height: 38px;
+}
+.numberSections {
+  width: 94.5%;
+  height: 68px;
+  background-color: rgb(241, 234, 234);
+  margin: 0 auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.numberSections img {
+  height: 60px;
+  margin: 4px;
+}
+.Randoms {
+  display: flex;
+  width: 99%;
+  margin: 0 auto;
+  margin-top: 10px;
+  padding: 5px;
+  justify-content: center;
+  align-items: center;
+}
+.Tabs {
+  background-color: rgb(241, 234, 234);
+  margin: auto;
+  padding: 8px 5px;
+  color: lightslategray;
+  border-radius: 5px;
+  height: 34px;
+  justify-content: center;
+}
+.Tabs:nth-child(2) {
+  color: white;
+  background-color: #18b660;
+}
+.BetBigSmall {
+  width: 93%;
+  background-color: red;
+  margin: 10px auto;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.BetBigSmall p {
+  display: inline-block;
+  height: 38px;
+  text-align: center;
+  width: 50%;
+  padding: 10px;
+  color: white;
+}
+.betSelector {
+  position: fixed;
+  bottom: 0;
+  height: 345px;
+  background-color: white;
+  width: 100%;
+
+  box-shadow: 0 0 100px 100px grey;
+  border-radius: 16px 16px 0 0;
+  overflow: hidden;
+}
+.bettaboff {
+  position: fixed;
+  bottom: 0;
+  background-color: white;
+  height: 0px;
+  overflow: hidden;
+  width: 100%;
+}
+.SelectionInfo {
+  height: 110px;
+  background-color: orange;
+  position: relative;
+}
+.SelectionInfo::before {
+  content: "";
+  background-color: white;
+  height: 40px;
+  display: block;
+  width: 58%;
+  position: absolute;
+  right: -4px;
+  bottom: -24.3px;
+  rotate: -10deg;
+}
+.SelectionInfo::after {
+  content: "";
+  background-color: white;
+  width: 58%;
+  height: 40px;
+  display: block;
+  rotate: 10deg;
+  margin-left: -5px;
+  margin-top: 14.5px;
+}
+
+.Selectorheading {
+  color: white;
+  font-size: 24px;
+  text-align: center;
+  padding-top: 8px;
+}
+.Selectedoption {
+  background-color: white;
+  padding: 5px;
+  width: 80%;
+  border-radius: 10px;
+  margin: 0 auto;
+  margin-top: 15px;
+  text-align: center;
+}
+.firsttab {
+  padding-top: 25px;
+  width: 100%;
+  z-index: 1;
+  position: relative;
+  display: flex;
+}
+.section {
+  width: 50%;
+  font-size: 18px;
+}
+.InActiveBalance {
+  background-color: rgb(241, 234, 234);
+  color: black;
+  margin-right: 7px;
+  padding: 2px 6px 2px 6px;
+  border-radius: 4px;
+}
+.activeBalance {
+  background-color: orange;
+  color: white;
+  margin-right: 7px;
+  padding: 2px 6px 2px 6px;
+  border-radius: 4px;
+}
+.section:nth-child(2) {
+  padding-left: 15px;
+}
+.SecondTab {
+  padding-top: 14px;
+  margin-top: 10px;
+  display: flex;
+}
+.sectionfx {
+  width: 50%;
+  font-size: 18px;
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 10px;
+}
+.specialInput {
+  width: 45%;
+  background-color: rgb(241, 234, 234);
+  outline: none;
+  border: none;
+  padding: 6px 0px;
+  text-align: center;
+  display: inline-block;
+}
+.iconify {
+  background-color: orange;
+  color: white;
+  padding: 4px 6px 4px 6px;
+  margin-left: 4px;
+  margin-right: 4px;
+}
+.thirdTab {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 15px;
+  font-size: 17px;
+}
+.submittab {
+  position: absolute;
+
+  height: 50px;
+  width: 100%;
+  bottom: 0px;
+  display: flex;
+}
+.submittab button:nth-child(1) {
+  width: 35%;
+  outline: none;
+  border: none;
+}
+.submittab button:nth-child(2) {
+  width: 65%;
+  outline: none;
+  border: none;
+  background-color: orange;
+  color: white;
+}

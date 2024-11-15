@@ -10,7 +10,7 @@ export default function WingoGameHistoryServerData({ currenttimer }) {
     WingoServerData1min,
     WingoServerData3min,
     WingoServerData5min,
-    WingoServerData10min,
+    WingoServerData30s,
   } = useContext(data);
 
   return (
@@ -207,8 +207,8 @@ export default function WingoGameHistoryServerData({ currenttimer }) {
               </div>
             </div>
           ))
-        : currenttimer === "10" &&
-          WingoServerData10min.map((item) => (
+        : currenttimer === "30" &&
+          WingoServerData30s.map((item) => (
             <div className={style.gameHistoryData}>
               <div className={style.DataHolder}>
                 <div

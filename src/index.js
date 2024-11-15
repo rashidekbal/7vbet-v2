@@ -7,7 +7,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Register from "./components/Register";
 import Login from "./components/Login";
 import OriginalLottery from "./components/OriginalLottery";
-import Wingo from "./components/Wingo";
+
 import { K3 } from "./components/K3";
 import D5 from "./components/D5";
 import { ActivityPage } from "./components/ActivityPage";
@@ -22,7 +22,10 @@ import DepositHistoryPage from "./components/DepositHistoryPage";
 import WithdrawlHistoryPage from "./components/WithdrawlHistoryPage";
 import Vip from "./components/Vip";
 import Safe from "./components/Safe";
-
+import Wingo1minute from "./components/WingoGame/Wingo1minute";
+import Wingo30sec from "./components/WingoGame/Wingo30sec";
+import Wingo3minute from "./components/WingoGame/Wingo3minute";
+import Wingo5minute from "./components/WingoGame/Wingo5minute";
 let router = createBrowserRouter([
   {
     path: "/",
@@ -36,13 +39,26 @@ let router = createBrowserRouter([
         path: "register",
         element: <Register />,
       },
+
       {
         path: "home",
         element: <OriginalLottery />,
       },
       {
         path: "wingo",
-        element: <Wingo />,
+        element: <Wingo30sec />,
+      },
+      {
+        path: "wingo1min",
+        element: <Wingo1minute />,
+      },
+      {
+        path: "wingo3min",
+        element: <Wingo3minute />,
+      },
+      {
+        path: "wingo5min",
+        element: <Wingo5minute />,
       },
       {
         path: "k3",
@@ -54,7 +70,7 @@ let router = createBrowserRouter([
       },
       {
         path: "trx",
-        element: "/trx",
+        element: "trx",
       },
       {
         path: "activity",

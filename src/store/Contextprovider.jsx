@@ -15,7 +15,7 @@ export default function Contextprovider({ children }) {
   let [WingoServerData1min, change1minWingo] = useState([]);
   let [WingoServerData3min, change3minWingo] = useState([]);
   let [WingoServerData5min, change5minWingo] = useState([]);
-  let [WingoServerData10min, change10minWingo] = useState([]);
+  let [WingoServerData30s, change30s] = useState([]);
   // change wingo 1 min result
   function get1minwingo() {
     axios
@@ -90,7 +90,7 @@ export default function Contextprovider({ children }) {
       orderid: "Rc2024092813005007730775f",
     },
   ];
-  let takenout = 27000;
+
   let tobeBet = 0;
   let WithdrawlReamining = 3;
 
@@ -108,8 +108,7 @@ export default function Contextprovider({ children }) {
           WingoServerData1min,
           WingoServerData3min,
           WingoServerData5min,
-          WingoServerData10min,
-          takenout,
+          WingoServerData30s,
 
           accumulated,
           tobeBet,
