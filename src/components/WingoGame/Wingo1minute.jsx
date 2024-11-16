@@ -25,7 +25,12 @@ function Wingo1minute() {
   const [MultiplierSelection, changeMultiplierSelection] = useState(1);
   const [quantity, changeQuantity] = useState(1);
   const [BetTab, changeBetTab] = useState("off");
-  let { get1minwingo } = useContext(data);
+
+  let { get1minwingo, setWingo1minbet, uid, userfinance, getUserfinances } =
+    useContext(data);
+
+  const [betset, changebetSet] = useState(null);
+  function test() {}
   useEffect(() => {
     get1minwingo();
   }, []);
@@ -756,6 +761,33 @@ function Wingo1minute() {
                 ? { backgroundColor: "#18b660" }
                 : {}
             }
+            onClick={() => {
+              let date = new Date();
+              let sec = date.getSeconds();
+              let year = date.getFullYear();
+              let month = date.getMonth() + 1;
+              let day = date.getDate();
+              let hour = date.getHours();
+              let min = date.getMinutes() + 1;
+              let amount = balanceSelection * quantity * MultiplierSelection;
+              // generate new random int between 0 and 9
+              let period = `${year}${month}${day}${hour == 0 ? `00` : hour}${
+                min == 0 ? `60` : min < 10 ? "0" + min : min
+              }`;
+              let packet = { uid, period, selection, amount };
+              console.log(sec);
+              if (sec > 55) {
+                alert("betting time is over");
+                changeBetTab("off");
+              } else {
+                if (amount > userfinance.balance) {
+                  alert("err bet not set low account balance please ad funds");
+                } else {
+                  setWingo1minbet(packet);
+                  changeBetTab("off");
+                }
+              }
+            }}
           >
             Total amount {balanceSelection * quantity * MultiplierSelection}
           </button>

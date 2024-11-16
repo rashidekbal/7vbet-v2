@@ -27,15 +27,30 @@ export default function Contextprovider({ children }) {
         console.log("error getting data");
       });
   }
-  function getUserfinances(userid) {
+  function getUserfinances(uid) {
     axios
       .post(`${host}/userfinances`, {
-        uid: userid,
+        uid,
       })
       .then((res) => {
         changeuserfinance(res.data);
       })
       .catch((err) => console.log(err));
+  }
+
+  function setWingo1minbet(packet) {
+    axios
+      .post(`${host}/setWingo1MinBet`, { packet })
+      .then((res) => {
+        if (res.data == "done") {
+        } else {
+          alert("bet failed");
+        }
+      })
+      .catch((res) => {
+        console.log("err bet not set", res.data);
+      });
+    getUserfinances(uid);
   }
   let rechargehistory = [
     {
@@ -124,6 +139,7 @@ export default function Contextprovider({ children }) {
           changeuid,
           getUserfinances,
           userfinance,
+          setWingo1minbet,
         }}
       >
         {children}
