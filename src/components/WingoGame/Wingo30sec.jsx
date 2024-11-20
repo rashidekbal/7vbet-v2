@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import style from "./css/wingo.module.css";
 import { WalletViewEffect } from "../WalletViewEffect";
 import WalletDataForGames from "../WalletDataForGames";
@@ -19,13 +19,18 @@ import number9 from "../../icons/n9-a20f6f42.png";
 import StatsWingo from "../StatsWingo";
 import { NavLink } from "react-router-dom";
 import Timer30sec from "./Timer30sec";
+import { data } from "../../store/Contextprovider";
 function Wingo30sec() {
   const [selection, changeSelection] = useState("Big");
   const [balanceSelection, changeBalanceSelection] = useState(1);
   const [MultiplierSelection, changeMultiplierSelection] = useState(1);
   const [quantity, changeQuantity] = useState(1);
   const [BetTab, changeBetTab] = useState("off");
-  useEffect(() => {}, []);
+  useEffect(() => {
+    get30secwingo();
+  }, []);
+  const { uid, setWingo30secbet, userfinance, get30secwingo } =
+    useContext(data);
   return (
     <div style={{ position: "relative" }}>
       {" "}
@@ -761,6 +766,41 @@ function Wingo30sec() {
                 ? { backgroundColor: "#18b660" }
                 : {}
             }
+            onClick={() => {
+              let date = new Date();
+              let sec = date.getSeconds();
+              let year = date.getFullYear();
+              let month = date.getMonth() + 1;
+              let day = date.getDate();
+              let hour = date.getHours();
+              let min = date.getMinutes() + 1;
+              let amount = balanceSelection * quantity * MultiplierSelection;
+              let game = "wingo";
+              let time = "30sec";
+              // generate new random int between 0 and 9
+              let period = `${year}${month}${day}${hour == 0 ? `00` : hour}${
+                min == 0 ? `60` : min < 10 ? "0" + min : min
+              }${date.getSeconds() >= 30 ? 2 : 1}`;
+              let packet = { uid, game, time, period, selection, amount };
+              console.log(sec);
+              if (sec > 55) {
+                alert("betting time is over");
+                changeBetTab("off");
+              } else if (sec - 30 > -5) {
+                alert("betting time is over");
+                changeBetTab("off");
+              } else {
+                if (amount > userfinance.balance) {
+                  alert("err bet not set low account balance please ad funds");
+                } else {
+                  setWingo30secbet(packet);
+                  changeBalanceSelection("1");
+                  changeMultiplierSelection(" 1");
+                  changeQuantity("1");
+                  changeBetTab("off");
+                }
+              }
+            }}
           >
             Total amount {balanceSelection * quantity * MultiplierSelection}
           </button>

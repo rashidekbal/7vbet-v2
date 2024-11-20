@@ -13,17 +13,23 @@ import number9 from "../../icons/n9-a20f6f42.png";
 import { data } from "../../store/Contextprovider";
 
 export default function Timer3min() {
+  const { getwingo3min, uid, getUserfinances } = useContext(data);
   const [currentsec, changesec] = useState("0");
   const [currentmin, changemin] = useState("0");
 
-  var time = new Date();
-
   useEffect(() => {
-    setTimeout(() => {
+    setInterval(() => {
+      var time = new Date();
       changesec(Math.abs(time.getSeconds() - 60).toString());
       changemin(Math.abs((time.getMinutes() % 3) - 3));
+      if (time.getMinutes() % 3 == 2) {
+        if (time.getSeconds() == 59) {
+          getwingo3min();
+          getUserfinances(String(window.sessionStorage.getItem("uid")));
+        }
+      }
     }, 1000);
-  });
+  }, []);
 
   return (
     <div className={style.timer}>
@@ -112,7 +118,6 @@ export default function Timer3min() {
             </b>
           )}
         </p>
-        <p className={style.currentround}>202406118010733</p>
       </div>
     </div>
   );

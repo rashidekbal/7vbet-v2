@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import style from "./css/wingo.module.css";
 import { WalletViewEffect } from "../WalletViewEffect";
 import WalletDataForGames from "../WalletDataForGames";
@@ -18,12 +18,18 @@ import number8 from "../../icons/n8-d4d951a4.png";
 import number9 from "../../icons/n9-a20f6f42.png";
 import StatsWingo from "../StatsWingo";
 import { NavLink } from "react-router-dom";
+import { data } from "../../store/Contextprovider";
 function Wingo5minute() {
   const [selection, changeSelection] = useState("Big");
   const [balanceSelection, changeBalanceSelection] = useState(1);
   const [MultiplierSelection, changeMultiplierSelection] = useState(1);
   const [quantity, changeQuantity] = useState(1);
   const [BetTab, changeBetTab] = useState("off");
+
+  const { uid, setWingo5minbet, userfinance, getwingo5min } = useContext(data);
+  useEffect(() => {
+    getwingo5min();
+  }, []);
   return (
     <div style={{ position: "relative" }}>
       {" "}
@@ -751,6 +757,52 @@ function Wingo5minute() {
                 ? { backgroundColor: "#18b660" }
                 : {}
             }
+            onClick={() => {
+              let date = new Date();
+              let sec = date.getSeconds();
+              let year = date.getFullYear();
+              let month = date.getMonth() + 1;
+              let day = date.getDate();
+              let hour = date.getHours();
+              let min = date.getMinutes() + 1;
+              let amount = balanceSelection * quantity * MultiplierSelection;
+              let game = "wingo";
+              let time = "5min";
+              // generate new random int between 0 and 9
+              let period = `${year}${month}${day}${hour == 0 ? `00` : hour}${
+                min == 0 ? `60` : min < 10 ? "0" + min : min
+              }`;
+              let packet = { uid, game, time, period, selection, amount };
+              console.log(sec);
+              if (date.getMinutes() % 5 == 4) {
+                if (date.getSeconds() > 55) {
+                  alert("betting time is over");
+                  changeBetTab("off");
+                } else {
+                  if (amount > userfinance.balance) {
+                    alert(
+                      "err bet not set low account balance please ad funds"
+                    );
+                  } else {
+                    setWingo5minbet(packet);
+                    changeBalanceSelection("1");
+                    changeMultiplierSelection(" 1");
+                    changeQuantity("1");
+                    changeBetTab("off");
+                  }
+                }
+              } else {
+                if (amount > userfinance.balance) {
+                  alert("err bet not set low account balance please ad funds");
+                } else {
+                  setWingo5minbet(packet);
+                  changeBalanceSelection("1");
+                  changeMultiplierSelection(" 1");
+                  changeQuantity("1");
+                  changeBetTab("off");
+                }
+              }
+            }}
           >
             Total amount {balanceSelection * quantity * MultiplierSelection}
           </button>

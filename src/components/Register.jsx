@@ -88,7 +88,7 @@ function Register() {
             {registered == "yes" ? (
               <button
                 onClick={() => {
-                  window.location.replace("http://192.168.57.240:3000/");
+                  window.location.replace("http://192.168.43.240:3000/");
                   changedialog("no");
                 }}
               >

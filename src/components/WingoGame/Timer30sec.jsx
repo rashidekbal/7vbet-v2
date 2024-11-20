@@ -13,6 +13,7 @@ import number9 from "../../icons/n9-a20f6f42.png";
 import { data } from "../../store/Contextprovider";
 function Timer30sec() {
   const [currentsec, changesec] = useState("0");
+  const { get30secwingo, uid, getUserfinances } = useContext(data);
 
   useEffect(() => {
     setInterval(() => {
@@ -22,6 +23,14 @@ function Timer30sec() {
         changesec(Math.abs(sec - 30).toString());
       } else if (sec >= 30) {
         changesec(Math.abs(sec - 60).toString());
+      }
+
+      if (sec == 29) {
+        get30secwingo();
+        getUserfinances(String(window.sessionStorage.getItem("uid")));
+      } else if (sec == 59) {
+        get30secwingo();
+        getUserfinances(String(window.sessionStorage.getItem("uid")));
       }
     }, 1000);
   }, []);
@@ -100,7 +109,6 @@ function Timer30sec() {
               </b>
             )}
           </p>
-          <p className={style.currentround}>202406118010733</p>
         </div>
       </div>
     </>

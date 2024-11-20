@@ -388,7 +388,7 @@ export const AccountPage = () => {
           className={style.logout}
           onClick={() => {
             window.sessionStorage.removeItem("uid");
-            window.location.replace("http://192.168.57.240:3000/");
+            window.location.replace("http://192.168.43.240:3000/");
           }}
         >
           Logout

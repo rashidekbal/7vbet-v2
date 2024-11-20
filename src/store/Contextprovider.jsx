@@ -1,7 +1,7 @@
 import axios from "axios";
+import { io } from "socket.io-client";
 import { createContext, useState } from "react";
-const host = "http://192.168.57.240:8000";
-
+const host = "http://192.168.43.240:8000";
 let safeRevenue = 0.1;
 let totalrevenuesafe = 0.0;
 const currentintrestrate = 5;
@@ -27,6 +27,36 @@ export default function Contextprovider({ children }) {
         console.log("error getting data");
       });
   }
+  function get30secwingo() {
+    axios
+      .get(`${host}/wingo30sec`)
+      .then((res) => {
+        change30s(res.data);
+      })
+      .catch((res) => {
+        console.log("error getting data");
+      });
+  }
+  function getwingo3min() {
+    axios
+      .get(`${host}/wingo3min`)
+      .then((res) => {
+        change3minWingo(res.data);
+      })
+      .catch((res) => {
+        console.log("error getting data");
+      });
+  }
+  function getwingo5min() {
+    axios
+      .get(`${host}/wingo5min`)
+      .then((res) => {
+        change5minWingo(res.data);
+      })
+      .catch((res) => {
+        console.log("error getting data");
+      });
+  }
   function getUserfinances(uid) {
     axios
       .post(`${host}/userfinances`, {
@@ -38,11 +68,12 @@ export default function Contextprovider({ children }) {
       .catch((err) => console.log(err));
   }
 
-  function setWingo1minbet(packet) {
+  function setWingo30secbet(packet) {
     axios
-      .post(`${host}/setWingo1MinBet`, { packet })
+      .post(`${host}/setWingo30secbet`, { packet })
       .then((res) => {
         if (res.data == "done") {
+          getUserfinances(uid);
         } else {
           alert("bet failed");
         }
@@ -50,7 +81,48 @@ export default function Contextprovider({ children }) {
       .catch((res) => {
         console.log("err bet not set", res.data);
       });
-    getUserfinances(uid);
+  }
+  function setWingo1minbet(packet) {
+    axios
+      .post(`${host}/setWingo1minbet`, { packet })
+      .then((res) => {
+        if (res.data == "done") {
+          getUserfinances(uid);
+        } else {
+          alert("bet failed");
+        }
+      })
+      .catch((res) => {
+        console.log("err bet not set", res.data);
+      });
+  }
+  function setWingo3minbet(packet) {
+    axios
+      .post(`${host}/setWingo3minbet`, { packet })
+      .then((res) => {
+        if (res.data == "done") {
+          getUserfinances(uid);
+        } else {
+          alert("bet failed");
+        }
+      })
+      .catch((res) => {
+        console.log("err bet not set", res.data);
+      });
+  }
+  function setWingo5minbet(packet) {
+    axios
+      .post(`${host}/setwingo5min`, { packet })
+      .then((res) => {
+        if (res.data == "done") {
+          getUserfinances(uid);
+        } else {
+          alert("bet failed");
+        }
+      })
+      .catch((res) => {
+        console.log("err bet not set", res.data);
+      });
   }
   let rechargehistory = [
     {
@@ -139,7 +211,13 @@ export default function Contextprovider({ children }) {
           changeuid,
           getUserfinances,
           userfinance,
+          setWingo5minbet,
+          get30secwingo,
+          getwingo3min,
+          getwingo5min,
           setWingo1minbet,
+          setWingo3minbet,
+          setWingo30secbet,
         }}
       >
         {children}

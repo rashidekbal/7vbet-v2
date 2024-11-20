@@ -475,6 +475,11 @@ function Wingo1minute() {
                   ? { backgroundColor: "#18b660" }
                   : {}
               }
+              onClick={() => {
+                if (quantity > 0) {
+                  changeQuantity(quantity - 1);
+                }
+              }}
             >
               -
             </span>
@@ -511,6 +516,9 @@ function Wingo1minute() {
                   ? { backgroundColor: "#18b660" }
                   : {}
               }
+              onClick={() => {
+                changeQuantity(quantity + 1);
+              }}
             >
               +
             </span>
@@ -770,11 +778,13 @@ function Wingo1minute() {
               let hour = date.getHours();
               let min = date.getMinutes() + 1;
               let amount = balanceSelection * quantity * MultiplierSelection;
+              let game = "wingo";
+              let time = "onemin";
               // generate new random int between 0 and 9
               let period = `${year}${month}${day}${hour == 0 ? `00` : hour}${
                 min == 0 ? `60` : min < 10 ? "0" + min : min
               }`;
-              let packet = { uid, period, selection, amount };
+              let packet = { uid, game, time, period, selection, amount };
               console.log(sec);
               if (sec > 55) {
                 alert("betting time is over");
@@ -784,6 +794,9 @@ function Wingo1minute() {
                   alert("err bet not set low account balance please ad funds");
                 } else {
                   setWingo1minbet(packet);
+                  changeBalanceSelection("1");
+                  changeMultiplierSelection(" 1");
+                  changeQuantity("1");
                   changeBetTab("off");
                 }
               }

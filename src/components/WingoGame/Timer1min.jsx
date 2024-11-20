@@ -13,19 +13,19 @@ import number9 from "../../icons/n9-a20f6f42.png";
 import { data } from "../../store/Contextprovider";
 
 export default function Timer1min() {
-  let { get1minwingo } = useContext(data);
+  let { get1minwingo, getUserfinances, uid } = useContext(data);
   const [currentsec, changesec] = useState("0");
 
-  var time = new Date();
-
   useEffect(() => {
-    setTimeout(() => {
+    setInterval(() => {
+      var time = new Date();
       changesec(Math.abs(time.getSeconds() - 60).toString());
       if (currentsec == "1") {
         get1minwingo();
+        getUserfinances(String(window.sessionStorage.getItem("uid")));
       }
     }, 1000);
-  });
+  }, []);
 
   return (
     <div className={style.timer}>
@@ -100,7 +100,6 @@ export default function Timer1min() {
             </b>
           )}
         </p>
-        <p className={style.currentround}>202406118010733</p>
       </div>
     </div>
   );

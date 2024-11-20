@@ -13,17 +13,25 @@ import number9 from "../../icons/n9-a20f6f42.png";
 import { data } from "../../store/Contextprovider";
 
 export default function Timer5min() {
+  const { getwingo5min, uid, getUserfinances } = useContext(data);
   const [currentsec, changesec] = useState("0");
   const [currentmin, changemin] = useState("0");
 
-  var time = new Date();
-
   useEffect(() => {
-    setTimeout(() => {
+    setInterval(() => {
+      var time = new Date();
       changesec(Math.abs(time.getSeconds() - 60).toString());
       changemin(Math.abs((time.getMinutes() % 5) - 5));
+      if (time.getMinutes % 5 == 4) {
+        if (time.getSeconds() == 59) {
+          getwingo5min();
+          getUserfinances(String(window.sessionStorage.getItem("uid")));
+        }
+      }
+      if (time.getMinutes() % 5 == 0) {
+      }
     }, 1000);
-  });
+  }, []);
 
   return (
     <div className={style.timer}>
@@ -112,7 +120,6 @@ export default function Timer5min() {
             </b>
           )}
         </p>
-        <p className={style.currentround}>202406118010733</p>
       </div>
     </div>
   );
