@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import style from "./css/wingo.module.css";
 import { WalletViewEffect } from "../WalletViewEffect";
 import WalletDataForGames from "../WalletDataForGames";
@@ -20,16 +20,35 @@ import StatsWingo from "../StatsWingo";
 import { NavLink } from "react-router-dom";
 import { data } from "../../store/Contextprovider";
 function Wingo5minute() {
+  const [blocker, changeblocker] = useState("no");
+  const [timer, changetimer] = useState();
   const [selection, changeSelection] = useState("Big");
   const [balanceSelection, changeBalanceSelection] = useState(1);
   const [MultiplierSelection, changeMultiplierSelection] = useState(1);
   const [quantity, changeQuantity] = useState(1);
   const [BetTab, changeBetTab] = useState("off");
 
-  const { uid, setWingo5minbet, userfinance, getwingo5min } = useContext(data);
+  const { uid, setWingo5minbet, userfinance, getwingo5min, ws } =
+    useContext(data);
   useEffect(() => {
     getwingo5min();
   }, []);
+  let currentTime = useRef({});
+  ws.on("message", (msg) => {
+    currentTime.minute = msg.minute;
+    currentTime.seconds = msg.seconds;
+    if (currentTime.minute % 5 == 4) {
+      if (currentTime.seconds >= 55) {
+        changeBetTab("no");
+        changeblocker("yes");
+        changetimer(Math.abs(currentTime.seconds - 60));
+      } else {
+        changeblocker("no");
+      }
+    } else {
+      changeblocker("no");
+    }
+  });
   return (
     <div style={{ position: "relative" }}>
       {" "}
@@ -97,11 +116,28 @@ function Wingo5minute() {
       <Timer5min />
       {/* wingo color options  */}
       <div className={style.ColoOptions}>
+        {/* this is blocker overlay */}
+        <div className={blocker == "yes" ? style.blocker : style.offblocker}>
+          <div className={style.middlecontainer}>
+            <h1>0</h1>
+            <h1>{timer}</h1>
+          </div>
+        </div>
         <button
           className={style.green}
           onClick={() => {
-            changeSelection("green");
-            changeBetTab("on");
+            if (currentTime.minute % 5 == 4) {
+              if (currentTime.seconds > 55) {
+                alert("betting time is over");
+                changeBetTab("off");
+              } else {
+                changeSelection("green");
+                changeBetTab("on");
+              }
+            } else {
+              changeSelection("green");
+              changeBetTab("on");
+            }
           }}
         >
           Green
@@ -109,8 +145,18 @@ function Wingo5minute() {
         <button
           className={style.violet}
           onClick={() => {
-            changeSelection("violet");
-            changeBetTab("on");
+            if (currentTime.minute % 5 == 4) {
+              if (currentTime.seconds > 55) {
+                alert("betting time is over");
+                changeBetTab("off");
+              } else {
+                changeSelection("violet");
+                changeBetTab("on");
+              }
+            } else {
+              changeSelection("violet");
+              changeBetTab("on");
+            }
           }}
         >
           Violet
@@ -118,8 +164,18 @@ function Wingo5minute() {
         <button
           className={style.red}
           onClick={() => {
-            changeSelection("red");
-            changeBetTab("on");
+            if (currentTime.minute % 5 == 4) {
+              if (currentTime.seconds > 55) {
+                alert("betting time is over");
+                changeBetTab("off");
+              } else {
+                changeSelection("red");
+                changeBetTab("on");
+              }
+            } else {
+              changeSelection("red");
+              changeBetTab("on");
+            }
           }}
         >
           Red
@@ -136,40 +192,90 @@ function Wingo5minute() {
             src={number0}
             alt="small_zero"
             onClick={() => {
-              changeSelection(0);
-              changeBetTab("on");
+              if (currentTime.minute % 5 == 4) {
+                if (currentTime.seconds > 55) {
+                  alert("betting time is over");
+                  changeBetTab("off");
+                } else {
+                  changeSelection(0);
+                  changeBetTab("on");
+                }
+              } else {
+                changeSelection(0);
+                changeBetTab("on");
+              }
             }}
           />
           <img
             src={number1}
             alt="small_one"
             onClick={() => {
-              changeSelection(1);
-              changeBetTab("on");
+              if (currentTime.minute % 5 == 4) {
+                if (currentTime.seconds > 55) {
+                  alert("betting time is over");
+                  changeBetTab("off");
+                } else {
+                  changeSelection(1);
+                  changeBetTab("on");
+                }
+              } else {
+                changeSelection(1);
+                changeBetTab("on");
+              }
             }}
           />
           <img
             src={number2}
             alt="small_three"
             onClick={() => {
-              changeSelection(2);
-              changeBetTab("on");
+              if (currentTime.minute % 5 == 4) {
+                if (currentTime.seconds > 55) {
+                  alert("betting time is over");
+                  changeBetTab("off");
+                } else {
+                  changeSelection(2);
+                  changeBetTab("on");
+                }
+              } else {
+                changeSelection(2);
+                changeBetTab("on");
+              }
             }}
           />
           <img
             src={number3}
             alt="small_four"
             onClick={() => {
-              changeSelection(3);
-              changeBetTab("on");
+              if (currentTime.minute % 5 == 4) {
+                if (currentTime.seconds > 55) {
+                  alert("betting time is over");
+                  changeBetTab("off");
+                } else {
+                  changeSelection(3);
+                  changeBetTab("on");
+                }
+              } else {
+                changeSelection(3);
+                changeBetTab("on");
+              }
             }}
           />
           <img
             src={number4}
             alt="small_four"
             onClick={() => {
-              changeSelection(4);
-              changeBetTab("on");
+              if (currentTime.minute % 5 == 4) {
+                if (currentTime.seconds > 55) {
+                  alert("betting time is over");
+                  changeBetTab("off");
+                } else {
+                  changeSelection(4);
+                  changeBetTab("on");
+                }
+              } else {
+                changeSelection(4);
+                changeBetTab("on");
+              }
             }}
           />
         </div>
@@ -182,40 +288,90 @@ function Wingo5minute() {
             src={number5}
             alt="small_five"
             onClick={() => {
-              changeSelection(5);
-              changeBetTab("on");
+              if (currentTime.minute % 5 == 4) {
+                if (currentTime.seconds > 55) {
+                  alert("betting time is over");
+                  changeBetTab("off");
+                } else {
+                  changeSelection(5);
+                  changeBetTab("on");
+                }
+              } else {
+                changeSelection(5);
+                changeBetTab("on");
+              }
             }}
           />
           <img
             src={number6}
             alt="small_six"
             onClick={() => {
-              changeSelection(6);
-              changeBetTab("on");
+              if (currentTime.minute % 5 == 4) {
+                if (currentTime.seconds > 55) {
+                  alert("betting time is over");
+                  changeBetTab("off");
+                } else {
+                  changeSelection(6);
+                  changeBetTab("on");
+                }
+              } else {
+                changeSelection(6);
+                changeBetTab("on");
+              }
             }}
           />
           <img
             src={number7}
             alt="small_seven"
             onClick={() => {
-              changeSelection(7);
-              changeBetTab("on");
+              if (currentTime.minute % 5 == 4) {
+                if (currentTime.seconds > 55) {
+                  alert("betting time is over");
+                  changeBetTab("off");
+                } else {
+                  changeSelection(7);
+                  changeBetTab("on");
+                }
+              } else {
+                changeSelection(7);
+                changeBetTab("on");
+              }
             }}
           />
           <img
             src={number8}
             alt="small_four"
             onClick={() => {
-              changeSelection(8);
-              changeBetTab("on");
+              if (currentTime.minute % 5 == 4) {
+                if (currentTime.seconds > 55) {
+                  alert("betting time is over");
+                  changeBetTab("off");
+                } else {
+                  changeSelection(8);
+                  changeBetTab("on");
+                }
+              } else {
+                changeSelection(8);
+                changeBetTab("on");
+              }
             }}
           />
           <img
             src={number9}
             alt="small_four"
             onClick={() => {
-              changeSelection(9);
-              changeBetTab("on");
+              if (currentTime.minute % 5 == 4) {
+                if (currentTime.seconds > 55) {
+                  alert("betting time is over");
+                  changeBetTab("off");
+                } else {
+                  changeSelection(9);
+                  changeBetTab("on");
+                }
+              } else {
+                changeSelection(9);
+                changeBetTab("on");
+              }
             }}
           />
         </div>
@@ -246,8 +402,18 @@ function Wingo5minute() {
           <b>
             <p
               onClick={() => {
-                changeSelection("Big");
-                changeBetTab("on");
+                if (currentTime.minute % 5 == 4) {
+                  if (currentTime.seconds > 55) {
+                    alert("betting time is over");
+                    changeBetTab("off");
+                  } else {
+                    changeSelection("Big");
+                    changeBetTab("on");
+                  }
+                } else {
+                  changeSelection("Big");
+                  changeBetTab("on");
+                }
               }}
               style={{ backgroundColor: "orange" }}
             >
@@ -257,8 +423,18 @@ function Wingo5minute() {
               onclick="selection_color('small')"
               style={{ backgroundColor: "#6ea8f4" }}
               onClick={() => {
-                changeSelection("small");
-                changeBetTab("on");
+                if (currentTime.minute % 5 == 4) {
+                  if (currentTime.seconds > 55) {
+                    alert("betting time is over");
+                    changeBetTab("off");
+                  } else {
+                    changeSelection("small");
+                    changeBetTab("on");
+                  }
+                } else {
+                  changeSelection("small");
+                  changeBetTab("on");
+                }
               }}
             >
               Small
@@ -759,12 +935,13 @@ function Wingo5minute() {
             }
             onClick={() => {
               let date = new Date();
-              let sec = date.getSeconds();
+              let sec = currentTime.seconds;
               let year = date.getFullYear();
               let month = date.getMonth() + 1;
               let day = date.getDate();
               let hour = date.getHours();
-              let min = date.getMinutes() + 1;
+              let min =
+                currentTime.minute + Math.abs((currentTime.minute % 5) - 5);
               let amount = balanceSelection * quantity * MultiplierSelection;
               let game = "wingo";
               let time = "5min";
@@ -773,9 +950,9 @@ function Wingo5minute() {
                 min == 0 ? `60` : min < 10 ? "0" + min : min
               }`;
               let packet = { uid, game, time, period, selection, amount };
-              console.log(sec);
-              if (date.getMinutes() % 5 == 4) {
-                if (date.getSeconds() > 55) {
+
+              if (min % 5 == 4) {
+                if (sec > 55) {
                   alert("betting time is over");
                   changeBetTab("off");
                 } else {

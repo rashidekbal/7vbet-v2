@@ -13,24 +13,43 @@ import number9 from "../../icons/n9-a20f6f42.png";
 import { data } from "../../store/Contextprovider";
 
 export default function Timer3min() {
-  const { getwingo3min, uid, getUserfinances } = useContext(data);
-  const [currentsec, changesec] = useState("0");
-  const [currentmin, changemin] = useState("0");
+  const { getwingo3min, uid, getUserfinances, ws } = useContext(data);
+  const [currentsec, changesec] = useState("");
+  const [currentmin, changemin] = useState("");
+  const [upcomingperiod, changeupcomingperiod] = useState();
+  let periodspecialminute = useRef();
+  function periodchanger() {
+    let date = new Date();
 
-  useEffect(() => {
-    setInterval(() => {
-      var time = new Date();
-      changesec(Math.abs(time.getSeconds() - 60).toString());
-      changemin(Math.abs((time.getMinutes() % 3) - 3));
-      if (time.getMinutes() % 3 == 2) {
-        if (time.getSeconds() == 59) {
-          getwingo3min();
-          getUserfinances(String(window.sessionStorage.getItem("uid")));
-        }
+    let year = date.getFullYear();
+    let month = date.getMonth() + 1;
+    let day = date.getDate();
+    let hour = date.getHours();
+    let min =
+      periodspecialminute.minute +
+      Math.abs((periodspecialminute.minute % 3) - 3);
+    let period = `${year}${month}${day}${hour == 0 ? `00` : hour}${
+      min == 0 ? `60` : min < 10 ? "0" + min : min
+    }`;
+    changeupcomingperiod(period);
+  }
+  ws.on("message", (msg) => {
+    periodspecialminute.minute = msg.minute;
+    changemin(Math.abs((msg.minute % 3) - 3));
+    changesec(Math.abs(msg.seconds - 60).toString());
+    if (currentmin == 1) {
+      if (currentsec == 1) {
+        getwingo3min();
+        periodchanger();
+        getUserfinances(String(window.sessionStorage.getItem("uid")));
       }
+    }
+  });
+  useEffect(() => {
+    setTimeout(() => {
+      periodchanger();
     }, 1000);
   }, []);
-
   return (
     <div className={style.timer}>
       <div class={style.twosectionsspl}>
@@ -118,6 +137,7 @@ export default function Timer3min() {
             </b>
           )}
         </p>
+        <p className={style.currentround}>{upcomingperiod}</p>
       </div>
     </div>
   );

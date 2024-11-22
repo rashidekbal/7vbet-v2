@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import style from "./css/wingo.module.css";
 import { WalletViewEffect } from "../WalletViewEffect";
 import WalletDataForGames from "../WalletDataForGames";
@@ -20,20 +20,39 @@ import StatsWingo from "../StatsWingo";
 import { NavLink } from "react-router-dom";
 import { data } from "../../store/Contextprovider";
 function Wingo1minute() {
+  const [blocker, changeblocker] = useState("no");
   const [selection, changeSelection] = useState("Big");
   const [balanceSelection, changeBalanceSelection] = useState(1);
   const [MultiplierSelection, changeMultiplierSelection] = useState(1);
   const [quantity, changeQuantity] = useState(1);
   const [BetTab, changeBetTab] = useState("off");
-
-  let { get1minwingo, setWingo1minbet, uid, userfinance, getUserfinances } =
+  const [timer, changetimer] = useState();
+  let currentSec = useRef();
+  let currentmin = useRef({});
+  let { get1minwingo, setWingo1minbet, uid, userfinance, getUserfinances, ws } =
     useContext(data);
-
   const [betset, changebetSet] = useState(null);
-  function test() {}
+
   useEffect(() => {
     get1minwingo();
+    getUserfinances(String(window.sessionStorage.getItem("uid")));
   }, []);
+  ws.on("message", (msg) => {
+    currentSec = Math.abs(msg.seconds - 60);
+    if (currentSec <= 5) {
+      changeBetTab("no");
+      changeblocker("yes");
+      changetimer(currentSec);
+    } else {
+      changeblocker("no");
+    }
+    currentmin.min = msg.minute;
+
+    if (currentSec == 1) {
+      get1minwingo();
+      getUserfinances(String(window.sessionStorage.getItem("uid")));
+    }
+  });
   return (
     <>
       {" "}
@@ -101,11 +120,21 @@ function Wingo1minute() {
       <Timer1min></Timer1min>
       {/* wingo color options  */}
       <div className={style.ColoOptions}>
+        {/* this is blocker overlay */}
+        <div className={blocker == "yes" ? style.blocker : style.offblocker}>
+          <div className={style.middlecontainer}>
+            <h1>0</h1>
+            <h1>{timer}</h1>
+          </div>
+        </div>
         <button
           className={style.green}
           onClick={() => {
-            changeSelection("green");
-            changeBetTab("on");
+            if (currentSec <= 5) {
+            } else {
+              changeSelection("green");
+              changeBetTab("on");
+            }
           }}
         >
           Green
@@ -113,8 +142,11 @@ function Wingo1minute() {
         <button
           className={style.violet}
           onClick={() => {
-            changeSelection("violet");
-            changeBetTab("on");
+            if (currentSec <= 5) {
+            } else {
+              changeSelection("violet");
+              changeBetTab("on");
+            }
           }}
         >
           Violet
@@ -122,8 +154,11 @@ function Wingo1minute() {
         <button
           className={style.red}
           onClick={() => {
-            changeSelection("red");
-            changeBetTab("on");
+            if (currentSec <= 5) {
+            } else {
+              changeSelection("red");
+              changeBetTab("on");
+            }
           }}
         >
           Red
@@ -140,40 +175,56 @@ function Wingo1minute() {
             src={number0}
             alt="small_zero"
             onClick={() => {
-              changeSelection(0);
-              changeBetTab("on");
+              if (currentSec <= 5) {
+              }
+              {
+                changeSelection(0);
+                changeBetTab("on");
+              }
             }}
           />
           <img
             src={number1}
             alt="small_one"
             onClick={() => {
-              changeSelection(1);
-              changeBetTab("on");
+              if (currentSec <= 5) {
+              } else {
+                changeSelection(1);
+                changeBetTab("on");
+              }
             }}
           />
           <img
             src={number2}
             alt="small_three"
             onClick={() => {
-              changeSelection(2);
-              changeBetTab("on");
+              if (currentSec <= 5) {
+              } else {
+                changeSelection(2);
+                changeBetTab("on");
+              }
             }}
           />
           <img
             src={number3}
             alt="small_four"
             onClick={() => {
-              changeSelection(3);
-              changeBetTab("on");
+              if (currentSec <= 5) {
+              } else {
+                changeSelection(3);
+                changeBetTab("on");
+              }
             }}
           />
           <img
             src={number4}
             alt="small_four"
             onClick={() => {
-              changeSelection(4);
-              changeBetTab("on");
+              if (currentSec <= 5) {
+              } else {
+                changeSelection(4);
+                changeBetTab("on");
+              }
             }}
           />
         </div>
@@ -186,40 +237,55 @@ function Wingo1minute() {
             src={number5}
             alt="small_five"
             onClick={() => {
-              changeSelection(5);
-              changeBetTab("on");
+              if (currentSec <= 5) {
+              } else {
+                changeSelection(5);
+                changeBetTab("on");
+              }
             }}
           />
           <img
             src={number6}
             alt="small_six"
             onClick={() => {
-              changeSelection(6);
-              changeBetTab("on");
+              if (currentSec <= 5) {
+              } else {
+                changeSelection(6);
+                changeBetTab("on");
+              }
             }}
           />
           <img
             src={number7}
             alt="small_seven"
             onClick={() => {
-              changeSelection(7);
-              changeBetTab("on");
+              if (currentSec <= 5) {
+              } else {
+                changeSelection(7);
+                changeBetTab("on");
+              }
             }}
           />
           <img
             src={number8}
             alt="small_four"
             onClick={() => {
-              changeSelection(8);
-              changeBetTab("on");
+              if (currentSec <= 5) {
+              } else {
+                changeSelection(8);
+                changeBetTab("on");
+              }
             }}
           />
           <img
             src={number9}
             alt="small_four"
             onClick={() => {
-              changeSelection(9);
-              changeBetTab("on");
+              if (currentSec <= 5) {
+              } else {
+                changeSelection(9);
+                changeBetTab("on");
+              }
             }}
           />
         </div>
@@ -770,26 +836,26 @@ function Wingo1minute() {
                 : {}
             }
             onClick={() => {
-              let date = new Date();
-              let sec = date.getSeconds();
-              let year = date.getFullYear();
-              let month = date.getMonth() + 1;
-              let day = date.getDate();
-              let hour = date.getHours();
-              let min = date.getMinutes() + 1;
-              let amount = balanceSelection * quantity * MultiplierSelection;
-              let game = "wingo";
-              let time = "onemin";
-              // generate new random int between 0 and 9
-              let period = `${year}${month}${day}${hour == 0 ? `00` : hour}${
-                min == 0 ? `60` : min < 10 ? "0" + min : min
-              }`;
-              let packet = { uid, game, time, period, selection, amount };
-              console.log(sec);
-              if (sec > 55) {
+              if (currentSec <= 5) {
                 alert("betting time is over");
+
                 changeBetTab("off");
               } else {
+                let date = new Date();
+                let year = date.getFullYear();
+                let month = date.getMonth() + 1;
+                let day = date.getDate();
+                let hour = date.getHours();
+                let min = currentmin.min + 1;
+                let amount = balanceSelection * quantity * MultiplierSelection;
+                let game = "wingo";
+                let time = "onemin";
+                // generate new random int between 0 and 9
+                let period = `${year}${month}${day}${hour == 0 ? `00` : hour}${
+                  min == 0 ? `60` : min < 10 ? "0" + min : min
+                }`;
+                let packet = { uid, game, time, period, selection, amount };
+
                 if (amount > userfinance.balance) {
                   alert("err bet not set low account balance please ad funds");
                 } else {

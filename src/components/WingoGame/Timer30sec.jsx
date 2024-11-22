@@ -13,22 +13,18 @@ import number9 from "../../icons/n9-a20f6f42.png";
 import { data } from "../../store/Contextprovider";
 function Timer30sec() {
   const [currentsec, changesec] = useState("0");
-  const { get30secwingo, uid, getUserfinances } = useContext(data);
+  const { get30secwingo, uid, getUserfinances, ws } = useContext(data);
 
+  ws.on("message", (msg) => {
+    if (msg.seconds < 30) {
+      changesec(Math.abs(msg.seconds - 30).toString());
+    } else if (msg.Seconds >= 30) {
+      changesec(Math.abs(msg.seconds - 60).toString());
+    }
+  });
   useEffect(() => {
     setInterval(() => {
-      var time = new Date();
-      let sec = time.getSeconds();
-      if (sec < 30) {
-        changesec(Math.abs(sec - 30).toString());
-      } else if (sec >= 30) {
-        changesec(Math.abs(sec - 60).toString());
-      }
-
-      if (sec == 29) {
-        get30secwingo();
-        getUserfinances(String(window.sessionStorage.getItem("uid")));
-      } else if (sec == 59) {
+      if (currentsec == 29) {
         get30secwingo();
         getUserfinances(String(window.sessionStorage.getItem("uid")));
       }

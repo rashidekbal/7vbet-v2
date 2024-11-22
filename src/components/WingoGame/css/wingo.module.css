@@ -24,6 +24,7 @@
   text-align: center;
   background-color: white;
   padding-bottom: 15px;
+  position: relative;
 }
 .green {
   float: left;
@@ -257,4 +258,34 @@
   border: none;
   background-color: orange;
   color: white;
+}
+.blocker {
+  height: 300px;
+  width: 100%;
+  position: absolute;
+  top: 10px;
+  background-color: rgb(0 0 0 / 0.5);
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.middlecontainer {
+  width: 80%;
+  height: 60%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.middlecontainer h1 {
+  background-color: white;
+  color: orange;
+  height: auto;
+  width: 40%;
+  font-size: 110px;
+  padding: 5px;
+  border-radius: 18px;
+}
+.offblocker {
+  display: none;
 }

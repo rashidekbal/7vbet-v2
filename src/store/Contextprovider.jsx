@@ -1,7 +1,9 @@
 import axios from "axios";
 import { io } from "socket.io-client";
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 const host = "http://192.168.43.240:8000";
+const ws = io(host);
+
 let safeRevenue = 0.1;
 let totalrevenuesafe = 0.0;
 const currentintrestrate = 5;
@@ -16,6 +18,7 @@ export default function Contextprovider({ children }) {
   let [WingoServerData3min, change3minWingo] = useState([]);
   let [WingoServerData5min, change5minWingo] = useState([]);
   let [WingoServerData30s, change30s] = useState([]);
+
   // change wingo 1 min result
   function get1minwingo() {
     axios
@@ -184,7 +187,6 @@ export default function Contextprovider({ children }) {
   function copydata(args) {
     navigator.clipboard.writeText(args);
   }
-
   return (
     <>
       <data.Provider
@@ -218,6 +220,7 @@ export default function Contextprovider({ children }) {
           setWingo1minbet,
           setWingo3minbet,
           setWingo30secbet,
+          ws,
         }}
       >
         {children}

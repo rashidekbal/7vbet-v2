@@ -13,26 +13,44 @@ import number9 from "../../icons/n9-a20f6f42.png";
 import { data } from "../../store/Contextprovider";
 
 export default function Timer5min() {
-  const { getwingo5min, uid, getUserfinances } = useContext(data);
-  const [currentsec, changesec] = useState("0");
-  const [currentmin, changemin] = useState("0");
+  const { getwingo5min, uid, getUserfinances, ws } = useContext(data);
+  const [currentsec, changesec] = useState("");
+  const [currentmin, changemin] = useState("");
 
+  const [upcomingperiod, changeupcomingperiod] = useState();
+  let periodspecialminute = useRef();
+  function periodchanger() {
+    let date = new Date();
+    let year = date.getFullYear();
+    let month = date.getMonth() + 1;
+    let day = date.getDate();
+    let hour = date.getHours();
+    let min =
+      periodspecialminute.minute +
+      Math.abs((periodspecialminute.minute % 5) - 5);
+    let period = `${year}${month}${day}${hour == 0 ? `00` : hour}${
+      min == 0 ? `60` : min < 10 ? "0" + min : min
+    }`;
+    changeupcomingperiod(period);
+  }
+  ws.on("message", (msg) => {
+    periodspecialminute.minute = msg.minute;
+    changemin(Math.abs((msg.minute % 5) - 5));
+
+    changesec(Math.abs(msg.seconds - 60).toString());
+    if (currentmin == 1) {
+      if (currentsec == 1) {
+        getwingo5min();
+        periodchanger();
+        getUserfinances(String(window.sessionStorage.getItem("uid")));
+      }
+    }
+  });
   useEffect(() => {
-    setInterval(() => {
-      var time = new Date();
-      changesec(Math.abs(time.getSeconds() - 60).toString());
-      changemin(Math.abs((time.getMinutes() % 5) - 5));
-      if (time.getMinutes % 5 == 4) {
-        if (time.getSeconds() == 59) {
-          getwingo5min();
-          getUserfinances(String(window.sessionStorage.getItem("uid")));
-        }
-      }
-      if (time.getMinutes() % 5 == 0) {
-      }
+    setTimeout(() => {
+      periodchanger();
     }, 1000);
   }, []);
-
   return (
     <div className={style.timer}>
       <div class={style.twosectionsspl}>
@@ -120,6 +138,7 @@ export default function Timer5min() {
             </b>
           )}
         </p>
+        <p className={style.currentround}>{upcomingperiod}</p>
       </div>
     </div>
   );

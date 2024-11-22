@@ -13,20 +13,37 @@ import number9 from "../../icons/n9-a20f6f42.png";
 import { data } from "../../store/Contextprovider";
 
 export default function Timer1min() {
-  let { get1minwingo, getUserfinances, uid } = useContext(data);
+  let { get1minwingo, getUserfinances, uid, ws } = useContext(data);
   const [currentsec, changesec] = useState("0");
+  const [upcomingperiod, changeupcomingperiod] = useState();
+  let periodspecialminute = useRef();
+  function periodchanger() {
+    let date = new Date();
 
+    let year = date.getFullYear();
+    let month = date.getMonth() + 1;
+    let day = date.getDate();
+    let hour = date.getHours();
+    let min = periodspecialminute.minute + 1;
+    let period = `${year}${month}${day}${hour == 0 ? `00` : hour}${
+      min == 0 ? `60` : min < 10 ? "0" + min : min
+    }`;
+    changeupcomingperiod(period);
+  }
+  ws.on("message", (msg) => {
+    periodspecialminute.minute = msg.minute;
+    if (msg.seconds) {
+      changesec(Math.abs(msg.seconds - 60).toString());
+    }
+    if (msg.seconds < 1) {
+      periodchanger();
+    }
+  });
   useEffect(() => {
-    setInterval(() => {
-      var time = new Date();
-      changesec(Math.abs(time.getSeconds() - 60).toString());
-      if (currentsec == "1") {
-        get1minwingo();
-        getUserfinances(String(window.sessionStorage.getItem("uid")));
-      }
+    setTimeout(() => {
+      periodchanger();
     }, 1000);
   }, []);
-
   return (
     <div className={style.timer}>
       <div class={style.twosectionsspl}>
@@ -100,6 +117,7 @@ export default function Timer1min() {
             </b>
           )}
         </p>
+        <p className={style.currentround}>{upcomingperiod}</p>
       </div>
     </div>
   );
