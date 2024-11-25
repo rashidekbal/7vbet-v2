@@ -18,6 +18,9 @@ export default function Contextprovider({ children }) {
   let [WingoServerData3min, change3minWingo] = useState([]);
   let [WingoServerData5min, change5minWingo] = useState([]);
   let [WingoServerData30s, change30s] = useState([]);
+  let [Wingouserbethistory1min, changeWingouserbethistory1min] = useState([]);
+  let [Wingouserbethistory3min, changeWingouserbethistory3min] = useState([]);
+  let [Wingouserbethistory5min, changeWingouserbethistory5min] = useState([]);
 
   // change wingo 1 min result
   function get1minwingo() {
@@ -127,6 +130,38 @@ export default function Contextprovider({ children }) {
         console.log("err bet not set", res.data);
       });
   }
+  function GetWingobetHistory1min(id) {
+    axios
+      .post(`${host}/wingobethistory1min`, { id })
+      .then((res) => {
+        changeWingouserbethistory1min(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  function GetWingobetHistory3min(id) {
+    axios
+      .post(`${host}/wingobethistory3min`, { id })
+      .then((res) => {
+        changeWingouserbethistory3min(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  function GetWingobetHistory5min(id) {
+    axios
+      .post(`${host}/wingobethistory1min`, { id })
+      .then((res) => {
+        changeWingouserbethistory5min(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
   let rechargehistory = [
     {
       status: "pending",
@@ -221,6 +256,12 @@ export default function Contextprovider({ children }) {
           setWingo3minbet,
           setWingo30secbet,
           ws,
+          GetWingobetHistory1min,
+          GetWingobetHistory3min,
+          GetWingobetHistory5min,
+          Wingouserbethistory1min,
+          Wingouserbethistory3min,
+          Wingouserbethistory5min,
         }}
       >
         {children}

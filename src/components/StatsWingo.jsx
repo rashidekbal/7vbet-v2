@@ -130,7 +130,11 @@ export default function StatsWingo({ currenttimer }) {
       ) : tab === "chart" ? (
         <WingoServerChart></WingoServerChart>
       ) : (
-        tab === "mybetHistorys" && <WingoPersonalHistory></WingoPersonalHistory>
+        tab === "mybetHistorys" && (
+          <WingoPersonalHistory
+            currenttimer={currenttimer}
+          ></WingoPersonalHistory>
+        )
       )}
     </>
   );

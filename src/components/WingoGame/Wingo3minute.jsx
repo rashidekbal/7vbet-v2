@@ -29,10 +29,17 @@ function Wingo3minute() {
   const [quantity, changeQuantity] = useState(1);
   const [BetTab, changeBetTab] = useState("off");
 
-  const { setWingo3minbet, getwingo3min, uid, userfinance, ws } =
-    useContext(data);
+  const {
+    setWingo3minbet,
+    getwingo3min,
+    uid,
+    userfinance,
+    ws,
+
+    GetWingobetHistory3min,
+  } = useContext(data);
   useEffect(() => {
-    getwingo3min();
+    getwingo3min(String(window.sessionStorage.getItem("uid")));
   }, []);
 
   let currentTime = useRef({});
@@ -51,6 +58,9 @@ function Wingo3minute() {
       changeblocker("no");
     }
   });
+  useEffect(() => {
+    GetWingobetHistory3min();
+  }, []);
   return (
     <>
       {" "}

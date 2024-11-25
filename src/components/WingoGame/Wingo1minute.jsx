@@ -29,12 +29,19 @@ function Wingo1minute() {
   const [timer, changetimer] = useState();
   let currentSec = useRef();
   let currentmin = useRef({});
-  let { get1minwingo, setWingo1minbet, uid, userfinance, getUserfinances, ws } =
-    useContext(data);
-  const [betset, changebetSet] = useState(null);
+  let {
+    get1minwingo,
+    setWingo1minbet,
+    uid,
+    userfinance,
+    getUserfinances,
+    ws,
+    GetWingobetHistory1min,
+  } = useContext(data);
 
   useEffect(() => {
     get1minwingo();
+    GetWingobetHistory1min(String(window.sessionStorage.getItem("uid")));
     getUserfinances(String(window.sessionStorage.getItem("uid")));
   }, []);
   ws.on("message", (msg) => {
@@ -44,12 +51,14 @@ function Wingo1minute() {
       changeblocker("yes");
       changetimer(currentSec);
     } else {
+      changetimer("");
       changeblocker("no");
     }
     currentmin.min = msg.minute;
 
     if (currentSec == 1) {
       get1minwingo();
+      GetWingobetHistory1min(String(window.sessionStorage.getItem("uid")));
       getUserfinances(String(window.sessionStorage.getItem("uid")));
     }
   });
@@ -861,6 +870,9 @@ function Wingo1minute() {
                 } else {
                   setWingo1minbet(packet);
                   changeBalanceSelection("1");
+                  GetWingobetHistory1min(
+                    String(window.sessionStorage.getItem("uid"))
+                  );
                   changeMultiplierSelection(" 1");
                   changeQuantity("1");
                   changeBetTab("off");

@@ -1,0 +1,64 @@
+.main {
+  width: 100%;
+  padding: 5px;
+  display: flex;
+  justify-content: space-between;
+  vertical-align: center;
+  margin-top: 8px;
+}
+.result {
+  background-color: orange;
+  vertical-align: middle;
+  text-align: center;
+  width: 13%;
+  margin-left: 10px;
+  color: white;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.periodTime {
+  width: 50%;
+}
+.period {
+  font-weight: 800;
+  font-size: 16px;
+  letter-spacing: 2px;
+}
+.time {
+  font-size: 12px;
+  padding-top: 5px;
+}
+.amount {
+  width: 25%;
+  overflow: hidden;
+  padding-right: 10px;
+}
+.fail {
+  border: 1px solid red;
+  color: red;
+  text-align: center;
+  border-radius: 8px;
+  font-size: 15px;
+}
+.sucess {
+  border: 1px solid #18b660;
+  color: #18b660;
+  text-align: center;
+  border-radius: 8px;
+  font-size: 15px;
+}
+.losseamount {
+  color: red;
+  text-align: center;
+  padding-top: 2px;
+  font-size: 12px;
+}
+.winamount {
+  color: #18b660;
+  text-align: center;
+  padding-top: 2px;
+  font-size: 12px;
+}
