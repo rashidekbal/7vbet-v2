@@ -16,6 +16,10 @@ function Timer30sec() {
   const { get30secwingo, uid, getUserfinances, ws } = useContext(data);
 
   ws.on("message", (msg) => {
+    if (currentsec == 1) {
+      get30secwingo();
+      getUserfinances(String(window.sessionStorage.getItem("uid")));
+    }
     if (msg.seconds < 30) {
       changesec(Math.abs(msg.seconds - 30).toString());
     } else if (msg.Seconds >= 30) {
@@ -23,12 +27,8 @@ function Timer30sec() {
     }
   });
   useEffect(() => {
-    setInterval(() => {
-      if (currentsec == 29) {
-        get30secwingo();
-        getUserfinances(String(window.sessionStorage.getItem("uid")));
-      }
-    }, 1000);
+    get30secwingo();
+    getUserfinances(String(window.sessionStorage.getItem("uid")));
   }, []);
 
   return (
@@ -36,7 +36,7 @@ function Timer30sec() {
       <div className={style.timer}>
         <div class={style.twosectionsspl}>
           <p className={style.insts}>How to play</p>
-          <p className={style.selectedsetting}>Win Go 1Min</p>
+          <p className={style.selectedsetting}>Win Go 30sec</p>
 
           <div className={style.peek}>
             <div className={style.peekitem}>
