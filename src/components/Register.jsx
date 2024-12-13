@@ -23,7 +23,7 @@ function Register() {
         } else {
           chnageInviteWarning("no");
           axios
-            .post(`${host}/register`, {
+            .post(`${host + "8000"}/register`, {
               phone: String(phone),
               password: password,
               refferedBy: code,
@@ -88,7 +88,7 @@ function Register() {
             {registered == "yes" ? (
               <button
                 onClick={() => {
-                  window.location.replace("http://192.168.43.240:3000/");
+                  window.location.replace(host + "3000/");
                   changedialog("no");
                 }}
               >

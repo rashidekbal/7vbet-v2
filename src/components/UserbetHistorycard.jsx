@@ -5,7 +5,29 @@ function UserbetHistorycard({ data }) {
   return (
     <>
       <div className={style.main}>
-        <div className={style.result}>{data.choice}</div>
+        <div
+          className={
+            data.choice == "0"
+              ? style.resultzero
+              : data.choice == "5"
+              ? style.resultfive
+              : data.choice == "red"
+              ? style.resulteven
+              : data.choice == "green"
+              ? style.resultodd
+              : data.choice == "violet"
+              ? style.resultviol
+              : data.choice == "Big"
+              ? style.resultbig
+              : data.choice == "small"
+              ? style.resultsmall
+              : Number(data.choice) % 2 == 0
+              ? style.resulteven
+              : style.resultodd
+          }
+        >
+          {data.choice}
+        </div>
         <div className={style.periodTime}>
           <div className={style.period}>{data.period}</div>
           <div className={style.time}>{data.BetTime}</div>

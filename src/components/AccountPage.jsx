@@ -14,6 +14,7 @@ import { FaRupeeSign } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 export const AccountPage = () => {
   let getData = useContext(data);
+  let { host } = useContext(data);
   useEffect(() => {
     getData.changeuid(window.sessionStorage.getItem("uid"));
     getData.getUserfinances(String(window.sessionStorage.getItem("uid")));
@@ -388,7 +389,7 @@ export const AccountPage = () => {
           className={style.logout}
           onClick={() => {
             window.sessionStorage.removeItem("uid");
-            window.location.replace("http://192.168.43.240:3000/");
+            window.location.replace(host + "3000/");
           }}
         >
           Logout

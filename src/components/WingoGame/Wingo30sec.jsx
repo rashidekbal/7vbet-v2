@@ -5,7 +5,10 @@ import WalletDataForGames from "../WalletDataForGames";
 import Notice from "../Notice";
 import logoActive from "../../icons/time_a-f83ed4c7.png";
 import logoInactive from "../../icons/time-5d4e96a3.png";
-
+import green from "../../icons/green.png";
+import red from "../../icons/red.png";
+import redVilet from "../../icons/redviolet.png";
+import greenViolet from "../../icons/greenviolet.png";
 import number0 from "../../icons/n0-30bd92d1.png";
 import number1 from "../../icons/n1-dfccbff5.png";
 import number2 from "../../icons/n2-c2913607.png";
@@ -16,21 +19,54 @@ import number6 from "../../icons/n6-a56e0b9a.png";
 import number7 from "../../icons/n7-5961a17f.png";
 import number8 from "../../icons/n8-d4d951a4.png";
 import number9 from "../../icons/n9-a20f6f42.png";
-import StatsWingo from "../StatsWingo";
+
 import { NavLink } from "react-router-dom";
-import Timer30sec from "./Timer30sec";
 import { data } from "../../store/Contextprovider";
+import WingoGameHistoryServer from "../WingoGameHistoryServer";
+import WingoServerChart from "../WingoServerChart";
+import WingoPersonalHistory from "../WingoPersonalHistory";
+import UserbetHistorycard from "../UserbetHistorycard";
 function Wingo30sec() {
+  const {
+    uid,
+    setWingo30secbet,
+    userfinance,
+    get30secwingo,
+    getUserfinances,
+    WingoServerData30s,
+    ws,
+    Wingouserbethistory1min,
+  } = useContext(data);
+  const [currentsec, changesec] = useState("0");
   const [selection, changeSelection] = useState("Big");
   const [balanceSelection, changeBalanceSelection] = useState(1);
   const [MultiplierSelection, changeMultiplierSelection] = useState(1);
   const [quantity, changeQuantity] = useState(1);
   const [BetTab, changeBetTab] = useState("off");
+
+  const [tab, change] = useState("serverhistory");
+  const [cdata, changecdata] = useState("serverhistory");
+  function changeData(args) {
+    change(args);
+    changecdata(args);
+  }
+
   useEffect(() => {
     get30secwingo();
+    getUserfinances(String(window.sessionStorage.getItem("uid")));
   }, []);
-  const { uid, setWingo30secbet, userfinance, get30secwingo } =
-    useContext(data);
+
+  ws.on("message", (msg) => {
+    if (msg.seconds < 30) {
+      changesec(Math.abs(msg.seconds - 30).toString());
+    } else if (msg.Seconds >= 30) {
+      changesec(Math.abs(msg.seconds - 60).toString());
+    }
+    if (currentsec == 55) {
+      get30secwingo();
+      getUserfinances(String(window.sessionStorage.getItem("uid")));
+    }
+  });
   return (
     <div style={{ position: "relative" }}>
       {" "}
@@ -95,7 +131,80 @@ function Wingo30sec() {
         {/* time selection info ends here */}
       </WalletViewEffect>
       {/*timer section */}
-      <Timer30sec />
+      <div className={style.timer}>
+        <div class={style.twosectionsspl}>
+          <p className={style.insts}>How to play</p>
+          <p className={style.selectedsetting}>Win Go 30sec</p>
+
+          <div className={style.peek}>
+            <div className={style.peekitem}>
+              <img className={style.peekresult} src={number0} />
+            </div>
+
+            <div className={style.peekitem}>
+              <img className={style.peekresult} src={number1} />
+            </div>
+
+            <div className={style.peekitem}>
+              <img className={style.peekresult} src={number5} />
+            </div>
+
+            <div className={style.peekitem}>
+              <img className={style.peekresult} src={number0} />
+            </div>
+
+            <div className={style.peekitem}>
+              <img className={style.peekresult} src={number0} />
+            </div>
+          </div>
+        </div>
+        <div class={style.twosectionSpll}>
+          <p className={style.timenotice}>Time remaining</p>
+          <p className={style.time}>
+            {currentsec === "60" ? (
+              <b>
+                <span className={style.min} id="min_first">
+                  0
+                </span>
+                <span className={style.min} id="min_sec">
+                  1
+                </span>
+                <span className={style.min} id="min_colen">
+                  :
+                </span>
+                <span className={style.min} id="second_first">
+                  0
+                </span>
+                <span className={style.min} id="second_second">
+                  0
+                </span>
+              </b>
+            ) : (
+              <b>
+                <span className={style.min} id="min_first">
+                  0
+                </span>
+                <span className={style.min} id="min_sec">
+                  0
+                </span>
+                <span className={style.min} id="min_colen">
+                  :
+                </span>
+                <span className={style.min} id="second_first">
+                  {currentsec.length == "2"
+                    ? currentsec[0]
+                    : currentsec.length == "1" && "0"}
+                </span>
+                <span className={style.min} id="second_second">
+                  {currentsec.length == "2"
+                    ? currentsec[1]
+                    : currentsec.length == "1" && currentsec[0]}
+                </span>
+              </b>
+            )}
+          </p>
+        </div>
+      </div>
       {/* wingo color options  */}
       <div className={style.ColoOptions}>
         <button
@@ -267,7 +376,190 @@ function Wingo30sec() {
           </b>
         </div>
       </div>
-      {/* result section*/} <StatsWingo currenttimer="30"></StatsWingo>
+      {/* result section*/}
+      <div className={style.GamesStat}>
+        {cdata === "serverhistory" ? (
+          <div
+            onClick={() => {
+              changeData("Serverhistory");
+            }}
+            className={style.historyCommon}
+            style={{
+              backgroundColor: "orange",
+              textAlign: "center",
+              color: "white",
+              marginRight: "10px",
+              fontSize: "small",
+              width: "108px",
+            }}
+          >
+            History
+          </div>
+        ) : (
+          <div
+            onClick={() => {
+              changeData("serverhistory");
+            }}
+            className={style.historyCommon}
+            style={{
+              backgroundColor: "white",
+              textAlign: "center",
+              color: "black",
+              marginRight: "10px",
+              fontSize: "small",
+              width: "108px",
+            }}
+          >
+            Game history
+          </div>
+        )}
+        {cdata === "chart" ? (
+          <div
+            onClick={() => {
+              changeData("chart");
+            }}
+            id="chart"
+            className={style.historyCommon}
+            style={{
+              width: "100px",
+              textAlign: "center",
+              margin: "0 14px",
+              fontSize: "small",
+              backgroundColor: "orange",
+              color: "white",
+            }}
+          >
+            Chart
+          </div>
+        ) : (
+          <div
+            onClick={() => {
+              changeData("chart");
+            }}
+            id="chart"
+            className={style.historyCommon}
+            style={{
+              width: "100px",
+              textAlign: "center",
+              margin: "0 14px",
+              fontSize: "small",
+              backgroundColor: "white",
+              color: "black",
+            }}
+          >
+            Chart
+          </div>
+        )}
+        {cdata === "mybetHistorys" ? (
+          <div
+            id="My_bet"
+            className={style.historyCommon}
+            onClick={() => {
+              changeData("mybetHistorys");
+            }}
+            style={{
+              width: "100px",
+              marginLeft: "12px",
+              textAlign: "center",
+              fontSize: "small",
+              backgroundColor: "orange",
+              color: "white",
+            }}
+          >
+            My history{" "}
+          </div>
+        ) : (
+          <div
+            id="My_bet"
+            className={style.historyCommon}
+            onClick={() => {
+              changeData("mybetHistorys");
+            }}
+            style={{
+              width: "100px",
+              marginLeft: "12px",
+              textAlign: "center",
+              fontSize: "small",
+              backgroundColor: "white",
+              color: "black",
+            }}
+          >
+            My history{" "}
+          </div>
+        )}
+      </div>
+      {tab === "serverhistory" ? (
+        WingoServerData30s.map((item) => (
+          <div className={style.gameHistoryData}>
+            <div className={style.DataHolder}>
+              <div
+                className={style.data}
+                style={{ width: "38%", fontSize: "17px" }}
+              >
+                {item.period}
+              </div>
+              <div
+                className={style.data}
+                style={{
+                  textAlign: "center",
+                  width: "22%",
+                  fontSize: "17px",
+                }}
+              >
+                {item.number}
+              </div>
+              <div
+                className={style.data}
+                style={{ width: "24%", fontSize: "17px" }}
+              >
+                {item.size}
+              </div>
+              <div
+                className={style.data}
+                style={{
+                  width: "40px",
+                  margin: "0 auto",
+                  textAlign: "center",
+                }}
+              >
+                <div>
+                  {item.color === "red" ? (
+                    <img
+                      className={style.Colorres}
+                      src={red}
+                      style={{ marginLeft: "12px" }}
+                    />
+                  ) : item.color === "green" ? (
+                    <img
+                      src={green}
+                      style={{ marginLeft: "12px", height: "14px" }}
+                    />
+                  ) : item.color === "redViolet" ? (
+                    <img
+                      src={redVilet}
+                      style={{ width: "40px", height: "16px" }}
+                    />
+                  ) : (
+                    item.color === "greenViolet" && (
+                      <img
+                        src={greenViolet}
+                        style={{ width: "40px", height: "16px" }}
+                      />
+                    )
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        ))
+      ) : tab === "chart" ? (
+        <>this is chart daTA</>
+      ) : (
+        tab === "mybetHistorys" &&
+        Wingouserbethistory1min.map((item) => (
+          <UserbetHistorycard data={item} />
+        ))
+      )}
       {/* option selector */}
       <div className={BetTab == "on" ? style.betSelector : style.bettaboff}>
         <div

@@ -1,6 +1,5 @@
 import style from "../css/WingoGameHostoryServer.module.css";
-import WingoGameHistoryServerData from "./WingoGameHistoryServerData";
-export default function WingoGameHistoryServer({ currenttimer }) {
+export default function WingoGameHistoryServer() {
   return (
     <>
       <div className={style.DataHeader}>
@@ -29,9 +28,6 @@ export default function WingoGameHistoryServer({ currenttimer }) {
           <b>Color</b>
         </div>
       </div>
-      <WingoGameHistoryServerData
-        currenttimer={currenttimer}
-      ></WingoGameHistoryServerData>
     </>
   );
 }

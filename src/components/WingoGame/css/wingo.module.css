@@ -289,3 +289,114 @@
 .offblocker {
   display: none;
 }
+.timer {
+  height: 106px;
+  width: 94%;
+  margin: 15px auto;
+  border-radius: 10px;
+  background-image: url(../../../icons/wingoissue-e9d39db0.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+.twosectionsspl {
+  display: inline-block;
+  width: 49.8%;
+}
+.twosectionSpll {
+  display: block;
+  float: right;
+  width: 47%;
+  margin: 0 auto;
+  height: 100%;
+}
+.insts {
+  border: 1px solid white;
+  padding: 4px;
+  display: block;
+  color: white;
+  width: 90%;
+  margin: 0 auto;
+  margin-top: 5px;
+  border-radius: 19px;
+  text-align: center;
+  font-size: small;
+}
+.selectedsetting {
+  color: white;
+  display: block;
+  width: 85%;
+  margin: 0 auto;
+  margin-top: 10px;
+}
+
+.peek {
+  display: flex;
+}
+.peekitem {
+  margin: 6px;
+}
+.peekresult {
+  height: 25px;
+}
+.timenotice {
+  color: white;
+  display: block;
+  width: 80%;
+  margin: 0 auto;
+  text-align: right;
+  margin-top: 7px;
+}
+.time {
+  display: block;
+  text-align: right;
+  width: 80%;
+  margin: 15px auto;
+}
+.min {
+  background-color: white;
+  color: black;
+  padding: 5px;
+  margin: 0 2px;
+}
+.currentround {
+  color: white;
+  text-align: right;
+  margin: 17px 10px 0px 0px;
+  font-weight: 900;
+}
+.GamesStat {
+  display: flex;
+  margin: 10px auto;
+  width: 93%;
+  border-radius: 10px;
+  justify-content: center;
+}
+.historyCommon {
+  background-color: white;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.gameHistoryData {
+  margin: 0 auto;
+  width: 93%;
+
+  overflow: scroll;
+  margin-top: 4px;
+}
+.gameHistoryData::-webkit-scrollbar {
+  display: none;
+}
+.DataHolder {
+  display: flex;
+  margin-bottom: 10px;
+}
+.data {
+  padding: 5px;
+  text-align: center;
+}
+
+.Colorres {
+  width: 17px;
+}

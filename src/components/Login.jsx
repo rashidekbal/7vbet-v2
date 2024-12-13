@@ -15,7 +15,7 @@ export default function Login() {
     } else {
       changeWarning("no");
       axios
-        .post(`${host}/login`, {
+        .post(`${host + "8000"}/login`, {
           phone,
           password,
         })
@@ -27,7 +27,7 @@ export default function Login() {
                 let uid = String(phone).slice(2);
                 window.sessionStorage.setItem("uid", uid);
                 setTimeout(() => {
-                  window.location.replace("http://192.168.43.240:3000/home");
+                  window.location.replace(host + "3000/home");
                 }, 100);
 
                 changepassword("");

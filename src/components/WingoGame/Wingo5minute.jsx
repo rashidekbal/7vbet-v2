@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import style from "./css/wingo.module.css";
 import { WalletViewEffect } from "../WalletViewEffect";
 import WalletDataForGames from "../WalletDataForGames";
-import Timer5min from "./Timer5min";
+
 import Notice from "../Notice";
 import logoActive from "../../icons/time_a-f83ed4c7.png";
 import logoInactive from "../../icons/time-5d4e96a3.png";
@@ -27,26 +27,51 @@ function Wingo5minute() {
   const [MultiplierSelection, changeMultiplierSelection] = useState(1);
   const [quantity, changeQuantity] = useState(1);
   const [BetTab, changeBetTab] = useState("off");
+  const [currentsec, changesec] = useState("");
+  const [currentmin, changemin] = useState("");
 
-  const { uid, setWingo5minbet, userfinance, getwingo5min, ws } =
-    useContext(data);
+  const [upcomingperiod, changeupcomingperiod] = useState();
+  let periodspecialminute = useRef();
+  function periodchanger() {
+    let date = new Date();
+    let year = date.getFullYear();
+    let month = date.getMonth() + 1;
+    let day = date.getDate();
+    let hour = date.getHours();
+    let min =
+      periodspecialminute.minute +
+      Math.abs((periodspecialminute.minute % 5) - 5);
+    let period = `${year}${month}${day}${hour == 0 ? `00` : hour}${
+      min == 0 ? `60` : min < 10 ? "0" + min : min
+    }`;
+    changeupcomingperiod(period);
+  }
+  const {
+    uid,
+    setWingo5minbet,
+    userfinance,
+    getwingo5min,
+    ws,
+    getUserfinances,
+  } = useContext(data);
   useEffect(() => {
     getwingo5min();
+    setTimeout(() => {
+      periodchanger();
+    }, 1000);
   }, []);
   let currentTime = useRef({});
   ws.on("message", (msg) => {
-    currentTime.minute = msg.minute;
-    currentTime.seconds = msg.seconds;
-    if (currentTime.minute % 5 == 4) {
-      if (currentTime.seconds >= 55) {
-        changeBetTab("no");
-        changeblocker("yes");
-        changetimer(Math.abs(currentTime.seconds - 60));
-      } else {
-        changeblocker("no");
+    periodspecialminute.minute = msg.minute;
+    changemin(Math.abs((msg.minute % 5) - 5));
+
+    changesec(Math.abs(msg.seconds - 60).toString());
+    if (currentmin == 1) {
+      if (currentsec == 1) {
+        getwingo5min();
+        periodchanger();
+        getUserfinances(String(window.sessionStorage.getItem("uid")));
       }
-    } else {
-      changeblocker("no");
     }
   });
   return (
@@ -113,7 +138,95 @@ function Wingo5minute() {
         {/* time selection info ends here */}
       </WalletViewEffect>
       {/*timer section */}
-      <Timer5min />
+      <div className={style.timer}>
+        <div class={style.twosectionsspl}>
+          <p className={style.insts}>How to play</p>
+          <p className={style.selectedsetting}>Win Go 3Min</p>
+
+          <div className={style.peek}>
+            <div className={style.peekitem}>
+              <img className={style.peekresult} src={number0} />
+            </div>
+
+            <div className={style.peekitem}>
+              <img className={style.peekresult} src={number1} />
+            </div>
+
+            <div className={style.peekitem}>
+              <img className={style.peekresult} src={number5} />
+            </div>
+
+            <div className={style.peekitem}>
+              <img className={style.peekresult} src={number0} />
+            </div>
+
+            <div className={style.peekitem}>
+              <img className={style.peekresult} src={number0} />
+            </div>
+          </div>
+        </div>
+        <div class={style.twosectionSpll}>
+          <p className={style.timenotice}>Time remaining</p>
+          <p className={style.time}>
+            {currentsec === "60" ? (
+              <b>
+                <span className={style.min} id="min_first">
+                  0
+                </span>
+                <span className={style.min} id="min_sec">
+                  {Math.abs(currentmin - 1)}
+                </span>
+                <span className={style.min} id="min_colen">
+                  :
+                </span>
+                <span className={style.min} id="second_first">
+                  0
+                </span>
+                <span className={style.min} id="second_second">
+                  0
+                </span>
+              </b>
+            ) : currentsec.length === 2 ? (
+              <b>
+                <span className={style.min} id="min_first">
+                  0
+                </span>
+                <span className={style.min} id="min_sec">
+                  {Math.abs(currentmin - 1)}
+                </span>
+                <span className={style.min} id="min_colen">
+                  :
+                </span>
+                <span className={style.min} id="second_first">
+                  {currentsec[0]}
+                </span>
+                <span className={style.min} id="second_second">
+                  {currentsec[1]}
+                </span>
+              </b>
+            ) : (
+              <b>
+                <span className={style.min} id="min_first">
+                  0
+                </span>
+                <span className={style.min} id="min_sec">
+                  {Math.abs(currentmin - 1)}
+                </span>
+                <span className={style.min} id="min_colen">
+                  :
+                </span>
+                <span className={style.min} id="second_first">
+                  0
+                </span>
+                <span className={style.min} id="second_second">
+                  {currentsec[0]}
+                </span>
+              </b>
+            )}
+          </p>
+          <p className={style.currentround}>{upcomingperiod}</p>
+        </div>
+      </div>
       {/* wingo color options  */}
       <div className={style.ColoOptions}>
         {/* this is blocker overlay */}

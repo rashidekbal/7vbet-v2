@@ -1,8 +1,8 @@
 import axios from "axios";
 import { io } from "socket.io-client";
 import { createContext, useEffect, useState } from "react";
-const host = "http://192.168.43.240:8000";
-const ws = io(host);
+const host = "http://192.168.23.240:";
+const ws = io(host + 8000);
 
 let safeRevenue = 0.1;
 let totalrevenuesafe = 0.0;
@@ -25,7 +25,7 @@ export default function Contextprovider({ children }) {
   // change wingo 1 min result
   function get1minwingo() {
     axios
-      .get(`${host}/wingoOneMin`)
+      .get(`${host + "8000"}/wingoOneMin`)
       .then((res) => {
         change1minWingo(res.data);
       })
@@ -35,7 +35,7 @@ export default function Contextprovider({ children }) {
   }
   function get30secwingo() {
     axios
-      .get(`${host}/wingo30sec`)
+      .get(`${host + "8000"}/wingo30sec`)
       .then((res) => {
         change30s(res.data);
       })
@@ -45,7 +45,7 @@ export default function Contextprovider({ children }) {
   }
   function getwingo3min() {
     axios
-      .get(`${host}/wingo3min`)
+      .get(`${host + "8000"}/wingo3min`)
       .then((res) => {
         change3minWingo(res.data);
       })
@@ -55,7 +55,7 @@ export default function Contextprovider({ children }) {
   }
   function getwingo5min() {
     axios
-      .get(`${host}/wingo5min`)
+      .get(`${host + "8000"}/wingo5min`)
       .then((res) => {
         change5minWingo(res.data);
       })
@@ -65,7 +65,7 @@ export default function Contextprovider({ children }) {
   }
   function getUserfinances(uid) {
     axios
-      .post(`${host}/userfinances`, {
+      .post(`${host + "8000"}/userfinances`, {
         uid,
       })
       .then((res) => {
@@ -76,7 +76,7 @@ export default function Contextprovider({ children }) {
 
   function setWingo30secbet(packet) {
     axios
-      .post(`${host}/setWingo30secbet`, { packet })
+      .post(`${host + "8000"}/setWingo30secbet`, { packet })
       .then((res) => {
         if (res.data == "done") {
           getUserfinances(uid);
@@ -90,7 +90,7 @@ export default function Contextprovider({ children }) {
   }
   function setWingo1minbet(packet) {
     axios
-      .post(`${host}/setWingo1minbet`, { packet })
+      .post(`${host + "8000"}/setWingo1minbet`, { packet })
       .then((res) => {
         if (res.data == "done") {
           getUserfinances(uid);
@@ -104,7 +104,7 @@ export default function Contextprovider({ children }) {
   }
   function setWingo3minbet(packet) {
     axios
-      .post(`${host}/setWingo3minbet`, { packet })
+      .post(`${host + "8000"}/setWingo3minbet`, { packet })
       .then((res) => {
         if (res.data == "done") {
           getUserfinances(uid);
@@ -118,7 +118,7 @@ export default function Contextprovider({ children }) {
   }
   function setWingo5minbet(packet) {
     axios
-      .post(`${host}/setwingo5min`, { packet })
+      .post(`${host + "8000"}/setwingo5min`, { packet })
       .then((res) => {
         if (res.data == "done") {
           getUserfinances(uid);
@@ -132,7 +132,7 @@ export default function Contextprovider({ children }) {
   }
   function GetWingobetHistory1min(id) {
     axios
-      .post(`${host}/wingobethistory1min`, { id })
+      .post(`${host + "8000"}/wingobethistory1min`, { id })
       .then((res) => {
         changeWingouserbethistory1min(res.data);
       })
@@ -143,7 +143,7 @@ export default function Contextprovider({ children }) {
 
   function GetWingobetHistory3min(id) {
     axios
-      .post(`${host}/wingobethistory3min`, { id })
+      .post(`${host + "8000"}/wingobethistory3min`, { id })
       .then((res) => {
         changeWingouserbethistory3min(res.data);
       })
@@ -154,7 +154,7 @@ export default function Contextprovider({ children }) {
 
   function GetWingobetHistory5min(id) {
     axios
-      .post(`${host}/wingobethistory1min`, { id })
+      .post(`${host + "8000"}/wingobethistory1min`, { id })
       .then((res) => {
         changeWingouserbethistory5min(res.data);
       })

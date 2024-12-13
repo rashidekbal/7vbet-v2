@@ -123,19 +123,6 @@ export default function StatsWingo({ currenttimer }) {
           </div>
         )}
       </div>
-      {tab === "serverhistory" ? (
-        <WingoGameHistoryServer
-          currenttimer={currenttimer}
-        ></WingoGameHistoryServer>
-      ) : tab === "chart" ? (
-        <WingoServerChart></WingoServerChart>
-      ) : (
-        tab === "mybetHistorys" && (
-          <WingoPersonalHistory
-            currenttimer={currenttimer}
-          ></WingoPersonalHistory>
-        )
-      )}
     </>
   );
 }
