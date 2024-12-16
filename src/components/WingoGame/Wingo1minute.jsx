@@ -76,6 +76,17 @@ function Wingo1minute() {
     setTimeout(() => {
       periodchanger();
     }, 1000);
+    setInterval(() => {
+      let date = new Date();
+      if (date.getSeconds() == 59) {
+        getUserfinances(String(window.sessionStorage.getItem("uid")));
+        get1minwingo();
+        GetWingobetHistory1min(String(window.sessionStorage.getItem("uid")));
+        setTimeout(() => {
+          periodchanger();
+        }, 2000);
+      }
+    }, 1000);
   }, []);
   function fetcher() {
     // if (currentsec > 1) {
@@ -89,24 +100,16 @@ function Wingo1minute() {
     console.log(currentsec);
   }
   ws.on("message", (msg) => {
-    periodspecialminute.minute = msg.minute;
-    if (msg.seconds) {
-      changesec(Math.abs(msg.seconds - 60).toString());
-    }
-
     if (msg.seconds >= 55) {
       changeblocker("yes");
-      if (msg.seconds == 59) {
-        get1minwingo();
-        periodchanger();
-        getUserfinances(String(window.sessionStorage.getItem("uid")));
-        GetWingobetHistory1min(String(window.sessionStorage.getItem("uid")));
-      }
+      changeBetTab("off");
     } else {
       changeblocker("no");
     }
-    if (msg.seconds == 59) {
-      console.log(msg.seconds);
+
+    periodspecialminute.minute = msg.minute;
+    if (msg.seconds) {
+      changesec(Math.abs(msg.seconds - 60).toString());
     }
   });
 
@@ -1300,6 +1303,7 @@ function Wingo1minute() {
 
                 if (amount > userfinance.balance) {
                   alert("err bet not set low account balance please ad funds");
+                  changeBetTab("off");
                 } else {
                   setWingo1minbet(packet);
                   changeBalanceSelection("1");

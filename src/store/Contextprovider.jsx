@@ -1,7 +1,7 @@
 import axios from "axios";
 import { io } from "socket.io-client";
 import { createContext, useEffect, useState } from "react";
-const host = "http://192.168.23.240:";
+const host = "http://192.168.88.240:";
 const ws = io(host + 8000);
 
 let safeRevenue = 0.1;
@@ -21,6 +21,7 @@ export default function Contextprovider({ children }) {
   let [Wingouserbethistory1min, changeWingouserbethistory1min] = useState([]);
   let [Wingouserbethistory3min, changeWingouserbethistory3min] = useState([]);
   let [Wingouserbethistory5min, changeWingouserbethistory5min] = useState([]);
+  let [Wingouserbethistory30sec, changeWingouserbethistory30sec] = useState([]);
 
   // change wingo 1 min result
   function get1minwingo() {
@@ -151,10 +152,19 @@ export default function Contextprovider({ children }) {
         console.log(err);
       });
   }
-
+  function GetWingobetHistory30sec(id) {
+    axios
+      .post(`${host + "8000"}/wingobethistory30sec`, { id })
+      .then((res) => {
+        changeWingouserbethistory30sec(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
   function GetWingobetHistory5min(id) {
     axios
-      .post(`${host + "8000"}/wingobethistory1min`, { id })
+      .post(`${host + "8000"}/wingobethistory5min`, { id })
       .then((res) => {
         changeWingouserbethistory5min(res.data);
       })
@@ -259,9 +269,11 @@ export default function Contextprovider({ children }) {
           GetWingobetHistory1min,
           GetWingobetHistory3min,
           GetWingobetHistory5min,
+          GetWingobetHistory30sec,
           Wingouserbethistory1min,
           Wingouserbethistory3min,
           Wingouserbethistory5min,
+          Wingouserbethistory30sec,
         }}
       >
         {children}

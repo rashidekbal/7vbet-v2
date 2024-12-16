@@ -69,18 +69,27 @@ function Wingo3minute() {
     }`;
     changeupcomingperiod(period);
   }
+  let currentTime = useRef({});
+  ws.on("message", (msg) => {
+    currentTime.minute = msg.minute;
+    currentTime.seconds = msg.seconds;
+    if (currentTime.minute % 3 == 2) {
+      if (currentTime.seconds >= 55) {
+        changeBetTab("off");
+        changeblocker("yes");
+
+        changetimer(Math.abs(currentTime.seconds - 60));
+      } else {
+        changeblocker("no");
+      }
+    } else {
+      changeblocker("no");
+    }
+  });
   ws.on("message", (msg) => {
     periodspecialminute.minute = msg.minute;
     changemin(Math.abs((msg.minute % 3) - 3));
     changesec(Math.abs(msg.seconds - 60).toString());
-    if (currentmin == 1) {
-      if (currentsec == 1) {
-        getwingo3min();
-        periodchanger();
-        getUserfinances(String(window.sessionStorage.getItem("uid")));
-        GetWingobetHistory3min(String(window.sessionStorage.getItem("uid")));
-      }
-    }
   });
   function getbethistory() {
     setTimeout(() => {
@@ -93,24 +102,21 @@ function Wingo3minute() {
     setTimeout(() => {
       periodchanger();
     }, 1000);
-  }, []);
+    setInterval(() => {
+      let date = new Date();
+      if (Math.abs((date.getMinutes() % 3) - 3) == 1) {
+        if (Math.abs(date.getSeconds() - 60) == 1) {
+          getwingo3min();
 
-  let currentTime = useRef({});
-  ws.on("message", (msg) => {
-    currentTime.minute = msg.minute;
-    currentTime.seconds = msg.seconds;
-    if (currentTime.minute % 3 == 2) {
-      if (currentTime.seconds >= 55) {
-        changeBetTab("no");
-        changeblocker("yes");
-        changetimer(Math.abs(currentTime.seconds - 60));
-      } else {
-        changeblocker("no");
+          getUserfinances(String(window.sessionStorage.getItem("uid")));
+          GetWingobetHistory3min(String(window.sessionStorage.getItem("uid")));
+          setTimeout(() => {
+            periodchanger();
+          }, 2000);
+        }
       }
-    } else {
-      changeblocker("no");
-    }
-  });
+    }, 1000);
+  }, []);
 
   return (
     <>
@@ -1424,6 +1430,7 @@ function Wingo3minute() {
                     alert(
                       "err bet not set low account balance please ad funds"
                     );
+                    changeBetTab("off");
                   } else {
                     setWingo3minbet(packet);
                     changeBalanceSelection("1");
@@ -1436,6 +1443,7 @@ function Wingo3minute() {
               } else {
                 if (amount > userfinance.balance) {
                   alert("err bet not set low account balance please ad funds");
+                  changeBetTab("off");
                 } else {
                   setWingo3minbet(packet);
                   changeBalanceSelection("1");

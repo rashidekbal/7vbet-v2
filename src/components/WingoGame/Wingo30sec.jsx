@@ -35,36 +35,85 @@ function Wingo30sec() {
     getUserfinances,
     WingoServerData30s,
     ws,
-    Wingouserbethistory1min,
+    Wingouserbethistory30sec,
+    GetWingobetHistory30sec,
   } = useContext(data);
-  const [currentsec, changesec] = useState("0");
+
+  function getbethistory() {
+    setTimeout(() => {
+      GetWingobetHistory30sec(String(window.sessionStorage.getItem("uid")));
+    }, 500);
+  }
+  const [currentmin, changeCurrentmin] = useState();
+  const [blocker, changeblocker] = useState("no");
+  const [currentsec, changesec] = useState("10");
   const [selection, changeSelection] = useState("Big");
   const [balanceSelection, changeBalanceSelection] = useState(1);
   const [MultiplierSelection, changeMultiplierSelection] = useState(1);
   const [quantity, changeQuantity] = useState(1);
   const [BetTab, changeBetTab] = useState("off");
-
+  const [upcomingperiod, changeupcomingperiod] = useState();
   const [tab, change] = useState("serverhistory");
   const [cdata, changecdata] = useState("serverhistory");
   function changeData(args) {
     change(args);
     changecdata(args);
   }
-
+  function periodchanger() {
+    let date = new Date();
+    let year = date.getFullYear();
+    let month = date.getMonth() + 1;
+    let day = date.getDate();
+    let hour = date.getHours();
+    let min = date.getMinutes() + 1;
+    // generate new random int between 0 and 9
+    let period = `${year}${month}${day}${hour == 0 ? `00` : hour}${
+      min == 0 ? `60` : min < 10 ? "0" + min : min
+    }${date.getSeconds() > 30 ? 2 : 1}`;
+    changeupcomingperiod(period);
+  }
   useEffect(() => {
     get30secwingo();
     getUserfinances(String(window.sessionStorage.getItem("uid")));
+    GetWingobetHistory30sec(String(window.sessionStorage.getItem("uid")));
+    setTimeout(() => {
+      periodchanger();
+    }, 1000);
+    setInterval(() => {
+      let date = new Date();
+      if (date.getSeconds() == 59) {
+        get30secwingo();
+        getUserfinances(String(window.sessionStorage.getItem("uid")));
+        GetWingobetHistory30sec(String(window.sessionStorage.getItem("uid")));
+        setTimeout(() => {
+          periodchanger();
+        }, 2000);
+      }
+      if (date.getSeconds() == 29) {
+        get30secwingo();
+        getUserfinances(String(window.sessionStorage.getItem("uid")));
+        GetWingobetHistory30sec(String(window.sessionStorage.getItem("uid")));
+        setTimeout(() => {
+          periodchanger();
+        }, 2000);
+      }
+    }, 1000);
   }, []);
 
   ws.on("message", (msg) => {
+    changeCurrentmin(msg.minute);
     if (msg.seconds < 30) {
       changesec(Math.abs(msg.seconds - 30).toString());
-    } else if (msg.Seconds >= 30) {
+    }
+    if (msg.seconds > 30) {
       changesec(Math.abs(msg.seconds - 60).toString());
     }
-    if (currentsec == 55) {
-      get30secwingo();
-      getUserfinances(String(window.sessionStorage.getItem("uid")));
+
+    if (currentsec < 6) {
+      changeblocker("yes");
+      changeBetTab("off");
+    } else {
+      changeblocker("no");
     }
   });
   return (
@@ -136,77 +185,192 @@ function Wingo30sec() {
           <p className={style.insts}>How to play</p>
           <p className={style.selectedsetting}>Win Go 30sec</p>
 
-          <div className={style.peek}>
-            <div className={style.peekitem}>
-              <img className={style.peekresult} src={number0} />
-            </div>
+          {WingoServerData30s.length > 1 && (
+            <div className={style.peek}>
+              <div className={style.peekitem}>
+                <img
+                  className={style.peekresult}
+                  src={
+                    WingoServerData30s[0].number == "0 "
+                      ? number0
+                      : WingoServerData30s[0].number == "1"
+                      ? number1
+                      : WingoServerData30s[0].number == "2"
+                      ? number2
+                      : WingoServerData30s[0].number == "3"
+                      ? number3
+                      : WingoServerData30s[0].number == "4"
+                      ? number4
+                      : WingoServerData30s[0].number == "5"
+                      ? number5
+                      : WingoServerData30s[0].number == "6"
+                      ? number6
+                      : WingoServerData30s[0].number == "7"
+                      ? number7
+                      : WingoServerData30s[0].number == "8"
+                      ? number8
+                      : WingoServerData30s[0].number == "9"
+                      ? number9
+                      : number0
+                  }
+                />
+              </div>
 
-            <div className={style.peekitem}>
-              <img className={style.peekresult} src={number1} />
-            </div>
+              <div className={style.peekitem}>
+                <img
+                  className={style.peekresult}
+                  src={
+                    WingoServerData30s[1].number == "0 "
+                      ? number0
+                      : WingoServerData30s[1].number == "1"
+                      ? number1
+                      : WingoServerData30s[1].number == "2"
+                      ? number2
+                      : WingoServerData30s[1].number == "3"
+                      ? number3
+                      : WingoServerData30s[1].number == "4"
+                      ? number4
+                      : WingoServerData30s[1].number == "5"
+                      ? number5
+                      : WingoServerData30s[1].number == "6"
+                      ? number6
+                      : WingoServerData30s[1].number == "7"
+                      ? number7
+                      : WingoServerData30s[1].number == "8"
+                      ? number8
+                      : WingoServerData30s[1].number == "9"
+                      ? number9
+                      : number0
+                  }
+                />
+              </div>
 
-            <div className={style.peekitem}>
-              <img className={style.peekresult} src={number5} />
-            </div>
+              <div className={style.peekitem}>
+                <img
+                  className={style.peekresult}
+                  src={
+                    WingoServerData30s[2].number == "0 "
+                      ? number0
+                      : WingoServerData30s[2].number == "1"
+                      ? number1
+                      : WingoServerData30s[2].number == "2"
+                      ? number2
+                      : WingoServerData30s[2].number == "3"
+                      ? number3
+                      : WingoServerData30s[2].number == "4"
+                      ? number4
+                      : WingoServerData30s[2].number == "5"
+                      ? number5
+                      : WingoServerData30s[2].number == "6"
+                      ? number6
+                      : WingoServerData30s[2].number == "7"
+                      ? number7
+                      : WingoServerData30s[2].number == "8"
+                      ? number8
+                      : WingoServerData30s[2].number == "9"
+                      ? number9
+                      : number0
+                  }
+                />
+              </div>
 
-            <div className={style.peekitem}>
-              <img className={style.peekresult} src={number0} />
-            </div>
+              <div className={style.peekitem}>
+                <img
+                  className={style.peekresult}
+                  src={
+                    WingoServerData30s[3].number == "0 "
+                      ? number0
+                      : WingoServerData30s[3].number == "1"
+                      ? number1
+                      : WingoServerData30s[3].number == "2"
+                      ? number2
+                      : WingoServerData30s[3].number == "3"
+                      ? number3
+                      : WingoServerData30s[3].number == "4"
+                      ? number4
+                      : WingoServerData30s[3].number == "5"
+                      ? number5
+                      : WingoServerData30s[3].number == "6"
+                      ? number6
+                      : WingoServerData30s[3].number == "7"
+                      ? number7
+                      : WingoServerData30s[3].number == "8"
+                      ? number8
+                      : WingoServerData30s[3].number == "9"
+                      ? number9
+                      : number0
+                  }
+                />
+              </div>
 
-            <div className={style.peekitem}>
-              <img className={style.peekresult} src={number0} />
+              <div className={style.peekitem}>
+                <img
+                  className={style.peekresult}
+                  src={
+                    WingoServerData30s[4].number == "0 "
+                      ? number0
+                      : WingoServerData30s[4].number == "1"
+                      ? number1
+                      : WingoServerData30s[4].number == "2"
+                      ? number2
+                      : WingoServerData30s[4].number == "3"
+                      ? number3
+                      : WingoServerData30s[4].number == "4"
+                      ? number4
+                      : WingoServerData30s[4].number == "5"
+                      ? number5
+                      : WingoServerData30s[4].number == "6"
+                      ? number6
+                      : WingoServerData30s[4].number == "7"
+                      ? number7
+                      : WingoServerData30s[4].number == "8"
+                      ? number8
+                      : WingoServerData30s[4].number == "9"
+                      ? number9
+                      : number0
+                  }
+                />
+              </div>
             </div>
-          </div>
+          )}
         </div>
         <div class={style.twosectionSpll}>
           <p className={style.timenotice}>Time remaining</p>
           <p className={style.time}>
-            {currentsec === "60" ? (
-              <b>
-                <span className={style.min} id="min_first">
-                  0
-                </span>
-                <span className={style.min} id="min_sec">
-                  1
-                </span>
-                <span className={style.min} id="min_colen">
-                  :
-                </span>
-                <span className={style.min} id="second_first">
-                  0
-                </span>
-                <span className={style.min} id="second_second">
-                  0
-                </span>
-              </b>
-            ) : (
-              <b>
-                <span className={style.min} id="min_first">
-                  0
-                </span>
-                <span className={style.min} id="min_sec">
-                  0
-                </span>
-                <span className={style.min} id="min_colen">
-                  :
-                </span>
-                <span className={style.min} id="second_first">
-                  {currentsec.length == "2"
-                    ? currentsec[0]
-                    : currentsec.length == "1" && "0"}
-                </span>
-                <span className={style.min} id="second_second">
-                  {currentsec.length == "2"
-                    ? currentsec[1]
-                    : currentsec.length == "1" && currentsec[0]}
-                </span>
-              </b>
-            )}
+            <b>
+              <span className={style.min} id="min_first">
+                0
+              </span>
+              <span className={style.min} id="min_sec">
+                0
+              </span>
+              <span className={style.min} id="min_colen">
+                :
+              </span>
+              <span className={style.min} id="second_first">
+                {currentsec.length == "2"
+                  ? currentsec[0]
+                  : currentsec.length == "1" && "0"}
+              </span>
+              <span className={style.min} id="second_second">
+                {currentsec.length == "2"
+                  ? currentsec[1]
+                  : currentsec.length == "1" && currentsec[0]}
+              </span>
+            </b>
           </p>
+          <p className={style.currentround}>{upcomingperiod}</p>
         </div>
       </div>
       {/* wingo color options  */}
       <div className={style.ColoOptions}>
+        {/* this is blocker overlay */}
+        <div className={blocker == "yes" ? style.blocker : style.offblocker}>
+          <div className={style.middlecontainer}>
+            <h1>0</h1>
+            <h1>{currentsec}</h1>
+          </div>
+        </div>
         <button
           className={style.green}
           onClick={() => {
@@ -556,7 +720,7 @@ function Wingo30sec() {
         <>this is chart daTA</>
       ) : (
         tab === "mybetHistorys" &&
-        Wingouserbethistory1min.map((item) => (
+        Wingouserbethistory30sec.map((item) => (
           <UserbetHistorycard data={item} />
         ))
       )}
@@ -1060,36 +1224,35 @@ function Wingo30sec() {
             }
             onClick={() => {
               let date = new Date();
-              let sec = date.getSeconds();
+              let sec = currentsec;
               let year = date.getFullYear();
               let month = date.getMonth() + 1;
               let day = date.getDate();
               let hour = date.getHours();
-              let min = date.getMinutes() + 1;
+              let min = currentmin + 1;
               let amount = balanceSelection * quantity * MultiplierSelection;
               let game = "wingo";
               let time = "30sec";
               // generate new random int between 0 and 9
               let period = `${year}${month}${day}${hour == 0 ? `00` : hour}${
                 min == 0 ? `60` : min < 10 ? "0" + min : min
-              }${date.getSeconds() >= 30 ? 2 : 1}`;
+              }${currentsec >= 30 ? 2 : 1}`;
               let packet = { uid, game, time, period, selection, amount };
-              console.log(sec);
-              if (sec > 55) {
-                alert("betting time is over");
-                changeBetTab("off");
-              } else if (sec - 30 > -5) {
+
+              if (sec <= 5) {
                 alert("betting time is over");
                 changeBetTab("off");
               } else {
                 if (amount > userfinance.balance) {
                   alert("err bet not set low account balance please ad funds");
+                  changeBetTab("off");
                 } else {
                   setWingo30secbet(packet);
                   changeBalanceSelection("1");
                   changeMultiplierSelection(" 1");
                   changeQuantity("1");
                   changeBetTab("off");
+                  getbethistory();
                 }
               }
             }}
