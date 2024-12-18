@@ -22,10 +22,8 @@ import number9 from "../../icons/n9-a20f6f42.png";
 
 import { NavLink } from "react-router-dom";
 import { data } from "../../store/Contextprovider";
-import WingoGameHistoryServer from "../WingoGameHistoryServer";
-import WingoServerChart from "../WingoServerChart";
-import WingoPersonalHistory from "../WingoPersonalHistory";
-import UserbetHistorycard from "../UserbetHistorycard";
+
+import UserbetHistorycard from "./UserbetHistorycard";
 function Wingo30sec() {
   const {
     uid,
@@ -104,16 +102,21 @@ function Wingo30sec() {
     changeCurrentmin(msg.minute);
     if (msg.seconds < 30) {
       changesec(Math.abs(msg.seconds - 30).toString());
+      if (msg.seconds >= 25) {
+        changeblocker("yes");
+        changeBetTab("off");
+      } else {
+        changeblocker("no");
+      }
     }
     if (msg.seconds > 30) {
       changesec(Math.abs(msg.seconds - 60).toString());
-    }
-
-    if (currentsec < 6) {
-      changeblocker("yes");
-      changeBetTab("off");
-    } else {
-      changeblocker("no");
+      if (msg.seconds >= 55) {
+        changeblocker("yes");
+        changeBetTab("off");
+      } else {
+        changeblocker("no");
+      }
     }
   });
   return (
@@ -531,7 +534,7 @@ function Wingo30sec() {
               onclick="selection_color('small')"
               style={{ backgroundColor: "#6ea8f4" }}
               onClick={() => {
-                changeSelection("small");
+                changeSelection("Small");
                 changeBetTab("on");
               }}
             >
@@ -545,7 +548,7 @@ function Wingo30sec() {
         {cdata === "serverhistory" ? (
           <div
             onClick={() => {
-              changeData("Serverhistory");
+              changeData("serverhistory");
             }}
             className={style.historyCommon}
             style={{
@@ -574,7 +577,7 @@ function Wingo30sec() {
               width: "108px",
             }}
           >
-            Game history
+            History
           </div>
         )}
         {cdata === "chart" ? (
@@ -652,13 +655,54 @@ function Wingo30sec() {
           </div>
         )}
       </div>
+      {tab == "serverhistory" && (
+        <div className={style.DataHeader}>
+          <div
+            id="period"
+            className={style.DataHeadersSecond}
+            style={{
+              width: "39%",
+              textAlign: "left",
+              fontSize: "15px",
+              paddingLeft: "10px",
+            }}
+          >
+            <b>Period</b>
+          </div>
+          <div
+            id="number"
+            className={style.DataHeadersSecond}
+            style={{ fontSize: "15px" }}
+          >
+            <b>Number</b>
+          </div>
+          <div
+            id="big_small"
+            className={style.DataHeadersSecond}
+            style={{
+              width: "25%",
+              textAlign: "center",
+              fontSize: "15px",
+            }}
+          >
+            <b>size</b>
+          </div>
+          <div
+            id="color"
+            className={style.DataHeadersSecond}
+            style={{ textAlign: "center", fontSize: "15px" }}
+          >
+            <b>Color</b>
+          </div>
+        </div>
+      )}
       {tab === "serverhistory" ? (
         WingoServerData30s.map((item) => (
           <div className={style.gameHistoryData}>
             <div className={style.DataHolder}>
               <div
                 className={style.data}
-                style={{ width: "38%", fontSize: "17px" }}
+                style={{ width: "38%", fontSize: "18px", paddingTop: "5px" }}
               >
                 {item.period}
               </div>
@@ -667,10 +711,36 @@ function Wingo30sec() {
                 style={{
                   textAlign: "center",
                   width: "22%",
-                  fontSize: "17px",
+                  fontSize: "25px",
+
+                  padding: "0",
                 }}
               >
-                {item.number}
+                <p
+                  style={
+                    Number(item.number) == 5
+                      ? {
+                          backgroundClip: "text",
+                          color: "transparent",
+                          backgroundImage:
+                            "linear-gradient(180deg, green, violet, transparent)",
+                          fontWeight: "bold",
+                        }
+                      : Number(item.number) == 0
+                      ? {
+                          backgroundClip: "text",
+                          color: "transparent",
+                          backgroundImage:
+                            "linear-gradient(180deg, red , violet,transparent)",
+                          fontWeight: "bold",
+                        }
+                      : Number(item.number) % 2 == 0
+                      ? { color: "red", fontWeight: "bold" }
+                      : { color: "#18b660", fontWeight: "bold" }
+                  }
+                >
+                  {item.number}
+                </p>
               </div>
               <div
                 className={style.data}
@@ -1252,7 +1322,6 @@ function Wingo30sec() {
                   changeMultiplierSelection(" 1");
                   changeQuantity("1");
                   changeBetTab("off");
-                  getbethistory();
                 }
               }
             }}

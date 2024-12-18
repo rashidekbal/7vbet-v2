@@ -22,7 +22,7 @@ import greenViolet from "../../icons/greenviolet.png";
 
 import { NavLink } from "react-router-dom";
 import { data } from "../../store/Contextprovider";
-import UserbetHistorycard from "../UserbetHistorycard";
+import UserbetHistorycard from "./UserbetHistorycard";
 function Wingo1minute() {
   const [blocker, changeblocker] = useState("no");
   const [selection, changeSelection] = useState("Big");
@@ -53,7 +53,7 @@ function Wingo1minute() {
     Wingouserbethistory1min,
     WingoServerData1min,
   } = useContext(data);
-  const [currentsec, changesec] = useState("0");
+  const [currentsec, changesec] = useState("00");
   const [upcomingperiod, changeupcomingperiod] = useState();
   let periodspecialminute = useRef();
   function periodchanger() {
@@ -88,17 +88,7 @@ function Wingo1minute() {
       }
     }, 1000);
   }, []);
-  function fetcher() {
-    // if (currentsec > 1) {
-    //   // periodchanger();
-    //   // get1minwingo();
-    //   // GetWingobetHistory1min(String(window.sessionStorage.getItem("uid")));
-    //   // getUserfinances(String(window.sessionStorage.getItem("uid")));
-    //   console.log(" data is being fetched");
-    // }
 
-    console.log(currentsec);
-  }
   ws.on("message", (msg) => {
     if (msg.seconds >= 55) {
       changeblocker("yes");
@@ -584,10 +574,10 @@ function Wingo1minute() {
               Big
             </p>
             <p
-              onclick="selection_color('small')"
+              onclick="selection_color('Small')"
               style={{ backgroundColor: "#6ea8f4" }}
               onClick={() => {
-                changeSelection("small");
+                changeSelection("Small");
                 changeBetTab("on");
               }}
             >
@@ -601,7 +591,7 @@ function Wingo1minute() {
         {cdata === "serverhistory" ? (
           <div
             onClick={() => {
-              changeData("Serverhistory");
+              changeData("serverhistory");
             }}
             className={style.historyCommon}
             style={{
@@ -630,7 +620,7 @@ function Wingo1minute() {
               width: "108px",
             }}
           >
-            Game history
+            History
           </div>
         )}
         {cdata === "chart" ? (
@@ -708,13 +698,54 @@ function Wingo1minute() {
           </div>
         )}
       </div>
+      {tab == "serverhistory" && (
+        <div className={style.DataHeader}>
+          <div
+            id="period"
+            className={style.DataHeadersSecond}
+            style={{
+              width: "39%",
+              textAlign: "left",
+              fontSize: "15px",
+              paddingLeft: "10px",
+            }}
+          >
+            <b>Period</b>
+          </div>
+          <div
+            id="number"
+            className={style.DataHeadersSecond}
+            style={{ fontSize: "15px" }}
+          >
+            <b>Number</b>
+          </div>
+          <div
+            id="big_small"
+            className={style.DataHeadersSecond}
+            style={{
+              width: "25%",
+              textAlign: "center",
+              fontSize: "15px",
+            }}
+          >
+            <b>size</b>
+          </div>
+          <div
+            id="color"
+            className={style.DataHeadersSecond}
+            style={{ textAlign: "center", fontSize: "15px" }}
+          >
+            <b>Color</b>
+          </div>
+        </div>
+      )}
       {tab === "serverhistory" ? (
         WingoServerData1min.map((item) => (
           <div className={style.gameHistoryData}>
             <div className={style.DataHolder}>
               <div
                 className={style.data}
-                style={{ width: "38%", fontSize: "17px" }}
+                style={{ width: "38%", fontSize: "18px", paddingTop: "5px" }}
               >
                 {item.period}
               </div>
@@ -723,10 +754,36 @@ function Wingo1minute() {
                 style={{
                   textAlign: "center",
                   width: "22%",
-                  fontSize: "17px",
+                  fontSize: "25px",
+
+                  padding: "0",
                 }}
               >
-                {item.number}
+                <p
+                  style={
+                    Number(item.number) == 5
+                      ? {
+                          backgroundClip: "text",
+                          color: "transparent",
+                          backgroundImage:
+                            "linear-gradient(180deg, green, violet, transparent)",
+                          fontWeight: "bold",
+                        }
+                      : Number(item.number) == 0
+                      ? {
+                          backgroundClip: "text",
+                          color: "transparent",
+                          backgroundImage:
+                            "linear-gradient(180deg, red , violet,transparent)",
+                          fontWeight: "bold",
+                        }
+                      : Number(item.number) % 2 == 0
+                      ? { color: "red", fontWeight: "bold" }
+                      : { color: "#18b660" }
+                  }
+                >
+                  {item.number}
+                </p>
               </div>
               <div
                 className={style.data}
@@ -1311,7 +1368,6 @@ function Wingo1minute() {
                   changeMultiplierSelection(" 1");
                   changeQuantity("1");
                   changeBetTab("off");
-                  getbethistory();
                 }
               }
             }}

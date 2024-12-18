@@ -1,5 +1,6 @@
 import React from "react";
-import style from "../css/Userbethistory.module.css";
+import style from "./css/Userbethistory.module.css";
+import { FaRupeeSign } from "react-icons/fa";
 
 function UserbetHistorycard({ data }) {
   return (
@@ -19,7 +20,7 @@ function UserbetHistorycard({ data }) {
               ? style.resultviol
               : data.choice == "Big"
               ? style.resultbig
-              : data.choice == "small"
+              : data.choice == "Small"
               ? style.resultsmall
               : Number(data.choice) % 2 == 0
               ? style.resulteven
@@ -34,10 +35,10 @@ function UserbetHistorycard({ data }) {
         </div>
         <div className={style.amount}>
           {data.status == "pending" ? (
-            <div style={{ color: "orange", textAlign: "center" }}>pending</div>
+            <div style={{ color: "orange", textAlign: "center" }}>Pending</div>
           ) : (
             <div className={data.status == "win" ? style.sucess : style.fail}>
-              {data.status == "win" ? "sucess" : "failed"}
+              {data.status == "win" ? "Sucess" : "Failed"}
             </div>
           )}
           {data.status == "pending" ? (
@@ -49,6 +50,13 @@ function UserbetHistorycard({ data }) {
               }
             >
               <span>{data.status == "win" ? " + " : " - "}</span>
+              <FaRupeeSign
+                style={
+                  data.status == "win"
+                    ? { color: "#18b660", fontSize: "11px" }
+                    : { color: "red", fontSize: "11px" }
+                }
+              />
               {data.status == "win" ? data.wlAmount : data.amount}
             </div>
           )}

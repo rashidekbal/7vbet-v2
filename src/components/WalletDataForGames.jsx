@@ -3,6 +3,7 @@ import style from "../css/WalletDataForGames.module.css";
 import wallet from "../icons/wallet-3f0340b6.png";
 import { data } from "../store/Contextprovider";
 import { FaRupeeSign } from "react-icons/fa";
+import { FiRefreshCcw } from "react-icons/fi";
 export default function WalletDataForGames() {
   let getData = useContext(data);
 
@@ -18,6 +19,16 @@ export default function WalletDataForGames() {
             <FaRupeeSign style={{ height: "17px", width: "14px" }} />
           </span>
           <span id="balance">{getData.userfinance.balance}</span>
+          <span
+            className={style.refresh}
+            onClick={() => {
+              getData.getUserfinances(
+                String(window.sessionStorage.getItem("uid"))
+              );
+            }}
+          >
+            <FiRefreshCcw />
+          </span>
         </h2>
 
         <p className={style.WalletSlogan}>

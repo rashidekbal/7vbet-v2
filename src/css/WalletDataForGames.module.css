@@ -54,3 +54,8 @@
   float: right;
   margin-right: 10px;
 }
+.refresh {
+  font-size: 12px;
+  vertical-align: middle;
+  margin-left: 8px;
+}

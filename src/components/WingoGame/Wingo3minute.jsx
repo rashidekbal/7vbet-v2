@@ -22,8 +22,7 @@ import greenViolet from "../../icons/greenviolet.png";
 
 import { NavLink } from "react-router-dom";
 import { data } from "../../store/Contextprovider";
-import UserbetHistorycard from "../UserbetHistorycard";
-import WingoGameHistoryServer from "../WingoGameHistoryServer";
+import UserbetHistorycard from "./UserbetHistorycard";
 
 function Wingo3minute() {
   const {
@@ -44,7 +43,7 @@ function Wingo3minute() {
   const [MultiplierSelection, changeMultiplierSelection] = useState(1);
   const [quantity, changeQuantity] = useState(1);
   const [BetTab, changeBetTab] = useState("off");
-  const [currentsec, changesec] = useState("");
+  const [currentsec, changesec] = useState("00");
   const [currentmin, changemin] = useState("");
   const [tab, change] = useState("serverhistory");
   const [cdata, changecdata] = useState("serverhistory");
@@ -107,7 +106,6 @@ function Wingo3minute() {
       if (Math.abs((date.getMinutes() % 3) - 3) == 1) {
         if (Math.abs(date.getSeconds() - 60) == 1) {
           getwingo3min();
-
           getUserfinances(String(window.sessionStorage.getItem("uid")));
           GetWingobetHistory3min(String(window.sessionStorage.getItem("uid")));
           setTimeout(() => {
@@ -704,7 +702,7 @@ function Wingo3minute() {
               Big
             </p>
             <p
-              onclick="selection_color('small')"
+              onclick="selection_color('Small')"
               style={{ backgroundColor: "#6ea8f4" }}
               onClick={() => {
                 if (currentTime.minute % 3 == 2) {
@@ -712,11 +710,11 @@ function Wingo3minute() {
                     alert("betting time is over");
                     changeBetTab("off");
                   } else {
-                    changeSelection("small");
+                    changeSelection("Small");
                     changeBetTab("on");
                   }
                 } else {
-                  changeSelection("small");
+                  changeSelection("Small");
                   changeBetTab("on");
                 }
               }}
@@ -731,7 +729,7 @@ function Wingo3minute() {
         {cdata === "serverhistory" ? (
           <div
             onClick={() => {
-              changeData("Serverhistory");
+              changeData("serverhistory");
             }}
             className={style.historyCommon}
             style={{
@@ -760,7 +758,7 @@ function Wingo3minute() {
               width: "108px",
             }}
           >
-            Game history
+            History
           </div>
         )}
         {cdata === "chart" ? (
@@ -838,13 +836,54 @@ function Wingo3minute() {
           </div>
         )}
       </div>
+      {tab == "serverhistory" && (
+        <div className={style.DataHeader}>
+          <div
+            id="period"
+            className={style.DataHeadersSecond}
+            style={{
+              width: "39%",
+              textAlign: "left",
+              fontSize: "15px",
+              paddingLeft: "10px",
+            }}
+          >
+            <b>Period</b>
+          </div>
+          <div
+            id="number"
+            className={style.DataHeadersSecond}
+            style={{ fontSize: "15px" }}
+          >
+            <b>Number</b>
+          </div>
+          <div
+            id="big_small"
+            className={style.DataHeadersSecond}
+            style={{
+              width: "25%",
+              textAlign: "center",
+              fontSize: "15px",
+            }}
+          >
+            <b>size</b>
+          </div>
+          <div
+            id="color"
+            className={style.DataHeadersSecond}
+            style={{ textAlign: "center", fontSize: "15px" }}
+          >
+            <b>Color</b>
+          </div>
+        </div>
+      )}
       {tab === "serverhistory" ? (
         WingoServerData3min.map((item) => (
           <div className={style.gameHistoryData}>
             <div className={style.DataHolder}>
               <div
                 className={style.data}
-                style={{ width: "38%", fontSize: "17px" }}
+                style={{ width: "38%", fontSize: "18px", paddingTop: "5px" }}
               >
                 {item.period}
               </div>
@@ -853,10 +892,36 @@ function Wingo3minute() {
                 style={{
                   textAlign: "center",
                   width: "22%",
-                  fontSize: "17px",
+                  fontSize: "25px",
+
+                  padding: "0",
                 }}
               >
-                {item.number}
+                <p
+                  style={
+                    Number(item.number) == 5
+                      ? {
+                          backgroundClip: "text",
+                          color: "transparent",
+                          backgroundImage:
+                            "linear-gradient(180deg, green, violet, transparent)",
+                          fontWeight: "bold",
+                        }
+                      : Number(item.number) == 0
+                      ? {
+                          backgroundClip: "text",
+                          color: "transparent",
+                          backgroundImage:
+                            "linear-gradient(180deg, red , violet,transparent)",
+                          fontWeight: "bold",
+                        }
+                      : Number(item.number) % 2 == 0
+                      ? { color: "red", fontWeight: "bold" }
+                      : { color: "#18b660", fontWeight: "bold" }
+                  }
+                >
+                  {item.number}
+                </p>
               </div>
               <div
                 className={style.data}
@@ -1437,7 +1502,6 @@ function Wingo3minute() {
                     changeMultiplierSelection(" 1");
                     changeQuantity("1");
                     changeBetTab("off");
-                    getbethistory();
                   }
                 }
               } else {
@@ -1450,7 +1514,6 @@ function Wingo3minute() {
                   changeMultiplierSelection(" 1");
                   changeQuantity("1");
                   changeBetTab("off");
-                  getbethistory();
                 }
               }
             }}

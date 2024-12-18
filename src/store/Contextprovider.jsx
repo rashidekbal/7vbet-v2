@@ -81,6 +81,7 @@ export default function Contextprovider({ children }) {
       .then((res) => {
         if (res.data == "done") {
           getUserfinances(uid);
+          GetWingobetHistory30sec(uid);
         } else {
           alert("bet failed");
         }
@@ -95,6 +96,7 @@ export default function Contextprovider({ children }) {
       .then((res) => {
         if (res.data == "done") {
           getUserfinances(uid);
+          GetWingobetHistory1min(uid);
         } else {
           alert("bet failed");
         }
@@ -109,6 +111,7 @@ export default function Contextprovider({ children }) {
       .then((res) => {
         if (res.data == "done") {
           getUserfinances(uid);
+          GetWingobetHistory3min(uid);
         } else {
           alert("bet failed");
         }
@@ -123,6 +126,7 @@ export default function Contextprovider({ children }) {
       .then((res) => {
         if (res.data == "done") {
           getUserfinances(uid);
+          GetWingobetHistory5min(uid);
         } else {
           alert("bet failed");
         }
