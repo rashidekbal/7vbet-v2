@@ -7,70 +7,76 @@ import fishing from "../icons/fishing.png";
 import mini_games from "../icons/mini_games.png";
 import popular from "../icons/popular.png";
 import style from "../css/OtherGames.module.css";
+import { NavLink } from "react-router-dom";
 
 function OtherGames() {
   return (
     <>
       <div className={style.OtherGames}>
         <div className={style.objectContainer}>
-          <div id='lottery' className={style.objects}>
+          <div id="lottery" className={style.objects}>
             <div className={style.link}>
-              <img src={lottery} alt='lottery' className={style.menuImage} />
+              <NavLink to="/home">
+                <img src={lottery} alt="lottery" className={style.menuImage} />
+              </NavLink>
 
               <p className={style.gameDetails}>Lottery</p>
             </div>
           </div>
-          <div id='slots' className={style.objects}>
+          <div id="mini" className={style.objects}>
             <div className={style.link}>
-              <img src={slots} alt='slots' className={style.menuImage} />
+              <NavLink to="/aviator">
+                <img
+                  src={mini_games}
+                  alt="mini_games"
+                  className={style.menuImage}
+                />
+              </NavLink>
 
-              <p>Slots</p>
+              <p>Aviator</p>
             </div>
           </div>
-          <div id='sports' className={style.objects}>
+
+          <div id="sports" className={style.objects}>
             <div className={style.link}>
-              <img src={sports} alt='Sports' className={style.menuImage} />
+              <img src={sports} alt="Sports" className={style.menuImage} />
 
               <p>Sports</p>
             </div>
           </div>
-          <div id='casino' className={style.objects}>
+          <div id="casino" className={style.objects}>
             <div className={style.link}>
-              <img src={casino} alt='Casino' className={style.menuImage} />
+              <img src={casino} alt="Casino" className={style.menuImage} />
 
               <p>Casino</p>
             </div>
           </div>
         </div>
         <div className={style.objectContainer}>
-          <div id='pvc' className={style.objects}>
+          <div id="pvc" className={style.objects}>
             <div className={style.link}>
-              <img src={pvc} alt='pvc' className={style.menuImage} />
+              <img src={pvc} alt="pvc" className={style.menuImage} />
 
               <p>pvc</p>
             </div>
           </div>
-          <div id='fishing' className={style.objects}>
+          <div id="fishing" className={style.objects}>
             <div className={style.link}>
-              <img src={fishing} alt='fishing' className={style.menuImage} />
+              <img src={fishing} alt="fishing" className={style.menuImage} />
 
               <p>Fishing</p>
             </div>
           </div>
-          <div id='mini' className={style.objects}>
+          <div id="slots" className={style.objects}>
             <div className={style.link}>
-              <img
-                src={mini_games}
-                alt='mini_games'
-                className={style.menuImage}
-              />
+              <img src={slots} alt="slots" className={style.menuImage} />
 
-              <p>Mini</p>
+              <p>Slots</p>
             </div>
           </div>
-          <div id='popular' className={style.objects}>
+          <div id="popular" className={style.objects}>
             <div className={style.link}>
-              <img src={popular} alt='popular' className={style.menuImage} />
+              <img src={popular} alt="popular" className={style.menuImage} />
 
               <p>Popular</p>
             </div>

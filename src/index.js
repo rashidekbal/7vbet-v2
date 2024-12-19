@@ -26,6 +26,7 @@ import Wingo1minute from "./components/WingoGame/Wingo1minute";
 import Wingo30sec from "./components/WingoGame/Wingo30sec";
 import Wingo3minute from "./components/WingoGame/Wingo3minute";
 import Wingo5minute from "./components/WingoGame/Wingo5minute";
+import Aviator from "./components/aviator/Aviator";
 let router = createBrowserRouter([
   {
     path: "/",
@@ -119,6 +120,10 @@ let router = createBrowserRouter([
       {
         path: "safe",
         element: <Safe />,
+      },
+      {
+        path: "aviator",
+        element: <Aviator />,
       },
     ],
   },
