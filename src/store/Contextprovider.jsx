@@ -1,7 +1,7 @@
 import axios from "axios";
 import { io } from "socket.io-client";
 import { createContext, useEffect, useState } from "react";
-const host = "http://192.168.88.240:";
+const host = "http://192.168.43.248:";
 const ws = io(host + 8000);
 
 let safeRevenue = 0.1;
