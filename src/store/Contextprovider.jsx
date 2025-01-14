@@ -23,10 +23,10 @@ export default function Contextprovider({ children }) {
   let [Wingouserbethistory5min, changeWingouserbethistory5min] = useState([]);
   let [Wingouserbethistory30sec, changeWingouserbethistory30sec] = useState([]);
 function setuid(uid){
-  alert("setting" +uid)
+  
   window.sessionStorage.setItem("uid",uid);
   sessionStorage.setItem("uid",uid)
-  alert(sessionStorage.getItem("uid"));
+  
 }
 
 
