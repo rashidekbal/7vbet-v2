@@ -389,7 +389,7 @@ export const AccountPage = () => {
           className={style.logout}
           onClick={() => {
             window.sessionStorage.removeItem("uid");
-            window.location.replace( "apkking.xyz");
+            window.location.replace( "https://7vbet-efbmlw7yk-rtechdevlopment123-gmailcoms-projects.vercel.app");
           }}
         >
           Logout
