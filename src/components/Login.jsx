@@ -7,7 +7,7 @@ import axios from "axios";
 
 import { MdOutlineCancel } from "react-icons/md";
 export default function Login() {
-  let { changeuid } = useContext(data);
+  let { changeuid ,  setuid } = useContext(data);
   function submit(e) {
     e.preventDefault();
     if (String(phone).length !== 10) {
@@ -25,7 +25,7 @@ export default function Login() {
             if (response !== "null") {
               if (response !== "passerr") {
                 let uid = String(phone).slice(2);
-                window.sessionStorage.setItem("uid", uid);
+                setuid(uid);
                 setTimeout(() => {
                   window.location.replace("https://7vbet-efbmlw7yk-rtechdevlopment123-gmailcoms-projects.vercel.app/home");
                 }, 100);
