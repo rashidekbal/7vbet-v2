@@ -395,7 +395,7 @@ export const AccountPage = () => {
           Logout
         </button>
       </div>
-      <GeneralHomeFooter page="account" /
+      <GeneralHomeFooter page="account" />
    
   );
 };
