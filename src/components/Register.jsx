@@ -23,7 +23,7 @@ function Register() {
         } else {
           chnageInviteWarning("no");
           axios
-            .post(`${host + "8000"}/register`, {
+            .post(`${host}/register`, {
               phone: String(phone),
               password: password,
               refferedBy: code,
@@ -88,7 +88,7 @@ function Register() {
             {registered == "yes" ? (
               <button
                 onClick={() => {
-                  window.location.replace(host + "3000/");
+                  window.location.replace("https://apkking.xyz");
                   changedialog("no");
                 }}
               >
