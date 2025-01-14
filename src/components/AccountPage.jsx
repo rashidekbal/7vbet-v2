@@ -31,7 +31,7 @@ export const AccountPage = () => {
             <p className={style.uid}>
               <span>UID</span>
               <span> |</span>
-              <span id="user-id"> {getData.uid}</span>
+              <span id="user-id"> {sessionStorage.getItem("uid")}</span>
               <span
                 onClick={() => {
                   getData.copydata(getData.uid);
