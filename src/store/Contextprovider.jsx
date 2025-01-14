@@ -22,6 +22,11 @@ export default function Contextprovider({ children }) {
   let [Wingouserbethistory3min, changeWingouserbethistory3min] = useState([]);
   let [Wingouserbethistory5min, changeWingouserbethistory5min] = useState([]);
   let [Wingouserbethistory30sec, changeWingouserbethistory30sec] = useState([]);
+function setuid(uid){
+  window.sessionStorage.setItem("uid",uid);
+}
+
+
 
   // change wingo 1 min result
   function get1minwingo() {
