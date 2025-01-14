@@ -15,7 +15,7 @@ export default function Login() {
     } else {
       changeWarning("no");
       axios
-        .post(`${host + "8000"}/login`, {
+        .post(`${host}/login`, {
           phone,
           password,
         })
@@ -27,7 +27,7 @@ export default function Login() {
                 let uid = String(phone).slice(2);
                 window.sessionStorage.setItem("uid", uid);
                 setTimeout(() => {
-                  window.location.replace("apkking.xyz/home");
+                  window.location.replace("https://7vbet-efbmlw7yk-rtechdevlopment123-gmailcoms-projects.vercel.app/home");
                 }, 100);
 
                 changepassword("");
