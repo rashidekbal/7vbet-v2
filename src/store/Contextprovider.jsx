@@ -283,6 +283,7 @@ function setuid(uid){
           Wingouserbethistory3min,
           Wingouserbethistory5min,
           Wingouserbethistory30sec,
+          setuid
         }}
       >
         {children}
