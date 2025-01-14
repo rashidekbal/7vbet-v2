@@ -27,7 +27,7 @@ export default function Login() {
                 let uid = String(phone).slice(2);
                 setuid(uid);
                 setTimeout(() => {
-                  window.location.replace("https://7vbet-efbmlw7yk-rtechdevlopment123-gmailcoms-projects.vercel.app/home");
+                  window.location.replace("https://apkking.xyz/home");
                 }, 100);
 
                 changepassword("");
