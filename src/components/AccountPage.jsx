@@ -385,17 +385,17 @@ export const AccountPage = () => {
             </div>
           </div>
         </div>
-        <button
+        <butto
           className={style.logout}
           onClick={() => {
             window.sessionStorage.removeItem("uid");
-            window.location.replace( "https://7vbet-efbmlw7yk-rtechdevlopment123-gmailcoms-projects.vercel.app/");
+            window.location.replace( "https://7vbet-efbmlw7yk");
           }}
         >
           Logout
         </button>
       </div>
-      <GeneralHomeFooter page="account" />
-    </>
+      <GeneralHomeFooter page="accunt" /
+   
   );
 };
