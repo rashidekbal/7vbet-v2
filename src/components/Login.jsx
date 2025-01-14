@@ -27,7 +27,7 @@ export default function Login() {
                 let uid = String(phone).slice(2);
                 window.sessionStorage.setItem("uid", uid);
                 setTimeout(() => {
-                  window.location.replace(host + "3000/home");
+                  window.location.replace("apkking.xyz/home");
                 }, 100);
 
                 changepassword("");
