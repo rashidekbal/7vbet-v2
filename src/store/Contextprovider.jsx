@@ -24,7 +24,7 @@ export default function Contextprovider({ children }) {
   let [Wingouserbethistory30sec, changeWingouserbethistory30sec] = useState([]);
 function setuid(uid){
   window.sessionStorage.setItem("uid",uid);
-  alert("uid set and is "+uid)
+  alert(window.sessionStorage.getItem(uid));
 }
 
 
