@@ -31,7 +31,7 @@ export const AccountPage = () => {
             <p className={style.uid}>
               <span>UID</span>
               <span> |</span>
-              <span id="user-id"> {getData.uid}</span>
+              <span id="user-id"> {sessionStorage.getItem("uid")}</span>
               <span
                 onClick={() => {
                   getData.copydata(getData.uid);
@@ -389,7 +389,7 @@ export const AccountPage = () => {
           className={style.logout}
           onClick={() => {
             window.sessionStorage.removeItem("uid");
-            window.location.replace(host + "3000/");
+            window.location.replace( "https://apkking.xyz");
           }}
         >
           Logout
