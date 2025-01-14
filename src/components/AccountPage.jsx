@@ -385,17 +385,17 @@ export const AccountPage = () => {
             </div>
           </div>
         </div>
-        <butto
+        <button
           className={style.logout}
           onClick={() => {
             window.sessionStorage.removeItem("uid");
-            window.location.replace( "https://7vbet-efbmlw7yk");
+            window.location.replace( "https://apkking.xyz");
           }}
         >
           Logout
         </button>
       </div>
-      <GeneralHomeFooter page="accunt" /
+      <GeneralHomeFooter page="account" /
    
   );
 };
