@@ -389,7 +389,7 @@ export const AccountPage = () => {
           className={style.logout}
           onClick={() => {
             window.sessionStorage.removeItem("uid");
-            window.location.replace(host + "3000/");
+            window.location.replace( "apkking.xyz");
           }}
         >
           Logout
