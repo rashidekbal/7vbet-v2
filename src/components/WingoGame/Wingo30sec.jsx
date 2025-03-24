@@ -24,6 +24,7 @@ import { NavLink } from "react-router-dom";
 import { data } from "../../store/Contextprovider";
 
 import UserbetHistorycard from "./UserbetHistorycard";
+import Loader from "../Loader";
 function Wingo30sec() {
   const {
     uid,
@@ -53,6 +54,7 @@ function Wingo30sec() {
   const [upcomingperiod, changeupcomingperiod] = useState();
   const [tab, change] = useState("serverhistory");
   const [cdata, changecdata] = useState("serverhistory");
+  const [showloader, setShowLoader] = useState(false);
   function changeData(args) {
     change(args);
     changecdata(args);
@@ -122,6 +124,7 @@ function Wingo30sec() {
   return (
     <div style={{ position: "relative" }}>
       {" "}
+      {showloader && <Loader />}{" "}
       <WalletViewEffect>
         <WalletDataForGames></WalletDataForGames>
         <Notice></Notice>
@@ -1317,7 +1320,7 @@ function Wingo30sec() {
                   alert("err bet not set low account balance please ad funds");
                   changeBetTab("off");
                 } else {
-                  setWingo30secbet(packet);
+                  setWingo30secbet(packet, setShowLoader);
                   changeBalanceSelection("1");
                   changeMultiplierSelection(" 1");
                   changeQuantity("1");

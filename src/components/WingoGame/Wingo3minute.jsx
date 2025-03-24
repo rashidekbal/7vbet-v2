@@ -47,6 +47,7 @@ function Wingo3minute() {
   const [currentmin, changemin] = useState("");
   const [tab, change] = useState("serverhistory");
   const [cdata, changecdata] = useState("serverhistory");
+  const [showloader, setShowLoader] = useState(false);
   function changeData(args) {
     change(args);
     changecdata(args);
@@ -1509,7 +1510,7 @@ function Wingo3minute() {
                   alert("err bet not set low account balance please ad funds");
                   changeBetTab("off");
                 } else {
-                  setWingo3minbet(packet);
+                  setWingo3minbet(packet, setShowLoader);
                   changeBalanceSelection("1");
                   changeMultiplierSelection(" 1");
                   changeQuantity("1");

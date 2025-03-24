@@ -85,64 +85,80 @@ export default function Contextprovider({ children }) {
       .catch((err) => console.log(err));
   }
 
-  function setWingo30secbet(packet) {
+  function setWingo30secbet(packet, setShowLoader) {
+    setShowLoader(true);
     axios
       .post(`${host}/setWingo30secbet`, { packet })
       .then((res) => {
         if (res.data == "done") {
           getUserfinances(uid);
           GetWingobetHistory30sec(uid);
+          setShowLoader(false);
         } else {
           alert("bet failed");
+          setShowLoader(false);
         }
       })
       .catch((res) => {
+        setShowLoader(false);
         console.log("err bet not set", res.data);
       });
   }
-  function setWingo1minbet(packet) {
+  function setWingo1minbet(packet, setShowLoader) {
+    setShowLoader(true);
     axios
       .post(`${host}/setWingo1minbet`, { packet })
       .then((res) => {
         if (res.data == "done") {
           getUserfinances(uid);
           GetWingobetHistory1min(uid);
+          setShowLoader(false);
         } else {
           alert("bet failed");
+          setShowLoader(false);
         }
       })
       .catch((res) => {
         console.log("err bet not set", res.data);
+        setShowLoader(false);
       });
   }
-  function setWingo3minbet(packet) {
+  function setWingo3minbet(packet, setShowLoader) {
+    setShowLoader(true);
     axios
       .post(`${host}/setWingo3minbet`, { packet })
       .then((res) => {
         if (res.data == "done") {
           getUserfinances(uid);
           GetWingobetHistory3min(uid);
+          setShowLoader(false);
         } else {
           alert("bet failed");
+          setShowLoader(false);
         }
       })
       .catch((res) => {
         console.log("err bet not set", res.data);
+        setShowLoader(false);
       });
   }
-  function setWingo5minbet(packet) {
+  function setWingo5minbet(packet, setShowLoader) {
+    setShowLoader(true);
     axios
       .post(`${host}/setwingo5min`, { packet })
       .then((res) => {
         if (res.data == "done") {
           getUserfinances(uid);
           GetWingobetHistory5min(uid);
+          setShowLoader(false);
         } else {
           alert("bet failed");
+          setShowLoader(false);
         }
       })
       .catch((res) => {
         console.log("err bet not set", res.data);
+        setShowLoader(false);
       });
   }
   function GetWingobetHistory1min(id) {

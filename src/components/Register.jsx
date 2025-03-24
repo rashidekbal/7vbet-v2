@@ -6,7 +6,19 @@ import { NavLink } from "react-router-dom";
 import axios from "axios";
 import { GrStatusGood } from "react-icons/gr";
 import { MdOutlineCancel } from "react-icons/md";
+import Loader from "./Loader";
 function Register() {
+  const [numberWarning, changeNumberWarning] = useState("no");
+  const [passwordWarning, changepasswordWarning] = useState("no");
+  const { host, websiteLink } = useContext(data);
+  const [phone, changephone] = useState("");
+  const [password, changepassword] = useState("");
+  const [cnfpassword, changecnfpassword] = useState("");
+  const [invite_Code, changeInviteCode] = useState("");
+  const [invite_warning, chnageInviteWarning] = useState("no");
+  const [showdialog, changedialog] = useState("no");
+  const [registered, changeRegistered] = useState("no");
+  const [showloader, setShowloader] = useState(false);
   function submit(e) {
     e.preventDefault();
     if (String(phone).length !== 10) {
@@ -22,6 +34,7 @@ function Register() {
           chnageInviteWarning("yes");
         } else {
           chnageInviteWarning("no");
+          setShowloader(true);
           axios
             .post(`${host}/register`, {
               phone: String(phone),
@@ -29,6 +42,7 @@ function Register() {
               refferedBy: code,
             })
             .then((res) => {
+              setShowloader(false);
               changedialog("yes");
               if (String(res.data) == "ok") {
                 changeRegistered("yes");
@@ -37,6 +51,7 @@ function Register() {
               }
             })
             .catch((err) => {
+              setShowloader(false);
               console.log(err);
             });
           changeInviteCode("");
@@ -47,16 +62,6 @@ function Register() {
       }
     }
   }
-  const [numberWarning, changeNumberWarning] = useState("no");
-  const [passwordWarning, changepasswordWarning] = useState("no");
-  const { host, websiteLink } = useContext(data);
-  const [phone, changephone] = useState("");
-  const [password, changepassword] = useState("");
-  const [cnfpassword, changecnfpassword] = useState("");
-  const [invite_Code, changeInviteCode] = useState("");
-  const [invite_warning, chnageInviteWarning] = useState("no");
-  const [showdialog, changedialog] = useState("no");
-  const [registered, changeRegistered] = useState("no");
 
   return (
     <>
@@ -67,6 +72,8 @@ function Register() {
             showdialog == "yes" ? style.register_Info : style.hidden_dialog
           }
         >
+          {" "}
+          {showloader && <Loader />}
           <div style={{ textAlign: "center" }}>
             {registered == "yes" ? (
               <GrStatusGood className={style.infoImage} />

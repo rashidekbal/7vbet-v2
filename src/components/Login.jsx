@@ -4,9 +4,18 @@ import { data } from "../store/Contextprovider";
 import Header from "./Header";
 import { NavLink } from "react-router-dom";
 import axios from "axios";
-
+import Loader from "./Loader";
 import { MdOutlineCancel } from "react-icons/md";
 export default function Login() {
+  const [password, changepassword] = useState("");
+  const [phone, changephone] = useState("");
+  const [phoneWarnign, changeWarning] = useState("no");
+  const { host } = useContext(data);
+  const [showdialog, changedialog] = useState("no");
+  const [passerr, changepasserr] = useState("no");
+  const [servererr, changeservererr] = useState("no");
+  const [usererr, changeusererr] = useState("no");
+  const [showloader, setShowloader] = useState(false);
   let { changeuid, setuid, websiteLink } = useContext(data);
   function submit(e) {
     e.preventDefault();
@@ -14,6 +23,7 @@ export default function Login() {
       changeWarning("yes");
     } else {
       changeWarning("no");
+      setShowloader(true);
       axios
         .post(`${host}/login`, {
           phone,
@@ -24,6 +34,7 @@ export default function Login() {
           if (response !== "err") {
             if (response !== "null") {
               if (response !== "passerr") {
+                setShowloader(false);
                 let uid = String(phone).slice(2);
                 setuid(uid);
                 setTimeout(() => {
@@ -33,35 +44,30 @@ export default function Login() {
                 changepassword("");
                 changephone("");
               } else {
+                setShowloader(false);
                 changedialog("yes");
                 changepasserr("yes");
               }
             } else {
+              setShowloader(false);
               console.log(res.data);
               changedialog("yes");
               changeusererr("yes");
             }
           } else {
+            setShowloader(false);
             console.log(res.data);
             changedialog("yes");
             changeservererr("yes");
           }
         })
         .catch((res) => {
+          setShowloader(false);
           changedialog("yes");
           changeservererr("yes");
         });
     }
   }
-
-  const [password, changepassword] = useState("");
-  const [phone, changephone] = useState("");
-  const [phoneWarnign, changeWarning] = useState("no");
-  const { host } = useContext(data);
-  const [showdialog, changedialog] = useState("no");
-  const [passerr, changepasserr] = useState("no");
-  const [servererr, changeservererr] = useState("no");
-  const [usererr, changeusererr] = useState("no");
 
   return (
     <>
@@ -73,6 +79,7 @@ export default function Login() {
           height: "800px",
         }}
       >
+        {showloader && <Loader />}
         <Header />
         <div className={style.mainview}>
           <div

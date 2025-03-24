@@ -23,6 +23,7 @@ import greenViolet from "../../icons/greenviolet.png";
 import { NavLink } from "react-router-dom";
 import { data } from "../../store/Contextprovider";
 import UserbetHistorycard from "./UserbetHistorycard";
+import Loader from "../Loader";
 function Wingo5minute() {
   const [blocker, changeblocker] = useState("no");
 
@@ -36,6 +37,7 @@ function Wingo5minute() {
   const [tab, change] = useState("serverhistory");
   const [cdata, changecdata] = useState("serverhistory");
   const [upcomingperiod, changeupcomingperiod] = useState();
+  const [showloader, setShowLoader] = useState(false);
   let periodspecialminute = useRef();
   function changeData(args) {
     change(args);
@@ -109,7 +111,7 @@ function Wingo5minute() {
   });
   return (
     <div style={{ position: "relative" }}>
-      {" "}
+      {showloader && <Loader />}{" "}
       <WalletViewEffect>
         <WalletDataForGames></WalletDataForGames>
         <Notice></Notice>

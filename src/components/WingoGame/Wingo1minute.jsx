@@ -19,7 +19,7 @@ import green from "../../icons/green.png";
 import red from "../../icons/red.png";
 import redVilet from "../../icons/redviolet.png";
 import greenViolet from "../../icons/greenviolet.png";
-
+import Loader from "../Loader";
 import { NavLink } from "react-router-dom";
 import { data } from "../../store/Contextprovider";
 import UserbetHistorycard from "./UserbetHistorycard";
@@ -33,6 +33,7 @@ function Wingo1minute() {
 
   const [tab, change] = useState("serverhistory");
   const [cdata, changecdata] = useState("serverhistory");
+  const [showloader, setShowLoader] = useState(false);
   function changeData(args) {
     change(args);
     changecdata(args);
@@ -106,6 +107,7 @@ function Wingo1minute() {
   return (
     <>
       {" "}
+      {showloader && <Loader />}
       <WalletViewEffect>
         <WalletDataForGames></WalletDataForGames>
         <Notice></Notice>
@@ -1362,7 +1364,7 @@ function Wingo1minute() {
                   alert("err bet not set low account balance please ad funds");
                   changeBetTab("off");
                 } else {
-                  setWingo1minbet(packet);
+                  setWingo1minbet(packet, setShowLoader);
                   changeBalanceSelection("1");
 
                   changeMultiplierSelection(" 1");
