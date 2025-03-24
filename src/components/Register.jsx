@@ -49,7 +49,7 @@ function Register() {
   }
   const [numberWarning, changeNumberWarning] = useState("no");
   const [passwordWarning, changepasswordWarning] = useState("no");
-  const { host } = useContext(data);
+  const { host, websiteLink } = useContext(data);
   const [phone, changephone] = useState("");
   const [password, changepassword] = useState("");
   const [cnfpassword, changecnfpassword] = useState("");
@@ -88,7 +88,7 @@ function Register() {
             {registered == "yes" ? (
               <button
                 onClick={() => {
-                  window.location.replace("https://apkking.xyz");
+                  window.location.replace(websiteLink);
                   changedialog("no");
                 }}
               >

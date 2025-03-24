@@ -14,7 +14,7 @@ import { FaRupeeSign } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 export const AccountPage = () => {
   let getData = useContext(data);
-  let { host } = useContext(data);
+  let { host, websiteLink } = useContext(data);
   useEffect(() => {
     getData.changeuid(window.sessionStorage.getItem("uid"));
     getData.getUserfinances(String(window.sessionStorage.getItem("uid")));
@@ -389,7 +389,7 @@ export const AccountPage = () => {
           className={style.logout}
           onClick={() => {
             window.sessionStorage.removeItem("uid");
-            window.location.replace( "https://apkking.xyz");
+            window.location.replace(websiteLink);
           }}
         >
           Logout

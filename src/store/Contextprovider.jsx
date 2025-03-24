@@ -1,8 +1,14 @@
 import axios from "axios";
 import { io } from "socket.io-client";
 import { createContext, useEffect, useState } from "react";
-const host = "https://sevenvbetserver.onrender.com";
+//for production
+// const host = "https://sevenvbetserver.onrender.com";
+// const ws = io(host);
+// websiteLink="https://apkking.xyz";
+//for local
+const host = "http://localhost:8000";
 const ws = io(host);
+const websiteLink = "http://localhost:3000";
 
 let safeRevenue = 0.1;
 let totalrevenuesafe = 0.0;
@@ -22,14 +28,10 @@ export default function Contextprovider({ children }) {
   let [Wingouserbethistory3min, changeWingouserbethistory3min] = useState([]);
   let [Wingouserbethistory5min, changeWingouserbethistory5min] = useState([]);
   let [Wingouserbethistory30sec, changeWingouserbethistory30sec] = useState([]);
-function setuid(uid){
-  
-  window.sessionStorage.setItem("uid",uid);
-  sessionStorage.setItem("uid",uid)
-  
-}
-
-
+  function setuid(uid) {
+    window.sessionStorage.setItem("uid", uid);
+    sessionStorage.setItem("uid", uid);
+  }
 
   // change wingo 1 min result
   function get1minwingo() {
@@ -255,7 +257,7 @@ function setuid(uid){
           WingoServerData3min,
           WingoServerData5min,
           WingoServerData30s,
-
+          websiteLink,
           accumulated,
           tobeBet,
           WithdrawlReamining,
@@ -286,7 +288,7 @@ function setuid(uid){
           Wingouserbethistory3min,
           Wingouserbethistory5min,
           Wingouserbethistory30sec,
-          setuid
+          setuid,
         }}
       >
         {children}

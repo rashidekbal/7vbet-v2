@@ -7,7 +7,7 @@ import axios from "axios";
 
 import { MdOutlineCancel } from "react-icons/md";
 export default function Login() {
-  let { changeuid ,  setuid } = useContext(data);
+  let { changeuid, setuid, websiteLink } = useContext(data);
   function submit(e) {
     e.preventDefault();
     if (String(phone).length !== 10) {
@@ -27,7 +27,7 @@ export default function Login() {
                 let uid = String(phone).slice(2);
                 setuid(uid);
                 setTimeout(() => {
-                  window.location.replace("https://apkking.xyz/home");
+                  window.location.replace(`${websiteLink}/home`);
                 }, 100);
 
                 changepassword("");
