@@ -4,7 +4,7 @@ import { createContext, useEffect, useState } from "react";
 //for production
 const host = "https://sevenvbetserver.onrender.com";
 const ws = io(host);
-websiteLink = "https://apkking.xyz";
+const websiteLink = "https://apkking.xyz";
 // //for local
 // const host = "http://localhost:8000";
 // const ws = io(host);
