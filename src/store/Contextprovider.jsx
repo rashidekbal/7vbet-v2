@@ -2,13 +2,13 @@ import axios from "axios";
 import { io } from "socket.io-client";
 import { createContext, useEffect, useState } from "react";
 //for production
-// const host = "https://sevenvbetserver.onrender.com";
-// const ws = io(host);
-// const websiteLink = "https://apkking.xyz";
-// //for local
-const host = "http://localhost:8000";
+const host = "https://sevenvbetserver.onrender.com";
 const ws = io(host);
-const websiteLink = "http://localhost:3000";
+const websiteLink = "https://apkking.xyz";
+// //for local
+// const host = "http://localhost:8000";
+// const ws = io(host);
+// const websiteLink = "http://localhost:3000";
 
 let safeRevenue = 0.1;
 let totalrevenuesafe = 0.0;
