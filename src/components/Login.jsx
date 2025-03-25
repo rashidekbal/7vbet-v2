@@ -25,18 +25,18 @@ export default function Login() {
       changeWarning("no");
       setShowloader(true);
       axios
-        .post(`${host}/login`, {
+        .post(`${host}/loginV2`, {
           phone,
           password,
         })
         .then((res) => {
-          let response = String(res.data);
-          if (response !== "err") {
-            if (response !== "null") {
-              if (response !== "passerr") {
+          let response = res.data;
+          if (response.msg !== "err") {
+            if (response.msg !== "null") {
+              if (response.msg !== "passerr") {
                 setShowloader(false);
                 let uid = String(phone).slice(2);
-                setuid(uid);
+                setuid(uid, response.token);
                 setTimeout(() => {
                   window.location.replace(`${websiteLink}/home`);
                 }, 100);
