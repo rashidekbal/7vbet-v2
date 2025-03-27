@@ -1,0 +1,254 @@
+.GameTimer {
+  height: 96px;
+  width: 100%;
+  background-color: white;
+  margin: 15px auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
+  display: flex;
+}
+.Options {
+  width: 25%;
+
+  border-radius: 10px;
+  text-align: center;
+}
+.OptionsImage {
+  width: 50px;
+}
+.timer {
+  height: 106px;
+  width: 94%;
+  margin: 15px auto;
+  border-radius: 10px;
+  background-image: url(../icons/wingoissue-e9d39db0.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  margin-bottom: 5px;
+}
+.twosectionsspl {
+  display: inline-block;
+  width: 49.8%;
+}
+.twosectionSpll {
+  display: block;
+  float: right;
+  width: 47%;
+  margin: 0 auto;
+  height: 100%;
+}
+.insts {
+  border: 1px solid white;
+  padding: 4px;
+  display: block;
+  color: white;
+  width: 90%;
+  margin: 0 auto;
+  margin-top: 5px;
+  border-radius: 19px;
+  text-align: center;
+  font-size: small;
+}
+.selectedsetting {
+  color: white;
+  display: block;
+  width: 85%;
+  margin: 0 auto;
+  margin-top: 10px;
+}
+.time {
+  display: block;
+  text-align: right;
+  width: 80%;
+  margin: 15px auto;
+}
+.min {
+  background-color: white;
+  color: black;
+  padding: 5px;
+  margin: 0 2px;
+}
+.currentround {
+  color: white;
+  text-align: right;
+  margin: 17px 10px 0px 0px;
+  font-weight: 900;
+}
+.timenotice {
+  color: white;
+  display: block;
+  width: 80%;
+  margin: 0 auto;
+  text-align: right;
+  margin-top: 7px;
+}
+.diceAreamainframe {
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.diceAreamainframe::after {
+  content: "";
+  background-color: #ff962c;
+  height: 30px;
+  width: 7px;
+  border-radius: 0 2px 2px 0;
+}
+.diceAreamainframe::before {
+  content: "";
+  background-color: #ff962c;
+  height: 30px;
+  width: 7px;
+  border-radius: 0 2px 2px 0;
+}
+.mainDiceBox {
+  background-color: #ff962c;
+  width: 84%;
+  height: 85%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 6px;
+}
+
+.innerDicebox {
+  background-color: #fd5810;
+  width: 92%;
+  height: 82%;
+  border-radius: 4px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.individualDicebox {
+  background-color: #333333;
+  width: 31%;
+  height: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.diceLogo {
+  height: 50px;
+  width: 50px;
+}
+.ColoOptions {
+  width: 92.7%;
+  margin: 0 auto;
+  border-radius: 10px;
+  height: auto;
+  text-align: center;
+  background-color: white;
+  padding-bottom: 15px;
+  position: relative;
+}
+.green {
+  float: left;
+  padding: 5px;
+  border: none;
+  background-color: #18b660;
+  color: white;
+  width: 40%;
+  height: 35px;
+  border-radius: 0 10px 0 10px;
+  margin-top: 10px;
+  margin-left: 13px;
+  height: 38px;
+}
+
+.red {
+  float: right;
+  padding: 5px;
+  border: none;
+  background-color: red;
+  color: white;
+  width: 40%;
+  height: 35px;
+  border-radius: 10px 0 10px 0;
+  margin-top: 10px;
+  margin-right: 13px;
+  height: 38px;
+}
+.numberSections {
+  width: 94.5%;
+  height: 75px;
+  background-color: rgb(241, 234, 234);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.numberSections img {
+  height: 60px;
+  margin: 4px;
+}
+.Randoms {
+  display: flex;
+  width: 99%;
+  margin: 0 auto;
+  margin-top: 10px;
+  padding: 5px;
+  justify-content: center;
+  align-items: center;
+}
+.Tabs {
+  background-color: rgb(241, 234, 234);
+  margin: auto;
+  padding: 8px 5px;
+  color: lightslategray;
+  border-radius: 5px;
+  height: 34px;
+  justify-content: center;
+}
+.Tabs:nth-child(2) {
+  color: white;
+  background-color: #18b660;
+}
+.BetBigSmall {
+  width: 93%;
+  background-color: red;
+  margin: 10px auto;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.BetBigSmall p {
+  display: inline-block;
+  height: 38px;
+  text-align: center;
+  width: 50%;
+  padding: 10px;
+  color: white;
+}
+.offblocker {
+  display: none;
+}
+.blocker {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  background-color: rgb(0 0 0 / 0.5);
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.middlecontainer {
+  width: 80%;
+  height: 60%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.middlecontainer h1 {
+  background-color: white;
+  color: orange;
+  height: auto;
+  width: 40%;
+  font-size: 110px;
+  padding: 5px;
+  border-radius: 18px;
+}

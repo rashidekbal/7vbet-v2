@@ -186,7 +186,7 @@ function Wingo3minute() {
           <p className={style.insts}>How to play</p>
           <p className={style.selectedsetting}>Win Go 3Min</p>
 
-          {WingoServerData3min.length > 1 && (
+          {WingoServerData3min.length > 5 && (
             <div className={style.peek}>
               <div className={style.peekitem}>
                 <img
@@ -1191,7 +1191,9 @@ function Wingo3minute() {
               value={quantity}
               className={style.specialInput}
               onChange={(e) => {
-                changeQuantity(e.target.value);
+                if (e.target.value > 0) {
+                  changeQuantity(e.target.value);
+                }
               }}
             />
 

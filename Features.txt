@@ -1,4 +1,3 @@
-jwt login auth
 clean codes 
 central level periods
 aviator
@@ -6,3 +5,5 @@ functional widthdrawl page
 functional deposite page
 mines page
 safe wallet
+k3 
+trx

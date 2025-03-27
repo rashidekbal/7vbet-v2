@@ -191,7 +191,7 @@ function Wingo30sec() {
           <p className={style.insts}>How to play</p>
           <p className={style.selectedsetting}>Win Go 30sec</p>
 
-          {WingoServerData30s.length > 1 && (
+          {WingoServerData30s.length > 5 && (
             <div className={style.peek}>
               <div className={style.peekitem}>
                 <img
@@ -1015,7 +1015,9 @@ function Wingo30sec() {
               value={quantity}
               className={style.specialInput}
               onChange={(e) => {
-                changeQuantity(e.target.value);
+                if (e.target.value > 0) {
+                  changeQuantity(e.target.value);
+                }
               }}
             />
 

@@ -90,19 +90,21 @@ function Wingo1minute() {
     }, 1000);
   }, []);
 
-  ws.on("message", (msg) => {
-    if (msg.seconds >= 55) {
-      changeblocker("yes");
-      changeBetTab("off");
-    } else {
-      changeblocker("no");
-    }
+  useEffect(() => {
+    ws.on("message", (msg) => {
+      if (msg.seconds >= 55) {
+        changeblocker("yes");
+        changeBetTab("off");
+      } else {
+        changeblocker("no");
+      }
 
-    periodspecialminute.minute = msg.minute;
-    if (msg.seconds) {
-      changesec(Math.abs(msg.seconds - 60).toString());
-    }
-  });
+      periodspecialminute.minute = msg.minute;
+      if (msg.seconds) {
+        changesec(Math.abs(msg.seconds - 60).toString());
+      }
+    });
+  }, [ws]);
 
   return (
     <>
@@ -173,7 +175,7 @@ function Wingo1minute() {
         <div class={style.twosectionsspl}>
           <p className={style.insts}>How to play</p>
           <p className={style.selectedsetting}>Win Go 1Min</p>
-          {WingoServerData1min.length > 1 && (
+          {WingoServerData1min.length > 5 && (
             <div className={style.peek}>
               <div className={style.peekitem}>
                 <img
@@ -1059,7 +1061,9 @@ function Wingo1minute() {
               value={quantity}
               className={style.specialInput}
               onChange={(e) => {
-                changeQuantity(e.target.value);
+                if (e.target.value > 0) {
+                  changeQuantity(e.target.value);
+                }
               }}
             />
 
