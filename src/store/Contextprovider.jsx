@@ -2,13 +2,13 @@ import axios from "axios";
 import { io } from "socket.io-client";
 import { createContext, useEffect, useState } from "react";
 //for production
-// const host = "https://sevenvbetserver.onrender.com";
-// const ws = io(host);
-// const websiteLink = "https://apkking.xyz";
-// //for local
-const host = "http://localhost:8000";
+const host = "https://sevenvbetserver.onrender.com";
 const ws = io(host);
-const websiteLink = "http://localhost:3000";
+const websiteLink = "https://7vbet.vercel.app";
+// //for local
+// const host = "http://localhost:8000";
+// const ws = io(host);
+// const websiteLink = "http://localhost:3000";
 
 let safeRevenue = 0.1;
 let totalrevenuesafe = 0.0;
@@ -28,6 +28,29 @@ export default function Contextprovider({ children }) {
   let [Wingouserbethistory3min, changeWingouserbethistory3min] = useState([]);
   let [Wingouserbethistory5min, changeWingouserbethistory5min] = useState([]);
   let [Wingouserbethistory30sec, changeWingouserbethistory30sec] = useState([]);
+  const [k3data, setK3Data] = useState([
+    {
+      period: 91234819,
+      pips: 14,
+      size: "Big",
+      oddEven: "Even",
+      result: "5,5,4",
+    },
+    {
+      period: 91234819,
+      pips: 9,
+      size: "Small",
+      oddEven: "Odd",
+      result: "1,5,3",
+    },
+    {
+      period: 91234819,
+      pips: 3,
+      size: "Small",
+      oddEven: "Odd",
+      result: "1,1,1",
+    },
+  ]);
   function setuid(uid, token) {
     window.sessionStorage.setItem("uid", uid);
     sessionStorage.setItem("uid", uid);
@@ -321,6 +344,7 @@ export default function Contextprovider({ children }) {
           Wingouserbethistory5min,
           Wingouserbethistory30sec,
           setuid,
+          k3data,
         }}
       >
         {children}
