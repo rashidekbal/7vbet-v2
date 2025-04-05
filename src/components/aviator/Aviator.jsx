@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import style from "./css/Aviator.module.css";
 import { NavLink } from "react-router-dom";
 import logo from "./icons/aviatorLogo.svg";
@@ -9,11 +9,24 @@ import { MdOutlineHistory } from "react-icons/md";
 import { CiCircleMinus, CiCirclePlus } from "react-icons/ci";
 
 function Aviator() {
-  const { userfinance } = useContext(data);
+  const { userfinance, ws } = useContext(data);
   const [typeSelected1, changeTypeSelected1] = useState("bet");
   const [typeSelected2, changeTypeSelected2] = useState("bet");
   const [bet1Amount, changeBet1Amount] = useState("10.00");
   const [bet2Amount, changeBet2Amount] = useState("10.00");
+  const [starting_in, set_starting_in] = useState("");
+  const [currentHeight, setCurrentHeight] = useState("");
+  useEffect(() => {
+    ws.on("Aviator_halt", (data) => {
+      set_starting_in(data.remaining_time);
+    });
+    ws.on("Flight_data", (data) => {
+      setCurrentHeight(data.Height);
+    });
+    return () => {
+      ws.off("Aviator_halt");
+    };
+  }, [ws]);
   return (
     <div className={style.mainConatiner}>
       {
@@ -59,7 +72,10 @@ function Aviator() {
         //display area
       }
 
-      <div className={style.displayArea}></div>
+      <div className={style.displayArea}>
+        <h1 style={{ color: "white" }}>starting in {starting_in}</h1>
+        <h1 style={{ color: "white" }}>currentHeight {currentHeight} </h1>
+      </div>
 
       {
         //bet section
