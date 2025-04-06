@@ -7,6 +7,8 @@ import { FaRupeeSign } from "react-icons/fa";
 import { HiMiniChatBubbleBottomCenterText } from "react-icons/hi2";
 import { MdOutlineHistory } from "react-icons/md";
 import { CiCircleMinus, CiCirclePlus } from "react-icons/ci";
+import blade from "./icons/blades.png";
+import background from "./icons/background.png";
 
 function Aviator() {
   const { userfinance, ws } = useContext(data);
@@ -16,9 +18,16 @@ function Aviator() {
   const [bet2Amount, changeBet2Amount] = useState("10.00");
   const [starting_in, set_starting_in] = useState("");
   const [currentHeight, setCurrentHeight] = useState("");
+  const [progress_barVisibility, set_progress_barVisibility] = useState(false);
   useEffect(() => {
     ws.on("Aviator_halt", (data) => {
       set_starting_in(data.remaining_time);
+      if (data.remaining_time == 0) {
+        set_progress_barVisibility(false);
+      } else {
+        set_progress_barVisibility(true);
+        setCurrentHeight("1.0");
+      }
     });
     ws.on("Flight_data", (data) => {
       setCurrentHeight(data.Height);
@@ -45,7 +54,7 @@ function Aviator() {
         <div className={style.headerBalance}>
           <p>
             <FaRupeeSign className={style.rupeeHeader} />
-            {userfinance.balance ? userfinance.balance : "92648.0"}
+            {userfinance.balance ? userfinance.balance : "0.0"}
             <span style={{ marginLeft: "3px", fontSize: "17.5px" }}>INR</span>
           </p>
         </div>
@@ -73,8 +82,27 @@ function Aviator() {
       }
 
       <div className={style.displayArea}>
-        <h1 style={{ color: "white" }}>starting in {starting_in}</h1>
-        <h1 style={{ color: "white" }}>currentHeight {currentHeight} </h1>
+        {progress_barVisibility ? (
+          <div className={style.waiting_dialog}>
+            <img className={style.blade_icon} src={blade} alt="blade" />
+            <h3>WAITING FOR NEXT ROUND</h3>
+            <progress
+              max={10}
+              value={Math.abs(starting_in)}
+              className={style.progress}
+            ></progress>
+            <p>00:0{starting_in}</p>
+          </div>
+        ) : (
+          <div className={style.FLyingZone}>
+            <img src={background} alt="bg" className={style.background} />
+            <div className={style.plane_box}>
+              {Number(currentHeight).toFixed(2)}
+            </div>
+          </div>
+        )}
+
+        {/* <h1 style={{ color: "white" }}>currentHeight {currentHeight} </h1> */}
       </div>
 
       {

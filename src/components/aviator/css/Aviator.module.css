@@ -84,6 +84,73 @@
   border: 1px solid black;
   box-shadow: 0 0 2px white;
   border-radius: 25px;
+  overflow: hidden;
+}
+.waiting_dialog {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  gap: 5px;
+  background-color: rgb(77, 76, 75);
+}
+
+.blade_icon {
+  height: 52px;
+  width: 50px;
+  animation-name: rotator;
+  animation-timing-function: linear;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+}
+@keyframes rotator {
+  0% {
+    transform: rotate(0);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.FLyingZone {
+  background-color: rgb(245, 218, 218);
+  color: black;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 35px;
+  position: relative;
+}
+.background {
+  height: 300%;
+  width: 200%;
+  position: absolute;
+  left: -350px;
+  bottom: -368px;
+  animation-name: rotatorbg;
+  animation-duration: 28s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+@keyframes rotatorbg {
+  0% {
+    transform: rotate(0);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.plane_box {
+  z-index: 1;
+  background-color: red;
+  background-color: transparent;
+  position: absolute;
 }
 .betSetter {
   height: 180px;
