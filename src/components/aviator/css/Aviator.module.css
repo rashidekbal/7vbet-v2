@@ -76,12 +76,17 @@
   justify-content: center;
   align-items: center;
 }
+.period_strip {
+  color: white;
+  padding: 1px 0 1px 20px;
+  font-size: small;
+}
 .displayArea {
   height: 250px;
   width: 98%;
   margin: 0 auto;
   margin-top: 8px;
-  border: 1px solid black;
+  border: 1px solid white;
   box-shadow: 0 0 2px white;
   border-radius: 25px;
   overflow: hidden;
@@ -146,97 +151,42 @@
     transform: rotate(360deg);
   }
 }
+
 .plane_box {
   z-index: 1;
-  background-color: red;
   background-color: transparent;
   position: absolute;
-}
-.betSetter {
-  height: 180px;
-  width: 98%;
-  margin: 0 auto;
-  background-color: #202020;
-  margin-top: 10px;
-  border-radius: 10px;
-  padding-top: 15px;
-}
-.optionContainer {
-  color: white;
   display: flex;
-  background-color: #141516;
-  width: 50%;
-  margin: 0 auto;
-  height: 25px;
-  border-radius: 25px;
-  justify-content: space-around;
-  align-items: center;
-  overflow: hidden;
-}
-.on {
-  background-color: #2c2d30;
-  width: 50%;
-  text-align: center;
-  border-radius: 25px;
-  height: 25px;
-  padding-top: 2px;
-}
-.off {
-  width: 50%;
-  text-align: center;
-  height: 25px;
-  padding-top: 2px;
-}
-.MainOptionArea {
-  height: 70%;
-  width: 95%;
-  margin: 0 auto;
-  margin-top: 10px;
-  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
-.division1 {
-  width: 50%;
-  height: 80%;
+.rocket {
+  height: 150px;
 }
-.division2 {
-  background-color: #28a909;
-  width: 50%;
-  border-radius: 20px;
-  color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 80%;
-  font-size: 1.2rem;
-  overflow: hidden;
-  border: 1px solid white;
+.height {
+  color: green;
 }
-.inputArea {
-  color: white;
-  border-radius: 26px;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  background-color: black;
-  height: 35px;
-  width: 60%;
-  margin: 0 auto;
-}
-.inputArea input {
+.game_over_dialog {
+  z-index: 2;
+  position: relative;
+  height: 100%;
   width: 100%;
-  background-color: black;
-  color: white;
-  outline: none;
-  border: none;
-
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
 }
-.inputfiledholder {
-  margin-top: -4.5px;
-  width: 50%;
+.GameOvermsg {
+  color: black;
+  z-index: 2;
+  font-size: 30px;
+  font-weight: bold;
 }
-.amountSelectorContainer {
-  height: 50px;
+.overAt {
+  color: red;
+  z-index: 2;
+  font-size: 50px;
+  font-weight: bold;
 }

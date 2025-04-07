@@ -9,7 +9,8 @@ import { MdOutlineHistory } from "react-icons/md";
 import { CiCircleMinus, CiCirclePlus } from "react-icons/ci";
 import blade from "./icons/blades.png";
 import background from "./icons/background.png";
-
+import gameOverIcon from "./icons/game_over.png";
+import rocket from "./icons/rocket-12318.gif";
 function Aviator() {
   const { userfinance, ws } = useContext(data);
   const [typeSelected1, changeTypeSelected1] = useState("bet");
@@ -17,23 +18,33 @@ function Aviator() {
   const [bet1Amount, changeBet1Amount] = useState("10.00");
   const [bet2Amount, changeBet2Amount] = useState("10.00");
   const [starting_in, set_starting_in] = useState("");
-  const [currentHeight, setCurrentHeight] = useState("");
-  const [progress_barVisibility, set_progress_barVisibility] = useState(false);
+  const [currentHeight, setCurrentHeight] = useState("0.0");
+  const [dialogVisibility, set_dialogVisibility] = useState("over");
+  const [currentPeriod, set_currentPeriod] = useState("000000");
   useEffect(() => {
     ws.on("Aviator_halt", (data) => {
       set_starting_in(data.remaining_time);
       if (data.remaining_time == 0) {
-        set_progress_barVisibility(false);
+        set_dialogVisibility("plane");
       } else {
-        set_progress_barVisibility(true);
+        set_dialogVisibility("halt");
         setCurrentHeight("1.0");
       }
     });
     ws.on("Flight_data", (data) => {
       setCurrentHeight(data.Height);
     });
+    ws.on("Game_over", (data) => {
+      if (data.msg) {
+        set_dialogVisibility("over");
+      }
+    });
+    ws.on("period", (data) => set_currentPeriod(data.period));
+
     return () => {
       ws.off("Aviator_halt");
+      ws.off("Flight_data");
+      ws.off("Game_over");
     };
   }, [ws]);
   return (
@@ -76,13 +87,19 @@ function Aviator() {
           <MdOutlineHistory style={{ color: "white" }} />
         </div>
       </div>
+      <div className={style.period_strip}>
+        <p>
+          <span>Round No. </span>
+          {currentPeriod}
+        </p>
+      </div>
 
       {
         //display area
       }
 
       <div className={style.displayArea}>
-        {progress_barVisibility ? (
+        {dialogVisibility == "halt" ? (
           <div className={style.waiting_dialog}>
             <img className={style.blade_icon} src={blade} alt="blade" />
             <h3>WAITING FOR NEXT ROUND</h3>
@@ -93,12 +110,26 @@ function Aviator() {
             ></progress>
             <p>00:0{starting_in}</p>
           </div>
-        ) : (
+        ) : dialogVisibility == "plane" ? (
           <div className={style.FLyingZone}>
-            <img src={background} alt="bg" className={style.background} />
+            {/* <img src={background} alt="bg" className={style.background} /> */}
             <div className={style.plane_box}>
-              {Number(currentHeight).toFixed(2)}
+              <img src={rocket} className={style.rocket} alt="rocket" />
+              <p className={style.height}>
+                {" "}
+                {Number(currentHeight).toFixed(2)}
+                <span>x</span>
+              </p>
             </div>
+          </div>
+        ) : (
+          <div className={style.game_over_dialog}>
+            <img src={background} alt="bg" className={style.background} />
+            <p className={style.GameOvermsg}>Flew Away!</p>
+            <p className={style.overAt}>
+              {currentHeight}
+              <span>x</span>
+            </p>
           </div>
         )}
 
@@ -108,107 +139,6 @@ function Aviator() {
       {
         //bet section
       }
-      <div className={style.betSetter}>
-        <div className={style.optionContainer}>
-          <div
-            className={typeSelected1 == "bet" ? style.on : style.off}
-            onClick={() => {
-              changeTypeSelected1("bet");
-            }}
-          >
-            {" "}
-            Bet
-          </div>
-          <div
-            className={typeSelected1 == "auto" ? style.on : style.off}
-            onClick={() => {
-              changeTypeSelected1("auto");
-            }}
-          >
-            Auto
-          </div>
-        </div>
-
-        <div className={style.MainOptionArea}>
-          <div className={style.division1}>
-            <div className={style.inputArea}>
-              <span>
-                <CiCircleMinus
-                  onClick={() => {
-                    if (Number(bet1Amount) <= 0) {
-                    } else {
-                      changeBet1Amount((Number(bet1Amount) - 1).toString());
-                    }
-                  }}
-                />
-              </span>
-              <span className={style.inputfiledholder}>
-                <input
-                  type="number"
-                  value={bet1Amount}
-                  onChange={(e) => {
-                    changeBet1Amount(e.target.value);
-                  }}
-                />
-              </span>
-              <span>
-                <CiCirclePlus
-                  onClick={() => {
-                    changeBet1Amount((Number(bet1Amount) + 1).toString());
-                  }}
-                />
-              </span>
-            </div>
-            <div className={style.amountSelectorContainer}>
-              <div className={style.conatiner1}>
-                <div>100.00</div>
-                <div>200.00</div>
-              </div>
-            </div>
-          </div>
-          <div className={style.division2}>
-            <div>
-              <p style={{ textAlign: "center" }}>BET</p>
-              <p>
-                {" "}
-                <FaRupeeSign className={style.rupeeHeader} />
-                {bet1Amount}
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className={style.betSetter}>
-        <div className={style.optionContainer}>
-          <div
-            className={typeSelected2 == "bet" ? style.on : style.off}
-            onClick={() => {
-              changeTypeSelected2("bet");
-            }}
-          >
-            {" "}
-            Bet
-          </div>
-          <div
-            className={typeSelected2 == "auto" ? style.on : style.off}
-            onClick={() => {
-              changeTypeSelected2("auto");
-            }}
-          >
-            Auto
-          </div>
-        </div>
-        <div className={style.MainOptionArea}>
-          <div className={style.division1}>div1</div>
-          <div className={style.division2}>
-            <div>
-              <p style={{ textAlign: "center" }}>BET</p>
-              <p>{bet2Amount}</p>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   );
 }

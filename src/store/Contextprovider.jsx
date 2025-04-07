@@ -2,11 +2,11 @@ import axios from "axios";
 import { io } from "socket.io-client";
 import { createContext, useEffect, useState } from "react";
 //for production
-const host = "https://sevenvbetserver.onrender.com";
-const websiteLink = "https://7vbet.vercel.app";
+// const host = "https://sevenvbetserver.onrender.com";
+// const websiteLink = "https://7vbet.vercel.app";
 // //for local
-// const host = "http://localhost:8000";
-// const websiteLink = "http://localhost:3000";
+const host = "http://localhost:8000";
+const websiteLink = "http://localhost:3000";
 const ws = io(host);
 let safeRevenue = 0.1;
 let totalrevenuesafe = 0.0;
