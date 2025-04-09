@@ -25,7 +25,7 @@ export default function Login() {
       changeWarning("no");
       setShowloader(true);
       axios
-        .post(`${host}/loginV2`, {
+        .post(`${host}/auth/loginV2`, {
           phone,
           password,
         })

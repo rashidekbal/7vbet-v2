@@ -36,7 +36,7 @@ function Register() {
           chnageInviteWarning("no");
           setShowloader(true);
           axios
-            .post(`${host}/register`, {
+            .post(`${host}/auth/register`, {
               phone: String(phone),
               password: password,
               refferedBy: code,
