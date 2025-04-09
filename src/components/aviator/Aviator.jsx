@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import style from "./css/Aviator.module.css";
 import { NavLink } from "react-router-dom";
 import logo from "./icons/aviatorLogo.svg";
@@ -8,19 +8,22 @@ import { HiMiniChatBubbleBottomCenterText } from "react-icons/hi2";
 import { MdOutlineHistory } from "react-icons/md";
 import { CiCircleMinus, CiCirclePlus } from "react-icons/ci";
 import blade from "./icons/blades.png";
-import background from "./icons/background.png";
-import gameOverIcon from "./icons/game_over.png";
-import rocket from "./icons/rocket-12318.gif";
+import background from "./icons/Plane_background.jpg";
+import rocket from "./icons/rocket-12318.jpg";
 function Aviator() {
   const { userfinance, ws } = useContext(data);
-  const [typeSelected1, changeTypeSelected1] = useState("bet");
-  const [typeSelected2, changeTypeSelected2] = useState("bet");
-  const [bet1Amount, changeBet1Amount] = useState("10.00");
-  const [bet2Amount, changeBet2Amount] = useState("10.00");
   const [starting_in, set_starting_in] = useState("");
   const [currentHeight, setCurrentHeight] = useState("0.0");
   const [dialogVisibility, set_dialogVisibility] = useState("over");
   const [currentPeriod, set_currentPeriod] = useState("000000");
+  const [planeTrajectory, setPlaneTrajectory] = useState({
+    bottom: "0px",
+    left: "0px",
+  });
+  const x = useRef(0);
+  const y = useRef(0);
+  let m = 0.5;
+
   useEffect(() => {
     ws.on("Aviator_halt", (data) => {
       set_starting_in(data.remaining_time);
@@ -33,8 +36,21 @@ function Aviator() {
     });
     ws.on("Flight_data", (data) => {
       setCurrentHeight(data.Height);
+      x.current = (data.Height - 1.0) * 100;
+      if (x.current < 220) {
+        y.current = m * x.current;
+      } else {
+        y.current = m * 220;
+      }
+      let trajectory = {
+        bottom: `${y.current}px`,
+        left: `${x.current}px`,
+      };
+      setPlaneTrajectory(trajectory);
     });
+
     ws.on("Game_over", (data) => {
+      setPlaneTrajectory({ bottom: `0px`, left: "0px" });
       if (data.msg) {
         set_dialogVisibility("over");
       }
@@ -112,15 +128,15 @@ function Aviator() {
           </div>
         ) : dialogVisibility == "plane" ? (
           <div className={style.FLyingZone}>
-            {/* <img src={background} alt="bg" className={style.background} /> */}
-            <div className={style.plane_box}>
+            <img src={background} alt="bg" className={style.background} />
+            <div className={style.plane_box} style={planeTrajectory}>
               <img src={rocket} className={style.rocket} alt="rocket" />
-              <p className={style.height}>
-                {" "}
-                {Number(currentHeight).toFixed(2)}
-                <span>x</span>
-              </p>
             </div>
+            <p className={style.height}>
+              {" "}
+              {Number(currentHeight).toFixed(2)}
+              <span>x</span>
+            </p>
           </div>
         ) : (
           <div className={style.game_over_dialog}>
@@ -132,13 +148,44 @@ function Aviator() {
             </p>
           </div>
         )}
-
-        {/* <h1 style={{ color: "white" }}>currentHeight {currentHeight} </h1> */}
       </div>
 
       {
         //bet section
       }
+      {/* control 1 */}
+      <div className={style.controlSection}>
+        <div className={style.ContorlBox}>
+          <div className={style.sides}>
+            <div className={style.inputFrame}>
+              <div className={style.inputFieldsFrame}>
+                <p className={style.mp}>
+                  <CiCircleMinus />
+                </p>
+                <input type="number" value={10.0} />
+                <p className={style.mp}>
+                  <CiCirclePlus />
+                </p>
+              </div>
+              <div className={style.OptionBox}>
+                <p>10</p>
+                <p>10</p>
+              </div>
+              <div className={style.OptionBox}>
+                <p>10</p>
+                <p>10</p>
+              </div>
+            </div>
+          </div>
+          <div className={style.sides}>
+            <div className={style.button}>
+              <p>Bet</p>
+              <p>0.00</p>
+            </div>
+          </div>
+        </div>
+        {/* contorl 2 */}
+      </div>
     </div>
   );
 }
