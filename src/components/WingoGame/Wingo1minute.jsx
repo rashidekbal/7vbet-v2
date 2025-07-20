@@ -23,6 +23,7 @@ import Loader from "../Loader";
 import { NavLink } from "react-router-dom";
 import { data } from "../../store/Contextprovider";
 import UserbetHistorycard from "./UserbetHistorycard";
+import Nodata from "./Nodata";
 function Wingo1minute() {
   const [blocker, changeblocker] = useState("no");
   const [selection, changeSelection] = useState("Big");
@@ -834,12 +835,13 @@ function Wingo1minute() {
           </div>
         ))
       ) : tab === "chart" ? (
-        <>this is chart daTA</>
-      ) : (
-        tab === "mybetHistorys" &&
+        <Nodata msg="No chart found" />
+      ) : tab === "mybetHistorys" && Wingouserbethistory1min.length > 0 ? (
         Wingouserbethistory1min.map((item) => (
           <UserbetHistorycard data={item} />
         ))
+      ) : (
+        <Nodata msg="No bet found" />
       )}
       {
         // history data ends here

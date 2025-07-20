@@ -4,12 +4,13 @@ import wallet from "../icons/wallet-3f0340b6.png";
 import { data } from "../store/Contextprovider";
 import { FaRupeeSign } from "react-icons/fa";
 import { FiRefreshCcw } from "react-icons/fi";
+import { NavLink } from "react-router-dom";
 export default function WalletDataForGames() {
   let getData = useContext(data);
 
   useEffect(() => {
     getData.changeuid(window.sessionStorage.getItem("uid"));
-    getData.getUserfinances(String(window.sessionStorage.getItem("uid")));
+    getData.getUserfinances();
   }, []);
   return (
     <>
@@ -38,7 +39,9 @@ export default function WalletDataForGames() {
 
         <div className={style.Wid}>
           <span className={style.WidthdrawlButton}>
-            <a className={style.widthdrawlAction}>Widthdraw</a>
+            <NavLink to="/widthdrawl" className={style.widthdrawlAction}>
+              Widthdraw
+            </NavLink>
           </span>
           <span
             className={style.WidthdrawlButton}
@@ -48,7 +51,9 @@ export default function WalletDataForGames() {
               marginRight: "10px",
             }}
           >
-            <a style={{ color: "white " }}>Deposit</a>
+            <NavLink style={{ color: "white " }} to="/Deposite">
+              Deposit
+            </NavLink>
           </span>
         </div>
       </div>

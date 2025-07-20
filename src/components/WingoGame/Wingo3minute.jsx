@@ -23,6 +23,7 @@ import greenViolet from "../../icons/greenviolet.png";
 import { NavLink } from "react-router-dom";
 import { data } from "../../store/Contextprovider";
 import UserbetHistorycard from "./UserbetHistorycard";
+import Nodata from "./Nodata";
 
 function Wingo3minute() {
   const {
@@ -969,12 +970,13 @@ function Wingo3minute() {
           </div>
         ))
       ) : tab === "chart" ? (
-        <>this is chart daTA</>
-      ) : (
-        tab === "mybetHistorys" &&
+        <Nodata msg="No chart found" />
+      ) : tab === "mybetHistorys" && Wingouserbethistory3min.length > 0 ? (
         Wingouserbethistory3min.map((item) => (
           <UserbetHistorycard data={item} />
         ))
+      ) : (
+        <Nodata msg="No bet found" />
       )}
       {
         // result section  ends here
@@ -1500,7 +1502,7 @@ function Wingo3minute() {
                     );
                     changeBetTab("off");
                   } else {
-                    setWingo3minbet(packet);
+                    setWingo3minbet(packet, setShowLoader);
                     changeBalanceSelection("1");
                     changeMultiplierSelection(" 1");
                     changeQuantity("1");

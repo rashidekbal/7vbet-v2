@@ -213,8 +213,24 @@
 
   background-color: transparent;
 }
-.button {
+.buttonFalse {
   background-color: #019b13;
+  color: white;
+  border: none;
+  height: 70%;
+  width: 90%;
+  font-size: 20px;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+  border-radius: 25px;
+  padding: 10px 0 10px 0;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+.buttonTrue {
+  background-color: #eb2923;
   color: white;
   border: none;
   height: 70%;
@@ -246,6 +262,8 @@
   justify-content: center;
   align-items: center;
   height: 40px;
+  background-color: rgb(64, 64, 64);
+  border-radius: 25px;
 }
 .inputFieldsFrame input {
   background-color: rgb(64, 64, 64);

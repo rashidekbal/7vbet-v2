@@ -24,6 +24,7 @@ import { NavLink } from "react-router-dom";
 import { data } from "../../store/Contextprovider";
 import UserbetHistorycard from "./UserbetHistorycard";
 import Loader from "../Loader";
+import Nodata from "./Nodata";
 function Wingo5minute() {
   const [blocker, changeblocker] = useState("no");
 
@@ -961,12 +962,13 @@ function Wingo5minute() {
           </div>
         ))
       ) : tab === "chart" ? (
-        <>this is chart daTA</>
-      ) : (
-        tab === "mybetHistorys" &&
+        <Nodata msg="No chart found" />
+      ) : tab === "mybetHistorys" && Wingouserbethistory5min.length > 0 ? (
         Wingouserbethistory5min.map((item) => (
           <UserbetHistorycard data={item} />
         ))
+      ) : (
+        <Nodata msg="No bet found" />
       )}
       {
         // history data ends here
@@ -1492,7 +1494,7 @@ function Wingo5minute() {
                     );
                     changeBetTab("off");
                   } else {
-                    setWingo5minbet(packet);
+                    setWingo5minbet(packet, setShowLoader);
                     changeBalanceSelection("1");
                     changeMultiplierSelection(" 1");
                     changeQuantity("1");
@@ -1504,7 +1506,7 @@ function Wingo5minute() {
                   alert("err bet not set low account balance please ad funds");
                   changeBetTab("off");
                 } else {
-                  setWingo5minbet(packet);
+                  setWingo5minbet(packet, setShowLoader);
                   changeBalanceSelection("1");
                   changeMultiplierSelection(" 1");
                   changeQuantity("1");

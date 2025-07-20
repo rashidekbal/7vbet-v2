@@ -1,13 +1,14 @@
 import axios from "axios";
 import { io } from "socket.io-client";
 import { createContext, useEffect, useState } from "react";
+import { INSUFFICIENT_BALANCE, TIME_UP } from "../constants/Enums";
 //for production
-const host = "https://sevenvbetserver.onrender.com";
-const websiteLink = "https://7vbet.vercel.app";
+// const host = "https://sevenvbetserver.onrender.com";
+// const websiteLink = "https://7vbet.vercel.app";
 // //for local
-// const host = "http://localhost:8000";
-// const websiteLink = "http://localhost:3000";
-const ws = io(host);
+const host = "http://localhost:8000/api/v1";
+const websiteLink = "http://localhost:3000";
+const ws = io("http://localhost:8000");
 let safeRevenue = 0.1;
 let totalrevenuesafe = 0.0;
 const currentintrestrate = 5;
@@ -65,9 +66,10 @@ export default function Contextprovider({ children }) {
   // change wingo 1 min result
   function get1minwingo() {
     api
-      .get(`/wingoOneMin`)
+      .get("/result/wingo/onemin")
       .then((res) => {
-        change1minWingo(res.data);
+        let response = res.data.data.response;
+        change1minWingo(response);
       })
       .catch((res) => {
         console.log("error getting data");
@@ -75,9 +77,10 @@ export default function Contextprovider({ children }) {
   }
   function get30secwingo() {
     api
-      .get(`/wingo30sec`)
+      .get("/result/wingo/thirtysec")
       .then((res) => {
-        change30s(res.data);
+        let response = res.data.data.response;
+        change30s(response);
       })
       .catch((res) => {
         console.log("error getting data");
@@ -85,9 +88,10 @@ export default function Contextprovider({ children }) {
   }
   function getwingo3min() {
     api
-      .get(`/wingo3min`)
+      .get("/result/wingo/threemin")
       .then((res) => {
-        change3minWingo(res.data);
+        let response = res.data.data.response;
+        change3minWingo(response);
       })
       .catch((res) => {
         console.log("error getting data");
@@ -95,27 +99,22 @@ export default function Contextprovider({ children }) {
   }
   function getwingo5min() {
     api
-      .get(`/wingo5min`)
+      .get(`/result/wingo/fivemin`)
       .then((res) => {
-        change5minWingo(res.data);
+        let response = res.data.data.response;
+        change5minWingo(response);
       })
       .catch((res) => {
         console.log("error getting data");
       });
   }
-  function getUserfinances(uid) {
+  function getUserfinances() {
     api
-      .get(`/userfinances`)
+      .get(`/user/userfinances`)
       .then((res) => {
-        if (res.status.toString === "401") {
-          window.location.replace(websiteLink);
-        }
-        if (res.status.toString() === "403") {
-          window.location.replace(websiteLink);
-        }
-        if (res.status.toString() === "200") {
-          changeuserfinance(res.data);
-        }
+        let response = res.data.data.response;
+
+        changeuserfinance(response);
       })
       .catch((err) => {
         window.location.replace(websiteLink);
@@ -125,14 +124,16 @@ export default function Contextprovider({ children }) {
   function setWingo30secbet(packet, setShowLoader) {
     setShowLoader(true);
     api
-      .post(`setWingo30secbet`, { packet })
+      .post(`/bet/wingo/thirtysec`, { packet })
       .then((res) => {
-        if (res.data == "done") {
-          getUserfinances(uid);
-          GetWingobetHistory30sec(uid);
-          setShowLoader(false);
-        } else {
+        let status = res.data.status;
+        if (status == TIME_UP) {
           alert("bet failed");
+        } else if (status == INSUFFICIENT_BALANCE) {
+          alert("balance not enough");
+        } else {
+          getUserfinances();
+          GetWingobetHistory30sec();
           setShowLoader(false);
         }
       })
@@ -144,14 +145,16 @@ export default function Contextprovider({ children }) {
   function setWingo1minbet(packet, setShowLoader) {
     setShowLoader(true);
     api
-      .post(`setWingo1minbet`, { packet })
+      .post(`/bet/wingo/onemin`, { packet })
       .then((res) => {
-        if (res.data == "done") {
+        let status = res.data.status;
+        if (status == TIME_UP) {
+          alert("bet failed");
+        } else if (status == INSUFFICIENT_BALANCE) {
+          alert("balance not enough");
+        } else {
           getUserfinances(uid);
           GetWingobetHistory1min(uid);
-          setShowLoader(false);
-        } else {
-          alert("bet failed");
           setShowLoader(false);
         }
       })
@@ -163,14 +166,16 @@ export default function Contextprovider({ children }) {
   function setWingo3minbet(packet, setShowLoader) {
     setShowLoader(true);
     api
-      .post(`/setWingo3minbet`, { packet })
+      .post(`/bet/wingo/threemin`, { packet })
       .then((res) => {
-        if (res.data == "done") {
+        let status = res.data.status;
+        if (status == TIME_UP) {
+          alert("bet failed");
+        } else if (status == INSUFFICIENT_BALANCE) {
+          alert("balance not enough");
+        } else {
           getUserfinances(uid);
           GetWingobetHistory3min(uid);
-          setShowLoader(false);
-        } else {
-          alert("bet failed");
           setShowLoader(false);
         }
       })
@@ -182,14 +187,16 @@ export default function Contextprovider({ children }) {
   function setWingo5minbet(packet, setShowLoader) {
     setShowLoader(true);
     api
-      .post(`/setwingo5min`, { packet })
+      .post(`/bet/wingo/fivemin`, { packet })
       .then((res) => {
-        if (res.data == "done") {
-          getUserfinances(uid);
-          GetWingobetHistory5min(uid);
-          setShowLoader(false);
-        } else {
+        let status = res.data.status;
+        if (status == TIME_UP) {
           alert("bet failed");
+        } else if (status == INSUFFICIENT_BALANCE) {
+          alert("balance not enough");
+        } else {
+          getUserfinances();
+          GetWingobetHistory5min();
           setShowLoader(false);
         }
       })
@@ -200,9 +207,10 @@ export default function Contextprovider({ children }) {
   }
   function GetWingobetHistory1min(id) {
     api
-      .get(`/wingobethistory1min`)
+      .get(`/bethistory/wingo/onemin`)
       .then((res) => {
-        changeWingouserbethistory1min(res.data);
+        let response = res.data.data.response;
+        changeWingouserbethistory1min(response);
       })
       .catch((err) => {
         console.log(err);
@@ -211,19 +219,21 @@ export default function Contextprovider({ children }) {
 
   function GetWingobetHistory3min(id) {
     api
-      .get(`${host}/wingobethistory3min`)
+      .get(`/bethistory/wingo/threemin`)
       .then((res) => {
-        changeWingouserbethistory3min(res.data);
+        let response = res.data.data.response;
+        changeWingouserbethistory3min(response);
       })
       .catch((err) => {
         console.log(err);
       });
   }
-  function GetWingobetHistory30sec(id) {
+  function GetWingobetHistory30sec() {
     api
-      .get(`${host}/wingobethistory30sec`)
+      .get(`/bethistory/wingo/thirtysec`)
       .then((res) => {
-        changeWingouserbethistory30sec(res.data);
+        let response = res.data.data.response;
+        changeWingouserbethistory30sec(response);
       })
       .catch((err) => {
         console.log(err);
@@ -231,9 +241,10 @@ export default function Contextprovider({ children }) {
   }
   function GetWingobetHistory5min(id) {
     api
-      .post(`${host}/wingobethistory5min`)
+      .get(`/bethistory/wingo/fivemin`)
       .then((res) => {
-        changeWingouserbethistory5min(res.data);
+        let response = res.data.data.response;
+        changeWingouserbethistory5min(response);
       })
       .catch((err) => {
         console.log(err);

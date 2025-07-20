@@ -25,6 +25,7 @@ import { data } from "../../store/Contextprovider";
 
 import UserbetHistorycard from "./UserbetHistorycard";
 import Loader from "../Loader";
+import Nodata from "./Nodata";
 function Wingo30sec() {
   const {
     uid,
@@ -790,12 +791,13 @@ function Wingo30sec() {
           </div>
         ))
       ) : tab === "chart" ? (
-        <>this is chart daTA</>
-      ) : (
-        tab === "mybetHistorys" &&
+        <Nodata msg="No chart found" />
+      ) : tab === "mybetHistorys" && Wingouserbethistory30sec.length > 0 ? (
         Wingouserbethistory30sec.map((item) => (
           <UserbetHistorycard data={item} />
         ))
+      ) : (
+        <Nodata msg="No bet found" />
       )}
       {/* option selector */}
       <div className={BetTab == "on" ? style.betSelector : style.bettaboff}>

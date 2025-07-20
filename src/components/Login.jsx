@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import style from "../css/login.module.css";
 import { data } from "../store/Contextprovider";
 import Header from "./Header";
@@ -17,6 +17,12 @@ export default function Login() {
   const [usererr, changeusererr] = useState("no");
   const [showloader, setShowloader] = useState(false);
   let { changeuid, setuid, websiteLink } = useContext(data);
+
+  useEffect(() => {
+    if (window.sessionStorage.getItem("uid")) {
+      window.location.replace(`${websiteLink}/home`);
+    }
+  }, []);
   function submit(e) {
     e.preventDefault();
     if (String(phone).length !== 10) {

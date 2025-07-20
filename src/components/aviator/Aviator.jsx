@@ -16,6 +16,9 @@ function Aviator() {
   const [currentHeight, setCurrentHeight] = useState("0.0");
   const [dialogVisibility, set_dialogVisibility] = useState("over");
   const [currentPeriod, set_currentPeriod] = useState("000000");
+  const [betAmount1, setBetAmount1] = useState(10);
+  const [betAmount2, setBetAmount2] = useState(10.0);
+  const [BetStatus1, setBetStatus1] = useState(false);
   const [planeTrajectory, setPlaneTrajectory] = useState({
     bottom: "0px",
     left: "0px",
@@ -24,6 +27,18 @@ function Aviator() {
   const y = useRef(0);
   let m = 0.5;
 
+  //functions
+  function handleBet1() {
+    if (starting_in > 0) {
+      if (betAmount1 >= 10) {
+        setBetStatus1(true);
+      } else {
+        alert("bet amount must be greater than 10.0");
+      }
+    } else {
+      alert("wait for next round");
+    }
+  }
   useEffect(() => {
     ws.on("Aviator_halt", (data) => {
       set_starting_in(data.remaining_time);
@@ -35,6 +50,7 @@ function Aviator() {
       }
     });
     ws.on("Flight_data", (data) => {
+      set_dialogVisibility("plane");
       setCurrentHeight(data.Height);
       x.current = (data.Height - 1.0) * 100;
       if (x.current < 220) {
@@ -53,6 +69,7 @@ function Aviator() {
       setPlaneTrajectory({ bottom: `0px`, left: "0px" });
       if (data.msg) {
         set_dialogVisibility("over");
+        setBetStatus1(false);
       }
     });
     ws.on("period", (data) => set_currentPeriod(data.period));
@@ -160,28 +177,85 @@ function Aviator() {
             <div className={style.inputFrame}>
               <div className={style.inputFieldsFrame}>
                 <p className={style.mp}>
-                  <CiCircleMinus />
+                  <CiCircleMinus
+                    onClick={() => {
+                      if (betAmount1 > 1) {
+                        setBetAmount1(betAmount1 - 1);
+                      }
+                    }}
+                  />
                 </p>
-                <input type="number" value={10.0} />
+                <input
+                  type="number"
+                  value={betAmount1}
+                  onChange={(e) => {
+                    setBetAmount1(Math.abs(e.target.value));
+                  }}
+                />
                 <p className={style.mp}>
-                  <CiCirclePlus />
+                  <CiCirclePlus
+                    onClick={() => {
+                      setBetAmount1(betAmount1 + 1);
+                    }}
+                  />
                 </p>
               </div>
               <div className={style.OptionBox}>
-                <p>10</p>
-                <p>10</p>
+                <p
+                  onClick={() => {
+                    setBetAmount1(10);
+                  }}
+                >
+                  10
+                </p>
+                <p
+                  onClick={() => {
+                    setBetAmount1(50);
+                  }}
+                >
+                  50
+                </p>
               </div>
               <div className={style.OptionBox}>
-                <p>10</p>
-                <p>10</p>
+                <p
+                  onClick={() => {
+                    setBetAmount1(100);
+                  }}
+                >
+                  100
+                </p>
+                <p
+                  onClick={() => {
+                    setBetAmount1(200);
+                  }}
+                >
+                  200
+                </p>
               </div>
             </div>
           </div>
           <div className={style.sides}>
-            <div className={style.button}>
-              <p>Bet</p>
-              <p>0.00</p>
-            </div>
+            {BetStatus1 ? (
+              <div
+                className={style.buttonTrue}
+                onClick={() => {
+                  handleBet1();
+                }}
+              >
+                <p>CashOut</p>
+                <p>{(betAmount1 * parseFloat(currentHeight)).toFixed(2)}</p>
+              </div>
+            ) : (
+              <div
+                className={style.buttonFalse}
+                onClick={() => {
+                  handleBet1();
+                }}
+              >
+                <p>Bet</p>
+                <p>{betAmount1.toFixed(2)}</p>
+              </div>
+            )}
           </div>
         </div>
         {/* contorl 2 */}

@@ -17,7 +17,7 @@ export const AccountPage = () => {
   let { host, websiteLink } = useContext(data);
   useEffect(() => {
     getData.changeuid(window.sessionStorage.getItem("uid"));
-    getData.getUserfinances(String(window.sessionStorage.getItem("uid")));
+    getData.getUserfinances();
   }, []);
   return (
     <>
